@@ -11,3 +11,19 @@
 git pull origin master 
 ```
 
+
+
+```xml
+// 第一下克隆下来
+git clone https://github.com/matt17du/note.git
+git remote -v
+// 设置别名
+git remote add origin https://github.com/matt17du/note.git
+// 拉取
+git pull origin
+// 推送
+git push origin master
+```
+
+// 注意分支
+

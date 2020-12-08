@@ -385,6 +385,14 @@ synchronized和lock都是可重入锁，synchronized是非公平锁，lock可以
 
 ## 集合
 
+### ArrayList和Vector区别
+
+1.vector是线程安全的，而arrayList不是线程安全的
+
+2.vector每次扩容是原来的2倍，而arrayList是1.5倍
+
+
+
 ### 比较器
 
 重写compare方法的实现并不一定都是互减可能会越界，可以使用compareTo方法

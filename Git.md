@@ -27,3 +27,13 @@ git push origin master
 
 // 注意分支
 
+```git
+git branch test
+
+git branch -v
+
+git checkout test
+
+git merge test
+```
+

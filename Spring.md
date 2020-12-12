@@ -397,3 +397,84 @@ java -jar spring-boot-02-config-02-0.0.1-SNAPSHOT.jar --server.port=8087  --serv
 @Configuration注解类上的@PropertySource
 
 **从上往下优先级有高到低**
+
+
+
+## 原理
+
+### 自动配置原理
+
+首先springboot的启动类有@SpringBootApplication注解,从该注解点进去
+
+```java
+@SpringBootApplication
+public class Springhello03Application {
+
+    public static void main(String[] args) {
+        SpringApplication.run(Springhello03Application.class, args);
+    }
+
+}
+```
+
+因为是自动注入，所以我们可以从@EnableAutoConfiguration点进去
+
+![image-20201212231057892](img/image-20201212231057892.png)
+
+
+
+从下图中的@Import注解可知，它向容器中导入了AutoConfigurationImportSelector类，我们不妨可以观察该类
+
+
+
+![image-20201212231201577](img/image-20201212231201577.png)
+
+
+
+可以观察selectImports方法的这行代码，根据方法名我们可以猜测他是获取配置类
+
+![image-20201212234527374](img/image-20201212234527374.png)
+
+
+
+从上图的方法的实现点进去可以跳转到下图的方法，我们知道是从该红色部分获得的配置，不妨点进去
+
+![image-20201212234654929](img/image-20201212234654929.png)
+
+它的实现方法有俩个选择第一个即可
+
+**![image-20201212234834728](img/image-20201212234834728.png)**
+
+得到下图，我们继续点进去到他的实现
+
+![image-20201212234925075](img/image-20201212234925075.png)
+
+
+
+![image-20201212235026972](img/image-20201212235026972.png)
+
+
+
+
+
+![image-20201212235127694](img/image-20201212235127694.png)
+
+
+
+读取上图的方法我们知道读取META-INF/spring.factories并把它封装为Properties,从properties中获取到EnableAutoConfiguration.class类（类名）对应的值，然后把他们添加在容器中。
+
+
+
+
+
+![image-20201212235940401](img/image-20201212235940401.png)
+
+
+
+
+
+![image-20201213000006035](img/image-20201213000006035.png)
+
+
+
+当然也不是所有配置类都加载到容器中，每一个配置类都会有@Conditional注解，只有满足某个条件才会加载到容器中。

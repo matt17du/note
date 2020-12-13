@@ -1,4 +1,4 @@
-## Git
+## 
 
 1.failed to push some refs to 'git@github.com:pavi-du/note.git'
 
@@ -14,6 +14,16 @@ git pull origin master
 
 
 ```xml
+
+```
+
+## 命令
+
+
+
+### 基本
+
+```java
 // 第一下克隆下来
 git clone https://github.com/matt17du/note.git
 git remote -v
@@ -21,19 +31,45 @@ git remote -v
 git remote add origin https://github.com/matt17du/note.git
 // 拉取
 git pull origin
+    
+
+git add --all
+    
+git commit -m "xxxm"
+    
 // 推送
-git push origin master
+git push origin master:master
+    
+
 ```
 
-// 注意分支
 
-```git
-git branch test
 
-git branch -v
+### 分支
 
-git checkout test
+```java
+git branch // 查看本地分支
 
-git merge test
+git branch -r // 查看远程分支
+
+git branch -a // 查看本地分支和远程分支
+    
+git branch test // 创建test分支
+
+
+git checkout test // 切换test分支
+
+git merge test // 合并test分支
+```
+
+## 错误
+
+### 由于第一次使用不是git clone 然后直接推送
+
+
+
+```java
+git pull origin master --allow-unrelated-histories
+// 合并俩个独立的仓库
 ```
 

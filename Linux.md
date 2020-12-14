@@ -92,3 +92,178 @@ netstat -anp | grep 9000   // 查看端口号为9000的进程
 
 ![image-20201110202418891](img/image-20201110202418891.png)
 
+
+
+#### 关机
+
+```java
+shutdown -h now // 立即关机
+```
+
+重启
+
+```java
+shutdown -r now // 立即重启
+```
+
+
+
+
+
+### 网络
+
+![image-20201214163102378](img/image-20201214163102378.png)
+
+
+
+
+
+![image-20201214163129586](img/image-20201214163129586.png)
+
+
+
+```java
+vim /etc/sysconfig/network-scripts/ifcfg-ens33
+```
+
+
+
+
+
+```java
+TYPE="Ethernet"
+PROXY_METHOD="none"
+BROWSER_ONLY="no"
+BOOTPROTO="dhcp"
+DEFROUTE="yes"
+IPV4_FAILURE_FATAL="no"
+IPV6INIT="yes"
+IPV6_AUTOCONF="yes"
+IPV6_DEFROUTE="yes"
+IPV6_FAILURE_FATAL="no"
+IPV6_ADDR_GEN_MODE="stable-privacy"
+NAME="ens33"
+UUID="6b84fa31-a207-4928-9e53-61ad2ec7b485"
+DEVICE="ens33"
+ONBOOT="yes"
+```
+
+```java
+TYPE="Ethernet"
+PROXY_METHOD="none"
+BROWSER_ONLY="no"
+BOOTPROTO="static" // 更改该值
+DEFROUTE="yes" 
+IPV4_FAILURE_FATAL="no"
+IPV6INIT="yes"
+IPV6_AUTOCONF="yes"
+IPV6_DEFROUTE="yes"
+IPV6_FAILURE_FATAL="no"
+IPV6_ADDR_GEN_MODE="stable-privacy"
+NAME="ens33"
+UUID="6b84fa31-a207-4928-9e53-61ad2ec7b485"
+DEVICE="ens33"
+ONBOOT="yes"
+IPADDR=192.168.96.129   // ip 地址,前三位和子网ip一致
+NETMASK=255.255.255.0   //
+GATEWAY=192.168.96.2    // ip.2
+DNS1=114.114.114.114    // 默认
+```
+
+重启网络
+
+```java
+service network restart
+```
+
+
+
+### JDK
+
+[jdk](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html)
+
+![image-20201214160140914](img/image-20201214160140914.png)
+
+
+
+下载解压到/opt目录下，之后 vim /etc/profile,添加如下内容
+
+
+
+```java
+JAVA_HOME=/opt/jdk1.8.0_152
+PATH=$PATH:$JAVA_HOME/bin
+CLASSPATH=$JAVA_HOME/lib
+export JAVA_HOME PATH CLASSPATH
+```
+
+配置文件生效
+
+```java
+临时生效：source /etc/profile
+永久生效：reboot
+```
+
+### tomcat
+
+[tomcat8.5](https://tomcat.apache.org/download-80.cgi)
+
+
+
+![image-20201214160705121](img/image-20201214160705121.png)
+
+
+
+下载安装解压即可
+
+### MySQL
+
+```java
+yum install mysql*
+    
+yum install mariadb-server
+```
+
+```java
+systemctl start mariadb.service
+```
+
+指定密码
+
+```java
+mysqladmin -u root password root
+```
+
+#### 开启远程连接的权限
+
+
+```java
+update user set host='%' where user = 'root'; 
+
+flush privileges;
+```
+
+
+
+
+
+### 防火墙
+
+查看防火墙状态
+
+```java
+systemctl status firewalld.service
+```
+
+关闭防火墙
+
+```java
+systemctl stop firewalld.service
+```
+
+禁止开机启动
+
+```java
+systemctl disable firewalld.service
+```
+

@@ -73,3 +73,58 @@ git pull origin master --allow-unrelated-histories
 // 合并俩个独立的仓库
 ```
 
+IDEA如何第一次创建项目提交
+
+首先在githup中创建项目
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20201219202633.png)
+
+
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20201219202929.png)
+
+
+
+之后的俩步
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20201219205240.png)
+
+
+
+
+
+
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20201219205341.png)
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20201219220054.png)
+
+
+
+
+
+**这里记得和远程仓库的名字相同，如果远程是master,这里也得是master**
+
+
+
+之后可能会出现 **Push rejected: Push to origin/master was rejected**
+
+
+
+我们输入以下内容即可
+
+```java
+git pull origin master --allow-unrelated-histories
+// master远程仓库分支名
+```
+
+紧接着add,commit,push即可
+

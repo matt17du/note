@@ -67,3 +67,16 @@ Pyright
 Python
 
 安装以上俩个插件
+
+
+
+
+
+1、**web-based installer、executable installer、embeddable zip file**
+–**web-based installer**：在线安装。下载的是一个exe可执行程序，双击后，该程序自动下载安装文件（所以需要有网络）进行安装。
+–**executable installer**：程序安装。下载的是一个exe可执行程序，双击进行安装。
+–**embeddable zip file**：解压安装。下载的是一个压缩文件，解压后即表示安装完成。
+
+2、**x86、x86-64**
+–**Windows x86** ：适用32位windows操作系统。
+–**Windows x86-64** ：适用64位windows操作系统。

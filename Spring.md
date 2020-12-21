@@ -400,6 +400,123 @@ java -jar spring-boot-02-config-02-0.0.1-SNAPSHOT.jar --server.port=8087  --serv
 
 
 
+## 日志
+
+### 概述
+
+日志门面：日志的抽象层
+
+日志实现：日志的实现
+
+
+
+**常用的框架**
+
+JUL、JCL、Jboss-logging、logback、log4j、log4j2、slf4j....
+
+| 日志门面  （日志的抽象层）                                   | 日志实现                                             |
+| ------------------------------------------------------------ | ---------------------------------------------------- |
+| ~~JCL（Jakarta  Commons Logging）~~    SLF4j（Simple  Logging Facade for Java）    **~~jboss-logging~~** | Log4j  JUL（java.util.logging）  Log4j2  **Logback** |
+
+
+
+日志门面：  SLF4J；
+
+日志实现：Logback；
+
+
+
+SpringBoot：底层是Spring框架，Spring框架默认是用JCL；
+
+​	**SpringBoot选用 SLF4j和logback**
+
+
+
+### 使用
+
+[可以参考](https://github.com/matt17du/base)
+
+首先我们需要引入
+
+```java
+  <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-logging</artifactId>
+  </dependency>
+```
+
+之后在application配置文件和logback-spring.xml做一些配置
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20201219224414.png)
+
+
+
+### 存在的问题
+
+在整合一些框架时可能某些框架需要依赖别的日志框架这时候我们就需要特殊处理这些问题
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20201219224833.png)
+
+
+
+
+
+1. 将原有的日志实现进行排除
+
+2. 引入转换包（其他框架的门面到该框架的门面）
+
+3. 引入实现
+
+   
+
+
+
+## Web
+
+### 静态资源
+
+所有 /webjars/** ，都去 classpath:/META-INF/resources/webjars/ 找资源；
+
+webjars：以jar包的方式引入静态资源；可以使用maven使用添加前端资源的依赖，不过现在的项目大多数前后端分离，所以这部分内容使用不会太多。
+
+[webjars](https://www.webjars.org/)
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20201219225655.png)
+
+
+
+项目的静态资源/
+
+```java
+"classpath:/META-INF/resources/", 
+"classpath:/resources/",
+"classpath:/static/", 
+"classpath:/public/" 
+"/"：当前项目的根路径
+```
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20201219225834.png)
+
+
+
+注意：基本都会放在项目的/resource/static下了
+
+
+
+### 模板
+
+#### thymeleaf
+
+[thymeleaf](https://www.thymeleaf.org/)
+
+
+
+
+
+
+
 ## 原理
 
 ### 自动配置原理

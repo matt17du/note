@@ -137,6 +137,12 @@ mybatis.mapperLocations=classpath:mapping/*.xml
 mybatis.config-location=classpath:mybatis-config.xml
 ```
 
+### **The server time zone value is unrecogni....**
+
+数据库连接后面添加&serverTimezone=UTC即可
+
+
+
 
 
 ![image-20201213175326465](img/image-20201213175326465.png)

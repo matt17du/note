@@ -298,7 +298,7 @@ exit
 
 
 ```java
-JAVA_HOME=/opt/jdk1.8.0_152
+JAVA_HOME=/opt/jdk1.8
 PATH=$PATH:$JAVA_HOME/bin
 CLASSPATH=$JAVA_HOME/lib
 export JAVA_HOME PATH CLASSPATH
@@ -693,6 +693,60 @@ su - u1
 ```java
 sudo ls
 ```
+
+
+
+
+
+
+
+## cygwin无法使用vim
+
+E437: terminal capability "cm" required 错误；
+
+```java
+export TERM=xterm    
+```
+
+**挂载**
+
+/cygdrive/
+
+
+
+
+
+```java
+ssh-keygen
+
+cd /home/matt/.ssh
+    
+ssh-copy-id -i id_rsa.pub root@192.168.96.128
+```
+
+
+
+```java
+scp a.txt root@192.168.96.128:/home/a/b
+```
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20201222135659.png)
+
+
+
+以管理元打开一直yes即可
+
+**ssh-host-config**
+
+
+
+passwd matt
+
+matt
+
+
 
 
 

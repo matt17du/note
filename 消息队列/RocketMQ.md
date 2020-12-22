@@ -1,3 +1,17 @@
+## 错误
+
+错误brokerId写成brokerld,导致从节点不能启动，从节点需要满足brokerId不是0
+
+
+
+
+
+
+
+
+
+
+
 ## 概述
 
 ![image-20201221214158719](C:\Users\matt\AppData\Roaming\Typora\typora-user-images\image-20201221214158719.png)
@@ -266,4 +280,10 @@ sh mqshutdown broker
 ```
 sh mqshutdown namesrv
 ```
+
+
+
+
+
+
 

@@ -503,7 +503,9 @@ exit
 
 [jdk](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html)
 
-![image-20201214160140914](img/image-20201214160140914.png)
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20201231172604.png)
 
 
 
@@ -531,9 +533,9 @@ export JAVA_HOME PATH CLASSPATH
 
 
 
-![image-20201214160705121](img/image-20201214160705121.png)
 
 
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20201231172634.png)
 
 下载安装解压即可
 

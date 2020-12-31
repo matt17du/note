@@ -6,7 +6,9 @@
 
 
 
-![image-20201213232710230](img/image-20201213232710230.png)
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20201231171700.png)
 
 
 
@@ -17,7 +19,8 @@
 ## 更改安装目录
 
 
-![image-20201213231342057](img/image-20201213231342057.png)
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20201231171737.png)
 
 
 
@@ -43,9 +46,7 @@ cache=D:\develop\env\nodejs\node_cache
 
 
 
-![image-20201213231145771](img/image-20201213231145771.png)
-
-
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20201231171810.png)
 
 ```java
 prefix=D:\develop\env\nodejs\node_global
@@ -60,9 +61,7 @@ cache=D:\develop\env\nodejs\node_cache
 
 
 
-
-
-![image-20201213231950975](img/image-20201213231950975.png)
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20201231172047.png)
 
 
 
@@ -76,7 +75,11 @@ NODE_PATH
 D:\develop\env\nodejs\node_global\node_modules
 ```
 
-![image-20201213232107076](img/image-20201213232107076.png)
+
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20201231172010.png)
 
 
 
@@ -86,9 +89,7 @@ D:\develop\env\nodejs\node_global\node_modules
 
 
 
-![image-20201213232144925](img/image-20201213232144925.png)
-
-
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20201231171931.png)
 
 ## 更换镜像
 
@@ -126,11 +127,11 @@ npm install -g cnpm --registry=https://registry.npm.taobao.org
 npm install express -g      # -g  是全局安装的意思
 ```
 
-![image-20201213232307395](img/image-20201213232307395.png)
 
 
 
 
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20201231171842.png)
 
 ## 常见的命令
 

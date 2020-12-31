@@ -53,21 +53,27 @@ https://www.python.org/
 
 第三步：CMD切换到该目录，运行命令”python setup.py install"
 
-![image-20201205232749101](img/image-20201205232749101.png)
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20201231164305.png)
 
 **pip环境变量配置**
 
 这是你打开python的安装目录，发现Scripts的文件夹下就已经有了pip的文件，将此文件夹下的目录作为环境变量配置，再再在cmd下输入pip，完美完成！添加在path目录下
 
-![image-20201129172329371](img/image-20201129172329371.png)
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20201231164233.png)
+
+
 
 **检查**
 
 在CMD输入pip,成功如下
 
-![image-20201129172141046](img/image-20201129172141046.png)
 
 
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20201231164141.png)
 
 ### 安装requests
 
@@ -221,7 +227,35 @@ str2 = "hello word"
 str3 = str('hello word')
 ```
 
-字符串使用+即可相加，使用*可以复制几次
+字符串使用+即可相加，使用*可以复制几次\
+
+定义一个长的字符串
+
+```python
+（'hello'
+'word'）
+```
+
+```
+'''
+this is good
+hello hey
+'''
+```
+
+
+
+
+
+find index
+
+
+
+
+
+istitle // 用来判断字符串中的单词是否是大写开头
+
+
 
 
 
@@ -370,6 +404,16 @@ int_list1 = list([1, 2, 3])
 
 
 
+```
+list = ['1', '2', '3']
+list = list * 2
+// 都会创建新的链表
+```
+
+
+
+
+
 #### tuple
 
 元组：用来存储有序的数据的队列，相对于list,元组是不可变，list是可以改变的
@@ -407,5 +451,190 @@ dict_01 = {'name': 'matt', 'age': 12}
 dict_02 = dict({'name': 'mike', 'age': 19})
 print(dict_01)
 print(dict_02)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+find:找不到就会返回-1
+
+而index则报错
+
+
+
+### 列表和元组的操作
+
+#### *len*():返回列表或者元组的元素个数
+
+```python
+list = [1, 2, 3]
+print(len(list))  # 
+```
+
+#### *list_01* *= 2
+
+```python
+list_01 = [1, 2, 3]
+print(len(list_01))
+
+list_01 *= 2
+print(list_01)  # [1, 2, 3, 1, 2, 3]
+```
+
+#### *in/ not in*  用来看元素是否在该列表中
+
+
+
+```python
+print(bool(5 in list_01))  # False
+```
+
+#### append:在原有列表的基础上添加在尾部
+
+```python
+list_02 = [1, 2, 3]
+list_02.append(4)
+print(list_02)  # [1, 2, 3, 4]
+```
+
+#### insert:在指定的位置插入元素，如果该位置不存在则添加在尾部,会发生数据的右移
+
+```python
+list_01 = [1, 2, 3]
+list_01.insert(0, 'a')
+print(list_01)  # ['a', 1, 2, 3]
+```
+
+#### count:用来查询列表或元组某个元素的个数
+
+
+
+```python
+list_01 = [1, 2, 3]
+list_01.insert(0, 'a')
+print(list_01)
+
+print(list_01.count(1))  # 1
+```
+
+#### remove:用来删除某个元素，若有多个则删除第一个，若没有则报错（在原有的列表上进行删除）
+
+
+
+```python
+list_02 = [1, 2]
+list_02.remove(1)
+print(list_02)  # [2]
+```
+
+#### clear:对当前列表进行清空
+
+```python
+list_03 = [1, 2, 3]
+list_03.clear()
+
+print(list_03)  # []
+```
+
+#### sort:对当前列表进行排序，不支持对多种数据类型进行排序（比如一个列表中既有数字又有字母就会报错）
+
+```python
+# 不支持多种数据类型同时进行排序
+list_01 = [1, 2, 3, -1]
+print(list_01)
+list_01.sort(reverse=True)
+print(list_01)  # [3, 2, 1, -1]
+```
+
+#### copy:对当前列表进行拷贝，内存地址会发生改变
+
+```python
+
+list_01 = [1, 2, 3]
+list_02 = list_01.copy()
+list_01.append(11)
+print(list_01)  # [1, 2, 3, 11]
+print(list_02)  # [1, 2, 3]
+```
+
+#### deepcopy:深拷贝，对于copy复制的列表如果列表仍然有列表，则复制的列表和被复制的列表共享该列表的列表只要一个列表的一个发生改变另外一个也会发生改变
+
+```
+copy.deepcopy(list)
+```
+
+#### extend:用于在列表中添加列表
+
+```python
+list_05 = [1, 2, 3]
+list_06 = ['a', 'b']
+list_05.extend(list_06)
+print(list_05)  # [1, 2, 3, 'a', 'b']
+```
+
+索引：数组的索引
+
+切片：选择列表中某个位置到某个位置的元素
+
+我们可以通过索引设置值
+
+```python
+list_07 = [1, 2, 3, 4, 5, 6]
+print(list_07[0: 1])  # [1]
+
+print(list_07[:: -1])  # 列表反转 [6, 5, 4, 3, 2, 1]
+
+print(list_07[:: 2])  # 指定步长 [1, 3, 5]
+
+list_07[0] = 100  
+```
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20201229203107.png)
+
+
+
+pop(index) :删除指定索引的元素，如不存在则报错
+
+del list[0] :删除指定索引的元素，如不存在则报错
+
+```python
+list_08 = [1, 2, 3, 4, 5, 6]
+list_08.pop(0)
+print(list_08)  # [2, 3, 4, 5, 6]
+del list_08[0]
+print(list_08)  # [3, 4, 5, 6]
+```
+
+字符串中的索引和切片和列表使用的相同，但是字符串无法改变
+
+ find如果获取不到，返回-1
+ index如果获取不到，直接报错
+
+```python
+list_09 = 'hello word'
+print(list_09.find('1'))  # -1
+
+print(list_09.index('hello word'))  # 0
 ```
 

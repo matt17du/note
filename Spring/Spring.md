@@ -14,23 +14,19 @@ ioc：
 
 ## idea创建项目
 
-![image-20201212221110224](img/image-20201212221110224.png)
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20201231173829.png)
 
 
 
-![image-20201212221150594](img/image-20201212221150594.png)
-
-
-
-
-
-![image-20201212221227773](img/image-20201212221227773.png)
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20201231173928.png)
 
 
 
 
 
-![image-20201212221238278](img/image-20201212221238278.png)
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20201231173858.png)
+
+
 
 
 
@@ -40,7 +36,7 @@ ioc：
 
 ## 配置文件
 
-![image-20201212221452323](img/image-20201212221452323.png)
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20201231174002.png)
 
 
 
@@ -307,13 +303,13 @@ person.age=11
 
 #### profiles
 
-![image-20201212225445741](img/image-20201212225445741.png)
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20201231174036.png)
 
 使用spring.profiles.active=pro来决定激活哪个文件
 
 #### yml多文档
 
-![image-20201212225735612](img/image-20201212225735612.png)
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20201231174115.png)
 
 
 
@@ -350,9 +346,7 @@ java -jar spring-boot-02-config-0.0.1-SNAPSHOT.jar --spring.profiles.active=dev
 -Dspring.profiles.active=dev
 ```
 
-![image-20201212230013560](img/image-20201212230013560.png)		
-
-#### 配置文件的加载位置
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20201231174150.png)配置文件的加载位置
 
 ```java
 ./config  项目的config目录下
@@ -536,7 +530,7 @@ public class Springhello03Application {
 
 因为是自动注入，所以我们可以从@EnableAutoConfiguration点进去
 
-![image-20201212231057892](img/image-20201212231057892.png)
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20201231174239.png)
 
 
 
@@ -544,37 +538,33 @@ public class Springhello03Application {
 
 
 
-![image-20201212231201577](img/image-20201212231201577.png)
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20201231174256.png)
 
 
 
 可以观察selectImports方法的这行代码，根据方法名我们可以猜测他是获取配置类
 
-![image-20201212234527374](img/image-20201212234527374.png)
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20201231174322.png)
 
 
 
 从上图的方法的实现点进去可以跳转到下图的方法，我们知道是从该红色部分获得的配置，不妨点进去
 
-![image-20201212234654929](img/image-20201212234654929.png)
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20201231174342.png)
 
 它的实现方法有俩个选择第一个即可
 
-**![image-20201212234834728](img/image-20201212234834728.png)**
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20201231174411.png)
 
 得到下图，我们继续点进去到他的实现
 
-![image-20201212234925075](img/image-20201212234925075.png)
-
-
-
-![image-20201212235026972](img/image-20201212235026972.png)
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20201231174551.png)
 
 
 
 
 
-![image-20201212235127694](img/image-20201212235127694.png)
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20201231174521.png)
 
 
 
@@ -584,13 +574,13 @@ public class Springhello03Application {
 
 
 
-![image-20201212235940401](img/image-20201212235940401.png)
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20201231174502.png)
 
 
 
 
 
-![image-20201213000006035](img/image-20201213000006035.png)
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20201231174439.png)
 
 
 

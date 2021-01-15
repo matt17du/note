@@ -95,27 +95,7 @@ Python
 
 
 
-### *Pycharm*
 
-#### 如何创建一个项目
-
-![](https://raw.githubusercontent.com/matt17du/img/main/img/20201227233243.png)
-
-
-
-1.设置新项目名称和存储路径（untitled可以修改）；
-
-2.**Project Interpreter**设置新建项目所依赖的python环境；
-
-​	2.1 **New environment using** 设置新的依赖环境。在项目中新建一个venv（virtualenv）目录，用于存放虚拟的python环境，这里所有的类库依赖都可以直接脱离系统安装的python独立运行；
-
-​		2.1.1 勾选上**Inherit global site-packages**则可以使用base interpreter（基础解释器）中安装的第三方库（即本地Python的**site-packages目录中的类库**）；不选将和外界完全隔离（会在base interpreter的基础上创建一个新的虚拟解释器）；
-
-​		2.1.2 勾选上**Make available to all projects**则可以将此项目的虚拟环境提供给其他项目使用；
-
-​	2.2 **Existing Interpreter**关联已经存在的python解释器，可以使用该解释器所安装的Python库；
-
-建议选择 **New environment using** 可以在Base Interpreter选择系统中安装的Python解释器，这样可以让项目独立部署运行，也可以避免一台服务器部署多个项目之间存在类库的版本依赖问。
 
 
 
@@ -227,7 +207,7 @@ str2 = "hello word"
 str3 = str('hello word')
 ```
 
-字符串使用+即可相加，使用*可以复制几次\
+字符串使用+即可相加，使用*可以复制几次
 
 定义一个长的字符串
 
@@ -245,20 +225,6 @@ hello hey
 
 
 
-
-
-find index
-
-
-
-
-
-istitle // 用来判断字符串中的单词是否是大写开头
-
-
-
-
-
 ##### 布尔类型
 
 
@@ -267,6 +233,12 @@ istitle // 用来判断字符串中的单词是否是大写开头
 bool1 = True
 bool1 = bool('hello')
 ```
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210111233719.png)
+
+
+
+
 
 ##### 空类型
 
@@ -326,14 +298,14 @@ print('end')
 
 #### 常用的内置函数
 
-input
+input:从键盘输入
 
 ```
 name = input("你的姓名")
 print('name: %s' % (name))
 ```
 
-**格式化输出**
+格式化输出
 
 ```
 print('name: %s' % (name))
@@ -349,6 +321,12 @@ id:返回变量的内存地址
 
 ```
 id(age)
+```
+
+is :判断俩个对象内存地址是否相等
+
+```
+print(str is str_1)
 ```
 
 len:返回字符串的长度
@@ -423,7 +401,6 @@ list = list * 2
 
 tuple_1 = (1, 2, 3,)
 
-
 tuple_2 = tuple((1, 2, 3, 4,))
 print(tuple_1)
 print(tuple_2)
@@ -455,158 +432,235 @@ print(dict_02)
 
 
 
+set:
+
+{}:只可以传入不可变的类型，set{[1,2,3]} 错误的
 
 
 
 
 
+dir(b):可以查看b的所有函数方法
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-find:找不到就会返回-1
-
-而index则报错
-
-
-
-### 列表和元组的操作
-
-#### *len*():返回列表或者元组的元素个数
-
-```python
-list = [1, 2, 3]
-print(len(list))  # 
-```
-
-#### *list_01* *= 2
-
-```python
-list_01 = [1, 2, 3]
-print(len(list_01))
-
-list_01 *= 2
-print(list_01)  # [1, 2, 3, 1, 2, 3]
-```
-
-#### *in/ not in*  用来看元素是否在该列表中
+### 字符串
 
 
 
 ```python
-print(bool(5 in list_01))  # False
+str1.capitalize() # 字符串首字母大写
+str1.lower() # 字符串小写
+str1.upper() # 字符串大写
+str1.swapcase() # 字符串大小写转换
+str2.zfill(10) # 左边用0填充
+
+str2.count('h') # 返回字符串成员的个数
+print(str2.startswith('he')) # str2是否是‘he’开头
+print(str2.endswith('he')) # str2是否以‘he’结尾
 ```
 
-#### append:在原有列表的基础上添加在尾部
+find 和 index 查找成员开始的位置
 
-```python
-list_02 = [1, 2, 3]
-list_02.append(4)
-print(list_02)  # [1, 2, 3, 4]
-```
-
-#### insert:在指定的位置插入元素，如果该位置不存在则添加在尾部,会发生数据的右移
-
-```python
-list_01 = [1, 2, 3]
-list_01.insert(0, 'a')
-print(list_01)  # ['a', 1, 2, 3]
-```
-
-#### count:用来查询列表或元组某个元素的个数
-
+区别：find找不到返回-1,而index会报错
 
 
 ```python
-list_01 = [1, 2, 3]
-list_01.insert(0, 'a')
-print(list_01)
-
-print(list_01.count(1))  # 1
+print(str2.find('hell'))
+print(str2.index('hell'))
 ```
 
-#### remove:用来删除某个元素，若有多个则删除第一个，若没有则报错（在原有的列表上进行删除）
+strip去除字符串首尾指定的成员默认是空格
+
+```python
+str3 = ' hello '
+print(str3.strip())
+
+print(str3.strip('h')) # hellhoh -> ellho
+```
+
+replace():字符串替换
+
+```
+str4 = 'hello'
+print(str4.replace('e', 'a', 3)) # old,new,次数：默认是全部替换
+```
+
+```python
+str_1 = ' '
+print(str_1.isspace()) # 判断字符串是否有空格组成
+str_1 = 'hello'
+print(str_1.istitle())  # 判断字符串是标题，即单词首字母大写
+
+print(str_1.isupper()) # 判断字符串是否全部大写
+print(str_1.islower()) # 判断字符串是否全部小写
+```
+
+
+
+
+
+
+
+字符串格式化
+
+```python
+str1 = 'hello word'
+# 1
+print('%s python' % (str1))
+
+# 2
+print(f'hello {str1}')
+
+# 3
+print('abc{}'.format('ag'))
+
+print('hello {0} -{1}-{0}'.format(1,2))
+print('hello {name}'.format(name='age'))
+print('hello num {:10.2f}'.format(3.134343))
+print('{:d}'.format(34))
+
+print('hello %30.e' % (10000000))
+```
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210109003738.png)
+
+```python
+%d # 十进制
+%b # 二进制
+%o # 八进制
+%x # 十六进制
+```
+
+转义字符
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210112002623.png)
+
+
+
+
+
+### 列表 list
+
+len:判断列表中元素的个数
+
+```python
+str = 'hello'
+list1= [1, 3, 3]
+print(len(list1)) # 3
+```
+
+in :判断某个元素是否在该列表中，或者判断任何数据类型的长度,而not in 功能刚好相反
+
+```python
+str = 'hello'
+list_1= [1, 3, 3]
+print(len(list_1))
+
+print(1 in list_1)
+```
+
+append():列表添加元素
+
+```python
+list_1.append('5')
+print(list_1) # [1, 3, 3, '5']
+```
+
+insert:列表中指定位置添加元素
+
+```python
+list_1 = [1, 2, 3]
+list_1.insert(0, 'a')
+print(list_1) # ['a', 1, 2, 3]
+```
+
+count:在列表中统计某个元素出现的次数
+
+```python
+print(list_1.count(1)) # 1
+```
+
+remove:删除列表中的元素，如果不存在则报错，如果有多个则删除第一个
+
+```python
+list_1.remove(1)
+print(list_1)
+```
+
+del:将变量完全删除，在使用就会报错
+
+```python
+del list_1
+print(list_1) # 直接报错
+```
+
+reverse():列表的元素进行反转
+
+```python
+list_1 = list([1, 2, 3])
+list_1.reverse()
+print(list_1) # [3, 2, 1]
+```
+
+sort():排序,reverse=False(默认)升序，如果True则降序，key=根据什么进行排序，
+
+成员必须是同一数据类型，否则无法进行排序
+
+```python
+list_1.sort(reverse=False) # key= reverse=
+print(list_1) # [1, 2, 3]
+```
+
+clear():列表清空
 
 
 
 ```python
-list_02 = [1, 2]
-list_02.remove(1)
-print(list_02)  # [2]
+list_1.clear()
+print(list_1) # []
 ```
 
-#### clear:对当前列表进行清空
+
+
+copy和deepcopy都是列表拷贝一份
+
+如果列表还有列表使用copy则它们会共享一个列表，而deepcopy会重新开辟一个列表
 
 ```python
-list_03 = [1, 2, 3]
-list_03.clear()
+print('copy')
+list_1 = [1, 2, 3]
+list_2 = list_1.copy()
+list_1.append('a')
+print(list_1,list_2) # [1, 2, 3, 'a'] [1, 2, 3]
+print(list_1 is list_2)
 
-print(list_03)  # []
+print('deepcopy----')
+list_1 = [[1,2],[3,4]]
+list_2 = copy.deepcopy(list_1)
+list_2[1].append('a')
+print(list_1, list_2)
 ```
 
-#### sort:对当前列表进行排序，不支持对多种数据类型进行排序（比如一个列表中既有数字又有字母就会报错）
+extend:列表中添加列表
 
 ```python
-# 不支持多种数据类型同时进行排序
-list_01 = [1, 2, 3, -1]
-print(list_01)
-list_01.sort(reverse=True)
-print(list_01)  # [3, 2, 1, -1]
+print('extend')
+list_1 = [1, 2, 3]
+list_2 = ['a', 'b']
+list_1.extend(list_2)
+print(list_1) # [1, 2, 3, 'a', 'b']
 ```
 
-#### copy:对当前列表进行拷贝，内存地址会发生改变
 
-```python
 
-list_01 = [1, 2, 3]
-list_02 = list_01.copy()
-list_01.append(11)
-print(list_01)  # [1, 2, 3, 11]
-print(list_02)  # [1, 2, 3]
-```
+索引：第一个元素是0
 
-#### deepcopy:深拷贝，对于copy复制的列表如果列表仍然有列表，则复制的列表和被复制的列表共享该列表的列表只要一个列表的一个发生改变另外一个也会发生改变
-
-```
-copy.deepcopy(list)
-```
-
-#### extend:用于在列表中添加列表
-
-```python
-list_05 = [1, 2, 3]
-list_06 = ['a', 'b']
-list_05.extend(list_06)
-print(list_05)  # [1, 2, 3, 'a', 'b']
-```
-
-索引：数组的索引
-
-切片：选择列表中某个位置到某个位置的元素
-
-我们可以通过索引设置值
-
-```python
-list_07 = [1, 2, 3, 4, 5, 6]
-print(list_07[0: 1])  # [1]
-
-print(list_07[:: -1])  # 列表反转 [6, 5, 4, 3, 2, 1]
-
-print(list_07[:: 2])  # 指定步长 [1, 3, 5]
-
-list_07[0] = 100  
-```
+切片：比如字符串的截取，左含右不含
 
 
 
@@ -614,27 +668,462 @@ list_07[0] = 100
 
 
 
-pop(index) :删除指定索引的元素，如不存在则报错
+pop():根据索引获删除值
 
-del list[0] :删除指定索引的元素，如不存在则报错
-
-```python
-list_08 = [1, 2, 3, 4, 5, 6]
-list_08.pop(0)
-print(list_08)  # [2, 3, 4, 5, 6]
-del list_08[0]
-print(list_08)  # [3, 4, 5, 6]
+```
+list_1 = list([1, 2, 3])
+list_1.pop(1)
+print(list_1)
 ```
 
-字符串中的索引和切片和列表使用的相同，但是字符串无法改变
+[]:根据索引获取值
 
- find如果获取不到，返回-1
- index如果获取不到，直接报错
+也可以修改值，不过字符串无法修改
 
 ```python
-list_09 = 'hello word'
-print(list_09.find('1'))  # -1
-
-print(list_09.index('hello word'))  # 0
+del list_1[0]
+print(list_1)
 ```
 
+
+
+### 字典使用
+
+定义
+
+```python
+dict_01 = {'name': 'matt', 'age': 12}
+dict_02 = dict({'name': 'mike', 'age': 19})
+```
+
+[] 和 update()
+
+[]:口号内填一个key,
+
+update()中需要添加一个已经定义好的字典，并不会会已有的字典进行覆盖除其中俩个字典相同的key会进行覆盖
+
+```python
+dict['age'] = 11
+dict_1 = {'name': 'matt'}
+dict.update(dict_1) # {'age': 11, 'name': 'matt'}
+```
+
+setdefault:key不存在才会设置
+
+```python
+dict.setdefault('a', 1)
+dict.setdefault('name', 1)
+print(dict)
+```
+
+
+
+keys 和 values
+
+keys:获取字典中所有的key
+
+values:获取字典中所有的值
+
+二者返回的都是伪列表，不具有列表的所有功能
+
+```python
+print(dict.keys())
+print('values:', dict.values())
+```
+
+
+
+[] 和 get
+
+二者用于字典根据key获取属性的值，
+
+[]:当key不存在就会报错而get没有此缺陷
+
+```python
+print(dict['a'])
+print(dict.get('v'))
+```
+
+clear:清空字典
+
+```python
+dict.clear()
+```
+
+pop():根据key删除值，若key不存在则报错
+
+```python
+dict.pop('a')
+```
+
+del使用
+
+```python
+
+del dict['b'] # 删除key魏'b'
+del dict # 在内存中删除字典，在使用则报错
+print(dict)
+```
+
+copy:字典的复制，内存地址会发生改变
+
+```
+dict_01 = dict.copy()
+print(id(dict) == id(dict_01))
+print(dict_01 is dict)
+```
+
+in 和 not in
+
+```python
+dict = {'a': 1, 'b': 2}
+print('a' not in dict)
+```
+
+popitem():删除字典末尾的key-value,字典为空直接报错
+
+```python
+res = dict.popitem() # 字典为空直接报错
+```
+
+​                                                
+
+类与类之间2个空行
+
+
+
+
+
+### 流程控制
+
+if
+
+```python
+# coding:utf-8
+
+i  = 1
+if i < 10:
+    print('个位数')
+elif i >= 10 and i < 100:
+    print('十位数')
+else:
+    print('其他')
+```
+
+for
+
+```python
+# coding:utf-8
+
+list_0 = [1, 2, 3, 4]
+for i in list_0:
+    print(i)
+
+dict_0 = {'name': 'matt', 'age': 10}
+for i in dict_0.values():
+    print(i)
+```
+
+while
+
+```python
+# coding:utf-8
+
+count = 100
+while count > 0:
+    count -= 1
+    print(count)
+print('end')
+```
+
+### 函数的使用
+
+```python
+# coding:utf-8
+
+​```
+a：必须要传，b有默认值可以不传
+​```
+def incr(a, b = 1): 
+    return a + 1
+
+sum = incr(a = 1)
+print(sum)
+
+# 可变参数，其中args封装为元组，而kwargs封装为字典
+def test(*args, **kwargs):
+    print('hello word')
+    print(args)
+    print(kwargs)
+test(1, 2, 3,name = 'age', age = 17)
+# (1, 2, 3)
+# {'name': 'age', 'age': 17}
+```
+
+函数中使用类型
+
+```python
+
+# python不会对参数类型进行验证
+def test(i:int, j:str = 'hello word'):
+    print(i)
+```
+
+lambda使用
+
+```python
+f = lambda : print('test lambda')
+f()
+
+t = lambda x, y : x + y
+print(t(1, 2))
+print('hello' + '11')
+```
+
+### 类与对象
+
+```python
+# coding:utf-8
+
+class Person(object):
+    name = 'matt'
+    __sex = '女'
+	# 构造函数，self代表当前对象
+    def __init__(self):
+        print(self)
+        self.age = 17
+
+    def __init__(self, name):
+        print('hello word')
+
+person = Person('11')
+print(person.name)
+# print(person.sex)
+```
+
+装饰器的使用
+
+```python
+def a(f):
+    def inter(*args, **kwargs):
+        return f(*args, **kwargs)
+    return inter
+
+@a
+def test(i):
+    print(i)
+
+test(1)
+```
+
+```python
+class T(object):
+
+    __name = 'matt'
+	
+    # 直接可以使用类调用
+    @classmethod
+    def a(cls, t):
+        print(t)
+ 	# 直接可以使用类调用，不需要使用cls,self
+    @staticmethod
+    def b():
+        print('staticmethod')
+
+    # 可以使用对象.name
+    @property
+    def name(self):
+        return self.__name
+
+T.a('11')
+T.b()
+
+t = T()
+print(t.name)
+
+```
+
+多继承
+
+```python
+# coding:utf-8
+
+class A(object):
+
+    def info(self):
+        print('a')
+
+
+class B(object):
+
+    def info(self):
+        print('b')
+
+class C(B, A):
+
+    def test(self):
+        super(C, self).info()
+        print('test')
+
+c = C()
+c.test()
+```
+
+super: super(当前类，self).父类的属性或者方法
+
+
+
+```python
+# coding:utf-8
+
+class Parent(object):
+
+    def __init__(self, name):
+        self.name = name
+
+    def info(self,name):
+        print(name)
+
+p = Parent('p')
+p.info('aaa')
+
+class Son(Parent):
+    
+    def __init__(self):
+        super(Son, self).__init__('aaa')
+
+    def test(self):
+        super(Son, self).info('hello word')
+
+s = Son()
+s.test()
+```
+
+类的高级函数
+
+```python
+# coding:utf-8
+
+class Person(object):
+
+    # 类的描述信息,相当于toString()方法
+    def __str__(self):
+        print('this is person')
+        return '1'
+	
+    # 在key不存在时会触发这个函数
+    def __getattr__(self, item):
+        print('%s 不存在' % (item))
+
+    # 在属性不存在设置时触发这个函数
+    def __setattr__(self, key, value):
+        if key not in self.__dict__:
+            return
+
+    # 对象(参数)
+    def __call__(self, *args, **kwargs):
+        print(*args)
+
+
+person = Person()
+print(person.a)
+print(person)
+
+person.age = 18
+print(person.age)
+
+person(12222)
+
+print(person.__dict__)
+```
+
+
+
+
+
+
+
+### 包与模块
+
+```
+包：一个文件夹，这个文件夹中有__init__.py和其他python文件，其中__init__.py是包的身份证，其他py文件是模块，包中也可以有包
+```
+
+
+
+导入包
+
+```python
+import animal.dog
+```
+
+
+
+导入模块
+
+```python
+from animal.dog import aciton
+
+action.jump()
+```
+
+导入模块中的函数
+
+```python
+from animal.dog.action import run as dog_run # as是起别名
+
+dog_run()
+```
+
+
+
+pop使用
+
+```python
+pip install 包名
+
+pip uninstall 包名
+
+pip -V
+```
+
+
+
+
+
+使用 python 不要使用代理 
+
+
+
+```
+ipython 7.2.0版本升级，导致自动补全（auto complete）功能出现异常，pip install ipython==7.1.1安装指定版本即可。
+```
+
+### end
+
+```python
+person.__dict__ # 返回它的所有属性
+```
+
+
+
+
+
+join,split
+
+
+
+```python
+print '------'
+
+
+str_1 = ' '
+list_1 = [1, 2, 3]
+print str_1.join(['a', 'b', 'c']) # a b c
+```
+
+eval
+
+chr
+
+ord

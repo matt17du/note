@@ -264,15 +264,11 @@ netstat -anp
 netstat -anp | grep 9000   // 查看端口号为9000的进程
 ```
 
-![image-20201110202258207](img/image-20201110202258207.png)
-
 
 
 
 
 ps -ef
-
-![image-20201110202418891](img/image-20201110202418891.png)
 
 
 
@@ -318,13 +314,9 @@ shutdown -r now // 立即重启
 
 ### 网络
 
-![image-20201214163102378](img/image-20201214163102378.png)
 
 
 
-
-
-![image-20201214163129586](img/image-20201214163129586.png)
 
 
 
@@ -714,9 +706,10 @@ echo "source /opt/rh/devtoolset-9/enable" >>/etc/profile
 
 ```java
 chmod 777 xxxx
-    
+// 进入redis安装目录
+// 编译
 make
-
+// 安装
 make install
 ```
 
@@ -932,7 +925,7 @@ export TERM=xterm
 
 
 
-```java
+```html
 ssh-keygen
 
 cd /home/matt/.ssh

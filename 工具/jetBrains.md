@@ -10,11 +10,17 @@
 
 
 
+如果是第二次安装，需要点击下面文件夹
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210116182055.png)
+
+
+
 ![](https://raw.githubusercontent.com/matt17du/img/main/img/20210106235137.png)
 
 
 
-选择下面zip文件安装
+选择下面zip文件安装，也可以直接托到ide界面，这种方式更好
 
 ![](https://raw.githubusercontent.com/matt17du/img/main/img/20210106235214.png)
 

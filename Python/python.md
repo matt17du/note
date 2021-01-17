@@ -27,11 +27,33 @@ https://www.python.org/
 
 
 
-选择对应版本点击即可2.7.17，最好选择32位的，因为它的兼容性更好
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210116165559.png)
+
+
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210116165657.png)
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210116165732.png)
+
+
+
+
+
+**下图不要选择all user**
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210116175019.png)
+
+
+
+**选择对应版本点击即可2.7.17，最好选择32位的，因为它的兼容性更好**
 
 #### 配置Path
 
-安装路径添加到path环境变量即可。
+安装路径添加到path环境变量即可。在3.7可以在安装时选择配置path
 
 ### **注意：python3.81安装的时候我们可以选择安装pip**
 
@@ -685,6 +707,83 @@ del list_1[0]
 print(list_1)
 ```
 
+### set 集合的使用
+
+
+
+集合的创建
+
+```python
+set_1 = {1, 2, 3} # 1
+print(type(set_1)) 
+set_1 = set() # 2 set([2, 3, 3])
+# {}：不可以使用
+```
+
+add:添加一个元素
+
+update:添加一个集合，如果元素已经在集合中则忽略该元素
+
+remove:移除一个元素
+
+clear:清空集合
+
+
+
+```python
+# coding:utf-8
+
+set_1 = set((1, 2, 3, 4))
+print(set_1)
+
+set_1.add('helo') # {1, 2, 3, 4, 'helo'}
+print(set_1) #
+
+set_1.update([1, 3, 3, 'matt']) # 如果元素已经在集合中则忽略该元素
+print(set_1) # {1, 2, 3, 4, 'matt', 'helo'}
+
+set_1.remove('matt')
+print('remove', set_1) # remove {1, 2, 3, 4, 'helo'}
+
+
+set_1.clear()
+print(set_1)
+
+# del set_1
+print(set_1)
+```
+
+difference:差集
+
+intersection：交集
+
+union：并集
+
+isdisjoint：判断俩个集合中是否有交集
+
+```python
+
+# coding:utf-8
+
+set_1 = {1, 2, 3, 4}
+set_2 = {1, 2, 'a', 'b'}
+diff = set_1.difference(set_2) # 也可以使用-
+print(diff)
+
+# print(set_1 - set_2)
+
+intersection_res = set_1.intersection(set_2)
+print('交集', intersection_res)
+
+union_res = set_1.union(set_2)
+print('union_res', union_res)
+
+isdisjoint_res = set_1.isdisjoint(set_2) # 判断俩个集合是否包含相同的元素，没有则True
+print(isdisjoint_res)
+```
+
+
+
 
 
 ### 字典使用
@@ -1127,3 +1226,324 @@ eval
 chr
 
 ord
+
+
+
+### 加密
+
+#### hashlib:不可逆
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210117214443.png)
+
+
+
+
+
+```python
+hashobj = hashlib.md5(b’hello’)
+result = hashobj. hexdigest() # 生成16进制字符串
+print(result)
+```
+
+
+
+base64：可解密，需要自己导入base64模块
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210117214629.png)
+
+
+
+
+
+```python
+ coding:utf-8
+import hashlib
+import base64
+
+res = hashlib.md5(b'hehllo ')
+print(res.hexdigest()) # 返回16进制字符串的值
+str = '中国人'
+res = str.encode(encoding='utf-8')
+print(res.decode(encoding='utf-8'))
+
+print(base64.encodebytes(str.encode(encoding='utf-8')))
+```
+
+
+
+### 日志 logging
+
+日志的等级
+
+debug
+info
+warnning
+error
+critical
+
+日志的使用
+
+```python
+
+# coding:utf-8
+
+import logging
+
+
+logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s %(filename)s[line:%(lineno)d] %(levelname)s %(message)s',
+        filename='my.log',
+        filemode='w'
+    )
+
+logging.info('hello word')
+```
+
+
+
+
+
+
+​	
+
+| logging.basicConfig |                                 |
+| ------------------- | ------------------------------- |
+| level               | 日志输出等级level=logging.DEBUG |
+| filename            | 存储位置filename=‘d://back.log’ |
+| format              | 日志输出格式                    |
+| filemode            | 输入模式filemode='w'            |
+
+
+​	
+​	
+
+
+
+
+| format具体格式 | 格式符含义     |
+| :------------- | :------------- |
+| %(levelname)s  | 日志级别名称   |
+| %(pathname)s   | 执行程序的路径 |
+| %(filename)s   | 执行程序名     |
+| %(lineno)d     | 日志的当前行号 |
+| %(asctime)s    | 打印日志的时间 |
+| %(message)s    | 日志信息       |
+
+
+
+### 常用的内置函数
+
+
+
+abs
+
+all any type isinstance help var dir hasattr
+
+input
+
+enumerate
+
+
+
+```python
+# coding:utf-8
+
+print(abs(-100)) # 返回正数
+
+print(all([1, 1, 1])) # 判断列表内容是否全是true
+
+class User(object):
+
+    def __init__(self):
+        print('创建User对象')
+
+user = User()
+print(help(user)) # help 打印对象的全部用法
+
+name = input('请输入姓名：')
+print(name)
+
+list_1 = [1, 3, 3]
+for index,i in enumerate(list_1): # 记录索引
+    print(index, i)
+
+print(isinstance(1, int)) # 判断某个变量是否是某个类型
+
+print(type('hello word'))
+user.name = 'hello'
+print(vars(user)) # 返回对象实例化字典信息
+print(dir(user)) # 返回对象的所有属性和方法
+
+print(hasattr('hello', 'aaa')) # 判断对象是否有某个属性
+
+user.__setattr__('age', 10)
+print(user.__getattribute__('age'))
+
+list_1 = [1, 2, 3]
+print(any((None,))) # 判断对象中是否有true值
+```
+
+
+
+### random 模块
+
+```python
+# coding:utf-8
+
+import random
+# 右边不可以取到
+def test():
+    for i in range(10000):
+        i = random.random() # 返回0-1的浮点数
+        if i == 1:
+            print(i)
+            return i;
+    print('没有1')
+
+test()
+
+print(random.uniform(1, 2)) # 返回范围的浮点数
+def test_uniform():
+    for i in range(10000):
+        i = random.uniform(1, 2)
+        if i == 1:
+            print(i)
+            return i;
+test_uniform()
+
+print('randint')
+print(random.randint(1, 1000)) # 返回整数
+
+print('choice', random.choice([1, 2, 3, 4, 5])) # 返回list中的一个值
+
+print('sample', random.sample([1, 2, 3, 4, 5],2))# 返回list中的几个值
+
+# 步长
+for i in range(10):
+    print(random.randrange(1, 100, 100)) # 返回指定的一个值，可以指定步长
+
+
+```
+
+### 迭代器
+
+```python
+
+# coding:utf-8
+
+iter_obj = iter([1, 2, 3])
+print(iter_obj.__next__())
+
+iter_obj = (i for i in range(10))
+print(iter_obj.__next__())
+
+def get_iter_obj():
+    for i in range(13):
+        yield i
+iter_obj = get_iter_obj()
+print(iter_obj.__next__())
+```
+
+### 高级函数
+
+```python
+# coding:utf-8
+
+from functools import reduce
+
+
+def _filter(x):
+    if x <= 0:
+        return False;
+    return True;
+
+res = list(filter(lambda x: x > 0, [-1, 2, 3]))
+print(res)
+
+res = list(map(_filter, [-1, -2, 100])) # 返回True False list
+print('map', res)
+
+print('----reduce----')
+res = reduce(lambda x, y: x + y, (1, 2, 3)) # 需要导入reduce
+print(res)
+```
+
+
+
+
+
+### 正则表达式
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210116002023.png)
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210116002110.png)
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210116002139.png)
+
+
+
+几个常用的函数
+
+使用前首先需要导入re
+
+```python
+import re
+```
+
+
+
+findall:将得到的字符串存在list中
+
+```python
+str = 'my name is hash'
+res = re.findall('\sis*', str) # 返回符合的list [' is']
+print(res)
+```
+
+match:必须从字符串开始查找
+
+
+
+```python
+str = 'hedd '
+print(re.match('\w*', str).group()) # 从开始字符开始查找
+```
+
+split:根据匹配得到的字符串进行分割
+
+```python
+str = 'my name is hello word'
+res = re.split('\s+', str) # 找到的就是空格符号
+print(res) # ['my', 'name', 'is', 'hello', 'word']
+```
+
+search:只可以匹配一次
+
+```python
+
+str = 'my email is 1718905040@qq.com 171890@qq.com'
+res = re.search('(\d*.qq.com)', str) # 只会查找一次
+print(res.groups())
+print(res.group(1)) # 索引从1开始
+```
+
+compile:得到一个可以使用以上函数的对象
+
+```python
+str = 'my email is 1718905040@qq.com 1234343@qq.com'
+re_obj = re.compile('\d+.\w{2}.com')
+res = re_obj.findall(str)
+print(res)
+```
+
+
+
+
+

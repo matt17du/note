@@ -1860,7 +1860,7 @@ import re
 
 
 
-findall:将得到的字符串存在list中
+findall:将得到的字符串存储在list中
 
 ```python
 str = 'my name is hash'
@@ -1868,9 +1868,7 @@ res = re.findall('\sis*', str) # 返回符合的list [' is']
 print(res)
 ```
 
-match:必须从字符串开始查找
-
-
+match:从字符串开始查找
 
 ```python
 str = 'hedd '
@@ -1885,7 +1883,7 @@ res = re.split('\s+', str) # 找到的就是空格符号
 print(res) # ['my', 'name', 'is', 'hello', 'word']
 ```
 
-search:只可以匹配一次
+search:只匹配一次
 
 ```python
 
@@ -1895,7 +1893,7 @@ print(res.groups())
 print(res.group(1)) # 索引从1开始
 ```
 
-compile:得到一个可以使用以上函数的对象
+compile:得到一个可以使用正则对象
 
 ```python
 str = 'my email is 1718905040@qq.com 1234343@qq.com'

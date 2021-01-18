@@ -92,3 +92,11 @@ CODE:XPNMF-ISDYF-LCSED-BPATU
 
 
 ## 7-zip
+
+
+
+
+
+## 图床
+
+推荐[picgo](https://github.com/Molunerfinn/PicGo)

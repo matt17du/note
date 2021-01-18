@@ -454,20 +454,6 @@ print(dict_02)
 
 
 
-set:
-
-{}:只可以传入不可变的类型，set{[1,2,3]} 错误的
-
-
-
-
-
-dir(b):可以查看b的所有函数方法
-
-
-
-
-
 ### 字符串
 
 
@@ -519,8 +505,6 @@ print(str_1.istitle())  # 判断字符串是标题，即单词首字母大写
 print(str_1.isupper()) # 判断字符串是否全部大写
 print(str_1.islower()) # 判断字符串是否全部小写
 ```
-
-
 
 
 
@@ -717,7 +701,7 @@ print(list_1)
 set_1 = {1, 2, 3} # 1
 print(type(set_1)) 
 set_1 = set() # 2 set([2, 3, 3])
-# {}：不可以使用
+# {}：不可以使用{}创建空的集合
 ```
 
 add:添加一个元素
@@ -759,7 +743,7 @@ intersection：交集
 
 union：并集
 
-isdisjoint：判断俩个集合中是否有交集
+isdisjoint：判断俩个集合中是否有交集,没有返回True
 
 ```python
 
@@ -886,12 +870,6 @@ res = dict.popitem() # 字典为空直接报错
 ```
 
 ​                                                
-
-类与类之间2个空行
-
-
-
-
 
 ### 流程控制
 
@@ -1138,17 +1116,11 @@ print(person.__dict__)
 
 
 
-
-
-
-
 ### 包与模块
 
 ```
-包：一个文件夹，这个文件夹中有__init__.py和其他python文件，其中__init__.py是包的身份证，其他py文件是模块，包中也可以有包
+包：一个文件夹，这个文件夹中有__init__.py和其他python文件，其中__init__.py是包的身份证，其他py文件是模块，包中也可以有
 ```
-
-
 
 导入包
 
@@ -1176,7 +1148,7 @@ dog_run()
 
 
 
-pop使用
+### pip使用
 
 ```python
 pip install 包名
@@ -1187,6 +1159,90 @@ pip -V
 ```
 
 
+
+
+
+pip更改镜像[参考](https://developer.aliyun.com/article/652884)
+
+pip国内的一些镜像
+
+- 阿里云 http://mirrors.aliyun.com/pypi/simple/
+- 中国科技大学 https://pypi.mirrors.ustc.edu.cn/simple/
+- 豆瓣(douban) http://pypi.douban.com/simple/
+- 清华大学 https://pypi.tuna.tsinghua.edu.cn/simple/
+- 中国科学技术大学 http://pypi.mirrors.ustc.edu.cn/simple/
+
+**提示：若担心安全问题请使用HTTPS加密源**
+
+修改源方法：
+
+临时使用：
+
+**Linux Mac Windows 通用命令**
+
+可以在使用pip的时候在后面加上-i参数，指定pip源
+
+> pip install scrapy -i https://pypi.tuna.tsinghua.edu.cn/simple
+
+永久修改：
+
+**Linux:**
+
+修改 pip.conf 文件 (没有就创建一个)
+
+> $HOME/.config/pip/pip.conf
+
+修改内容如下：
+
+> [global]
+>
+> index-url = https://pypi.tuna.tsinghua.edu.cn/simple12
+
+**Mac:**
+
+修改 pip.conf 文件
+
+> $HOME/Library/Application Support/pip/pip.conf
+
+如果没有上面的目录,在如下目录创建 pip.conf
+
+> $HOME/.config/pip/pip.conf
+
+修改内容如下：
+
+> [global]
+>
+> index-url = https://pypi.tuna.tsinghua.edu.cn/simple12
+
+**Windows:**
+
+修改 pip.conf 文件 (没有就创建一个)
+
+> %APPDATA%\pip\pip.ini
+
+修改内容如下：
+
+> [global]
+>
+> index-url = https://pypi.tuna.tsinghua.edu.cn/simple
+
+修改文件后，执行命令发生错误
+
+使用非HTTPS加密源（如豆瓣源），在执行命令发生错误，在命令最后加上`--trusted-host pypi.douban.com`
+
+> pip install django -i http://pypi.douban.com/simple --trusted-host [pypi.douban.com](http://pypi.douban.com/)
+
+
+
+%APPDATA%\pip\pip.ini
+
+
+
+```
+[global]
+
+index-url = https://pypi.tuna.tsinghua.edu.cn/simple
+```
 
 
 

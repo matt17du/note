@@ -61,7 +61,7 @@ sysctl -p
 chown -R es:es /usr/local/elasticsearch/
 ```
 
-查看当前用户的所在的组
+**查看当前用户的所在的组**
 
 ```
 id matt # matt:用户名

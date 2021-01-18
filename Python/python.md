@@ -1,4 +1,4 @@
-## 安装与使用
+### **安装**
 
 ### 安装环境
 
@@ -134,7 +134,7 @@ exit() // 退出
 
 
 
-## 语法
+
 
 ### 概述
 
@@ -1114,9 +1114,153 @@ person(12222)
 print(person.__dict__)
 ```
 
+### 异常
+
+异常的捕获
+
+```python
+
+try:
+    i = 10 / 0
+except Exception as e:
+    print(e)
+finally:
+    print('end...')
+```
+
+捕获多个异常
+
+```python
+try:
+    res = 1 / 0
+except ZeroDivisionError as e:
+    print(e)
+except Exception as e:
+    print(e)
+finally:
+    print('end')
+```
+
+```python
+try:
+    res = 1 / 0
+except (ZeroDivisionError, Exception) as e:
+    print(e)
+```
+
+自定义抛出异常
+
+```python
+i = 100
+if i == 100:
+    raise Exception('i 不可以为100')
+```
+
+自定义异常
+
+```python
+# coding:utf-8
+
+class MyException(Exception):
+    def __init__(self, message):
+        self.message = message
+
+i = 100
+if i == 100:
+    raise MyException('hhhah')
+```
+
+常见的异常
+StopIteration：由内置函数 next() 和 iterator 的 __next__() 方法所引发，用来表示该迭
+代器不能产生下一项；
+
+ZeroDivisionError：当除法或取余运算的第二个参数为零时将被引发
+
+AttributeError：当属性引用或赋值失败时将被引发
+
+EOFError：当 input() 函数未读取任何数据即达到文件结束条件 (EOF) 时将被引发
+
+ImportError：当 import 语句尝试加载模块遇到麻烦时将被引发 
+
+ModuleNotFoundError：当一个模块无法被定位时将由 import 引发
+
+LookupError：此基类用于派生当映射或序列所使用的键或索引无效时引发的异常
+
+IndexError：当序列抽取超出范围时将被引发
+
+KeyError：当在现有键集合中找不到指定的映射（字典）键时将被引发
+
+NameError：当某个局部或全局名称未找到时将被引发
+
+UnboundLocalError：当在函数或方法中对某个局部变量进行引用，但该变量并未绑定任
+何值时将被引发
+
+OSError：此异常在一个系统函数返回系统相关的错误时将被引发，此类错误包括 I/O 操
+作失败例如 “文件未找到” 或 “磁盘已满” 等（不包括非法参数类型或其他偶然性错误）
+
+BlockingIOError：当一个操作会被某个设置为非阻塞操作的对象（例如套接字）所阻塞时
+将被引发
+
+ChildProcessError：当一个子进程上的操作失败时将被引发
+
+ConnectionError：与连接相关问题的基类
+
+BrokenPipeError：当试图写入另一端已被关闭的管道，或是试图写入已关闭写入的套接字
+时将被引发
+
+ConnectionAbortedError：当连接尝试被对端中止时将被引发ConnectionRefusedError：
+	当连接尝试被对端拒绝时将被引发
+ConnectionResetError：当连接被对端重置时将被引发
+FileExistsError：当试图创建一个已存在的文件或目录时将被引发
+FileNotFoundError：当所请求的文件或目录不存在时将被引发
+InterruptedError：当系统调用被输入信号中断时将被引发
+
+IsADirectoryError：当请求对一个目录执行文件操作将被引发
+NotADirectoryError：当请求对一个非目录对象执行目录操作时将被引发 PermissionError：
+	当在没有足够操作权限的情况下试图执行某个操作时将被引发
+
+ ProcessLookupError：当给
+定的进程不存在时将被引发
+TimeoutError：当一个系统函数发生系统级超时的情况下将被引发
+ReferenceError：此异常将在使用 weakref.proxy() 函数所创建的弱引用来访问该引用的
+某个已被作为垃圾回收的属性时被引发
+RuntimeError：当检测到一个不归属于任何其他类别的错误时将被引发
+NotImplementedError：在用户自定义的基类中，抽象方法应当在其要求所派生类重载该
+方法，或是在其要求所开发的类提示具体实现尚待添加时引发此异常
+RecursionError：它会在解释器检测发现超过最大递归深度时被引发
+SyntaxError：当解析器遇到语法错误时将被引发
+IndentationError：与不正确的缩进相关的语法错误的基类
+TabError：当缩进包含对制表符和空格符不一致的使用时将被引发
+SystemError：当解释器发现内部错误，但情况看起来尚未严重到要放弃所有希望时将被引
+发
+TypeError：当一个操作或函数被应用于类型不适当的对象时将被引发
+ValueError：当操作或函数接收到具有正确类型但值不适合的参数，并且情况不能用更精确
+的异常来描述时将被引发
+UnicodeError：当发生与 Unicode 相关的编码或解码错误时将被引发
+UnicodeDecodeError：当在解码过程中发生与 Unicode 相关的错误时将被引发
+UnicodeEncodeError：当在编码过程中发生与 Unicode 相关的错误时将被引发
+
+UnicodeTranslateError：在转写过程中发生与 Unicode 相关的错误时将被引发 Warning：
+警告类别的基类
+DeprecationWarning：如果所发出的警告是针对其他 Python 开发者的，则以此作为与
+已弃用特性相关警告的基类
+PendingDeprecationWarning：对于已过时并预计在未来弃用，但目前尚未弃用的特性相
+关警告的基类
+RuntimeWarning：与模糊的运行时行为相关的警告的基类
+SyntaxWarning：与模糊的语法相关的警告的基类
+UserWarning：用户代码所产生警告的基类
+FutureWarning：如果所发出的警告是针对以 Python 所编写应用的最终用户的，则以此
+作为与已弃用特性相关警告的基类
+ImportWarning：与在模块导入中可能的错误相关的警告的基类
+UnicodeWarning：与 Unicode 相关的警告的基类
+BytesWarning：与 bytes 和 bytearray 相关的警告的基类
+ResourceWarning：与资源使用相关的警告的基类
 
 
-### 包与模块
+
+
+
+### **包与模块**
 
 ```
 包：一个文件夹，这个文件夹中有__init__.py和其他python文件，其中__init__.py是包的身份证，其他py文件是模块，包中也可以有
@@ -1157,8 +1301,6 @@ pip uninstall 包名
 
 pip -V
 ```
-
-
 
 
 
@@ -1244,44 +1386,207 @@ pip国内的一些镜像
 index-url = https://pypi.tuna.tsinghua.edu.cn/simple
 ```
 
-
-
-使用 python 不要使用代理 
+### 时间
 
 
 
-```
-ipython 7.2.0版本升级，导致自动补全（auto complete）功能出现异常，pip install ipython==7.1.1安装指定版本即可。
-```
+*python 中时间日期格式化符号*
+%y：两位数的年份表示（00-99）
+%Y：四位数的年份表示（000-9999）
+%m：月份（01-12）
+%d：月内中的一天（0-31）
+%H：24 小时制小时数（0-23）
+%I：12 小时制小时数（01-12）
+%M：分钟数（00=59）
+%S：秒（00-59）
+%a：本地简化星期名称
+%A：本地完整星期名称
+%b：本地简化的月份名称
+%B：本地完整的月份名称
+%c：本地相应的日期表示和时间表示
+%j：年内的一天（001-366）
+%p 本地 A.M.或 P.M.的等价符
+%U：一年中的星期数（00-53）星期天为星期的开始
+%w：星期（0-6），星期天为星期的开始
+%W：一年中的星期数（00-53）星期一为星期的开始
+%x：本地相应的日期表示
 
-### end
+%X：本地相应的时间表示
+%Z：当前时区的名称
+%%： %号本身
+
+
 
 ```python
-person.__dict__ # 返回它的所有属性
+# coding:utf-8
+
+from datetime import datetime
+from datetime import timedelta
+
+
+res = datetime.now() # 当前时间日期对象
+print(res)
+
+one_day = timedelta(days=1) # 得到时间间隔对象
+
+print(res - one_day) # 使用
+res = datetime.now()
+# 时间日期对象转字符串 以及解析
+print(res.strftime('%Y/%m/%d %H:%M:%S')) # 只有一个参数就不需要名
+
+time_str = res.strftime('%Y/%m/%d %H:%M:%S')
+time_obj = datetime.strptime(time_str, '%Y/%m/%d %H:%M:%S')
+print(time_obj)
+
+
+```
+
+```python
+# coding:utf-8
+
+import time
+from datetime import datetime
+
+print(time.time()) # 时间戳
+
+print('localtime', time.localtime()) # 获取本地时间
+# time.sleep(10)
+print('this is end')
+# 时间日期对象 和时间戳转换
+timestamp_1 = datetime.timestamp(datetime.now()) # 获取时间戳
+print(timestamp_1)
+
+
+print(datetime.fromtimestamp(timestamp_1))
+
+
 ```
 
 
 
+### 文件
+
+打开文件的三步：打开->操作->关闭
+注意：
+1.最大可以打开的文件的数量
+2.打开后关闭的原因是因为这样不会浪费文字描述符
+读取文本文件：
+r r+ w w+ a a+
+读取二进制文件：
+rb rb+ wb wb+ ab ab+
 
 
-join,split
+
+r:(默认)
+-只能读，不能写
+-读取文件不存在，会报错
+
+r+:
+-可读写
+-读取文件不存在，会报错
+
+w:
+-write only
+-会清空文件之前的内容
+-文件不存在，不会报错，会创建新的文件并写入
+
+w+:
+-rw
+-会清空文件内容
+-文件不存在，不报错，会创建新的文件
+
+a:
+-write only
+-不会清空文件内容
+-文件不存在，不会报错，会创建新的文件并写入
+
+a+:
+-rw
+-文件不存在不报错
+-不会清空文件内容
+
+
+
+读取文本文件：
+r 	r+ 	 w 	  w+ 	 a 	 a+
+读取二进制文件：
+rb    rb+ 	wb 	wb+ 	ab 	ab+
+
+
+
+open():打开文件
+
+write():写入一个字符串到文件中
+
+writelines():写入一个list
+
+```python
+# coding:utf-8
+
+
+try:
+    f = open('D:/var/hello.txt', 'a',encoding='utf-8')
+    # f.write('中古哟人')
+    list_0 = list(['hello word', 'matt'])
+    f.writelines(list_0)
+except Exception as e:
+    print('写文件出错')
+finally:
+    f.close()
+```
+
+read():整个文件读取到一个字符串
+
+readlines():文件读到一个list中
+
+readline():读取到一行
+
+closed:判断文件是否关闭,是属性
 
 
 
 ```python
-print '------'
+# coding:utf-8
 
 
-str_1 = ' '
-list_1 = [1, 2, 3]
-print str_1.join(['a', 'b', 'c']) # a b c
+try:
+    f = open(file='D:/var/hello.txt', mode='r', encoding='utf-8')
+    # print(f.read())
+    # print(f.readlines())
+    print(f.readline())
+except Exception as e:
+    print('读取文件出错')
+finally:
+    if f.closed:
+        pass
+    else:
+        f.close()
+
 ```
 
-eval
 
-chr
 
-ord
+字典的序列化
+
+需要导入json
+
+```python
+# coding:utf-8
+
+import json
+
+
+user_str = json.dumps({'name': '对某些'})
+
+print(json.loads(user_str))
+f = open(file='D:/var/json.txt',mode='w',encoding='utf-8')
+
+f.writelines(user_str)
+
+
+```
+
+
 
 
 

@@ -485,3 +485,312 @@ class Solution {
 }
 ```
 
+
+
+
+
+```java
+class Solution {
+    public int findKthLargest(int[] nums, int k) {
+    
+        k = nums.length - k;
+        int l = 0;
+        int r = nums.length - 1;
+        quickSort(nums,l,r,k);
+        return nums[k];
+    }
+
+    public void quickSort(int[] nums, int l, int r, int k) {
+        if (l < r) {
+            int[] p = partition(nums,l,r);
+            if (k > p[0] + 1) {
+                quickSort(nums, p[0] + 2, r, k);
+            } else if (k < p[0] + 1) {
+                quickSort(nums, l, p[0], k);
+            } else {
+                return;
+            }
+        }
+    }
+
+     
+
+    public int[] partition(int[] nums, int l, int r) {
+        int less = l - 1;
+        int more = r;
+        while (l < more) {
+            if (nums[l] < nums[r]) {
+                swap(nums, ++less, l++);
+            } else if (nums[l] > nums[r]) {
+                swap(nums, l, --more);
+            } else {
+                l++;
+            }
+        }
+        swap(nums, more, r);
+        return new int[]{less, more + 1};
+    }
+
+    public void swap(int[] nums, int i, int j) {
+        if (i == j) {
+            return;
+        }
+        nums[i] = nums[i] ^ nums[j];
+        nums[j] = nums[i] ^ nums[j];
+        nums[i] = nums[i] ^ nums[j];
+    }
+}
+```
+
+
+
+#### [347. 前 K 个高频元素](https://leetcode-cn.com/problems/top-k-frequent-elements/)
+
+难度中等619
+
+给定一个非空的整数数组，返回其中出现频率前 ***k\*** 高的元素。
+
+ 
+
+**示例 1:**
+
+```
+输入: nums = [1,1,1,2,2,3], k = 2
+输出: [1,2]
+```
+
+**示例 2:**
+
+```
+输入: nums = [1], k = 1
+输出: [1]
+```
+
+ 
+
+**提示：**
+
+- 你可以假设给定的 *k* 总是合理的，且 1 ≤ k ≤ 数组中不相同的元素的个数。
+- 你的算法的时间复杂度**必须**优于 O(*n* log *n*) , *n* 是数组的大小。
+- 题目数据保证答案唯一，换句话说，数组中前 k 个高频元素的集合是唯一的。
+- 你可以按任意顺序返回答案。
+
+```java
+class Solution {
+    public int[] topKFrequent(int[] nums, int k) {
+        Map<Integer, Integer> frequentForNum = new HashMap<>();
+        for (int num: nums) {
+            frequentForNum.put(num, frequentForNum.getOrDefault(num, 0) + 1);
+        }
+        ArrayList<Integer>[] buckets = new ArrayList[nums.length + 1];
+        for (int key: frequentForNum.keySet()) {
+            int frequent = frequentForNum.get(key);
+            if (buckets[frequent] == null) {
+                buckets[frequent] = new ArrayList<Integer>();
+            }
+            buckets[frequent].add(key);
+        }
+        List<Integer> topK = new ArrayList<>();
+        for (int i = buckets.length - 1; topK.size() < k && i >= 0; i-- ) {
+            if (buckets[i] == null) {
+                continue;
+            }
+            if (buckets[i].size() < (k - topK.size())) {
+                topK.addAll(buckets[i]);
+            } else {
+                topK.addAll(buckets[i].subList(0,k - topK.size()));
+            }
+        }
+        int[] res = new int[k];
+        for (int i = 0;i < k;i++) {
+            res[i] = topK.get(i);
+        }
+        return res;
+    }
+}
+```
+
+arr.length
+
+List<Integer>[] arr = new ArrayList[10];// 不需要添加<>
+
+
+
+
+
+#### [451. 根据字符出现频率排序](https://leetcode-cn.com/problems/sort-characters-by-frequency/)
+
+难度中等205
+
+给定一个字符串，请将字符串里的字符按照出现的频率降序排列。
+
+**示例 1:**
+
+```
+输入:
+"tree"
+
+输出:
+"eert"
+
+解释:
+'e'出现两次，'r'和't'都只出现一次。
+因此'e'必须出现在'r'和't'之前。此外，"eetr"也是一个有效的答案。
+```
+
+
+
+
+
+```java
+class Solution {
+    public String frequencySort(String s) {
+        Map<Character, Integer> frequencyForNum = new HashMap<>();
+        char[] sArr = s.toCharArray();
+        for (char c: s.toCharArray()) {
+            frequencyForNum.put(c, frequencyForNum.getOrDefault(c, 0) + 1);
+            
+        }
+        List<Character>[] buckets = new ArrayList[sArr.length + 1];
+        for (char c: frequencyForNum.keySet()) {
+            int size = frequencyForNum.get(c);
+            if (buckets[size] == null) {
+                buckets[size] = new ArrayList<>();
+            }
+            buckets[size].add(c);
+        }
+        StringBuilder sb = new StringBuilder();
+        for (int i = buckets.length - 1; i >= 0; i--) {
+            if (buckets[i] == null) {
+                continue;
+            }
+            for (char c: buckets[i]){
+                for (int j = 0; j < i; j++) { // 出现多次
+                    sb.append(c);
+                }
+                
+            }
+        }
+        return sb.toString();
+
+    }
+}
+```
+
+#### [75. 颜色分类](https://leetcode-cn.com/problems/sort-colors/)
+
+难度中等761
+
+给定一个包含红色、白色和蓝色，一共 `n` 个元素的数组，**[原地](https://baike.baidu.com/item/原地算法)**对它们进行排序，使得相同颜色的元素相邻，并按照红色、白色、蓝色顺序排列。
+
+此题中，我们使用整数 `0`、 `1` 和 `2` 分别表示红色、白色和蓝色。
+
+
+
+ 
+
+**示例 1：**
+
+```
+输入：nums = [2,0,2,1,1,0]
+输出：[0,0,1,1,2,2]
+```
+
+**示例 2：**
+
+```
+输入：nums = [2,0,1]
+输出：[0,1,2]
+```
+
+**示例 3：**
+
+```
+输入：nums = [0]
+输出：[0]
+```
+
+**示例 4：**
+
+```
+输入：nums = [1]
+输出：[1]
+```
+
+ 
+
+**提示：**
+
+- `n == nums.length`
+- `1 <= n <= 300`
+- `nums[i]` 为 `0`、`1` 或 `2`
+
+ 
+
+**进阶：**
+
+- 你可以不使用代码库中的排序函数来解决这道题吗？
+- 你能想出一个仅使用常数空间的一趟扫描算法吗？
+
+```java
+class Solution {
+    public void sortColors(int[] nums) {
+        int l = -1;
+        int r = nums.length;
+        int i = 0;
+        while (i < r) {
+            if (nums[i] == 0) {
+                swap(nums, ++l, i++);
+            } else if (nums[i] == 2) {
+                swap(nums, i, --r);
+            } else {
+                i++;
+            }
+        }
+    }
+
+    public void swap(int[] nums, int i, int j) {
+        if (i == j) {
+            return;
+        }
+        nums[i] = nums[i] ^ nums[j];
+        nums[j] = nums[i] ^ nums[j];
+        nums[i] = nums[i] ^ nums[j];
+    }
+}
+```
+
+### 二分查找
+
+#### [69. x 的平方根](https://leetcode-cn.com/problems/sqrtx/)
+
+难度简单576
+
+实现 `int sqrt(int x)` 函数。
+
+计算并返回 *x* 的平方根，其中 *x* 是非负整数。
+
+由于返回类型是整数，结果只保留整数的部分，小数部分将被舍去。
+
+**示例 1:**
+
+```
+输入: 4
+输出: 2
+```
+
+**示例 2:**
+
+```
+输入: 8
+输出: 2
+说明: 8 的平方根是 2.82842..., 
+     由于返回类型是整数，小数部分将被舍去。
+```
+
+
+
+```java
+
+```
+

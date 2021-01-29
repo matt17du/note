@@ -1589,6 +1589,253 @@ class Solution {
 
 
 
+### DFS
+
+#### [695. 岛屿的最大面积](https://leetcode-cn.com/problems/max-area-of-island/)
+
+难度中等422
+
+给定一个包含了一些 `0` 和 `1` 的非空二维数组 `grid` 。
+
+一个 **岛屿** 是由一些相邻的 `1` (代表土地) 构成的组合，这里的「相邻」要求两个 `1` 必须在水平或者竖直方向上相邻。你可以假设 `grid` 的四个边缘都被 `0`（代表水）包围着。
+
+找到给定的二维数组中最大的岛屿面积。(如果没有岛屿，则返回面积为 `0` 。)
+
+ 
+
+**示例 1:**
+
+```
+[[0,0,1,0,0,0,0,1,0,0,0,0,0],
+ [0,0,0,0,0,0,0,1,1,1,0,0,0],
+ [0,1,1,0,1,0,0,0,0,0,0,0,0],
+ [0,1,0,0,1,1,0,0,1,0,1,0,0],
+ [0,1,0,0,1,1,0,0,1,1,1,0,0],
+ [0,0,0,0,0,0,0,0,0,0,1,0,0],
+ [0,0,0,0,0,0,0,1,1,1,0,0,0],
+ [0,0,0,0,0,0,0,1,1,0,0,0,0]]
+```
+
+对于上面这个给定矩阵应返回 `6`。注意答案不应该是 `11` ，因为岛屿只能包含水平或垂直的四个方向的 `1` 。
+
+**示例 2:**
+
+```
+[[0,0,0,0,0,0,0,0]]
+```
+
+对于上面这个给定的矩阵, 返回 `0`。
+
+
+
+
+
+```java
+class Solution {
+
+    private int m;
+    private int n;
+    private int[][] direction = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
+
+    public int maxAreaOfIsland(int[][] grid) {
+        if (grid == null || grid.length == 0 || grid[0].length == 0) {
+            return 0;
+        }
+        int maxArea = 0;
+        m = grid.length;
+        n = grid[0].length;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                maxArea = Math.max(maxArea, dfs(grid, i, j));
+            }
+        }
+        return maxArea;
+    }
+
+    private int dfs(int[][] grid, int i, int j) {
+        if (i < 0 || i >= m || j < 0 || j >=n || grid[i][j] == 0) {
+            return 0;
+        }
+
+        int area = 1;
+        grid[i][j] = 0;
+        for (int[] d : direction) {
+            area += dfs(grid, i + d[0], j + d[1]);
+        }
+        return area;
+        
+
+    }
+}
+```
+
+#### [200. 岛屿数量](https://leetcode-cn.com/problems/number-of-islands/)
+
+难度中等959
+
+给你一个由 `'1'`（陆地）和 `'0'`（水）组成的的二维网格，请你计算网格中岛屿的数量。
+
+岛屿总是被水包围，并且每座岛屿只能由水平方向和/或竖直方向上相邻的陆地连接形成。
+
+此外，你可以假设该网格的四条边均被水包围。
+
+ 
+
+**示例 1：**
+
+```
+输入：grid = [
+  ["1","1","1","1","0"],
+  ["1","1","0","1","0"],
+  ["1","1","0","0","0"],
+  ["0","0","0","0","0"]
+]
+输出：1
+```
+
+**示例 2：**
+
+```
+输入：grid = [
+  ["1","1","0","0","0"],
+  ["1","1","0","0","0"],
+  ["0","0","1","0","0"],
+  ["0","0","0","1","1"]
+]
+输出：3
+```
+
+ 
+
+**提示：**
+
+- `m == grid.length`
+- `n == grid[i].length`
+- `1 <= m, n <= 300`
+- `grid[i][j]` 的值为 `'0'` 或 `'1'`
+
+
+
+```java
+class Solution {
+
+    private int m;
+    private int n;
+    private int[][] direction = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
+
+    public int numIslands(char[][] grid) {
+        if (grid == null || grid.length == 0 || grid[0].length == 0) {
+            return 0;
+        }
+        m = grid.length;
+        n = grid[0].length;
+        int islandsNum = 0;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (grid[i][j] == '1') {
+                    dfs(grid, i, j);
+                    islandsNum++;
+                }
+            }
+        }
+        return islandsNum;
+    }
+
+    public void dfs(char[][] grid, int i, int j) {
+        if (i < 0 || i >= m || j < 0 || j >= n || grid[i][j] == '0') {
+            return;
+        }
+        grid[i][j] = '0';
+        for (int[] d : direction) {
+            dfs(grid, i + d[0], j + d[1]);
+        }
+    }
+
+}
+```
+
+
+
+
+
+#### [547. 省份数量](https://leetcode-cn.com/problems/number-of-provinces/)
+
+难度中等482
+
+有 `n` 个城市，其中一些彼此相连，另一些没有相连。如果城市 `a` 与城市 `b` 直接相连，且城市 `b` 与城市 `c` 直接相连，那么城市 `a` 与城市 `c` 间接相连。
+
+**省份** 是一组直接或间接相连的城市，组内不含其他没有相连的城市。
+
+给你一个 `n x n` 的矩阵 `isConnected` ，其中 `isConnected[i][j] = 1` 表示第 `i` 个城市和第 `j` 个城市直接相连，而 `isConnected[i][j] = 0` 表示二者不直接相连。
+
+返回矩阵中 **省份** 的数量。
+
+ 
+
+**示例 1：**
+
+![img](https://assets.leetcode.com/uploads/2020/12/24/graph1.jpg)
+
+```
+输入：isConnected = [[1,1,0],[1,1,0],[0,0,1]]
+输出：2
+```
+
+**示例 2：**
+
+![img](https://assets.leetcode.com/uploads/2020/12/24/graph2.jpg)
+
+```
+输入：isConnected = [[1,0,0],[0,1,0],[0,0,1]]
+输出：3
+```
+
+ 
+
+**提示：**
+
+- `1 <= n <= 200`
+- `n == isConnected.length`
+- `n == isConnected[i].length`
+- `isConnected[i][j]` 为 `1` 或 `0`
+- `isConnected[i][i] == 1`
+- `isConnected[i][j] == isConnected[j][i]`
+
+
+
+```java
+class Solution {
+
+    private int n;
+
+    public int findCircleNum(int[][] isConnected) {
+        if (isConnected == null || isConnected.length == 0 || isConnected[0].length == 0) {
+            return 0;
+        }
+        n = isConnected.length;
+        boolean[] hasVisited = new boolean[n];
+        int circleNum = 0;
+        for (int i = 0; i < n; i++) {
+            if (!hasVisited[i]) {
+                dfs(isConnected, i, hasVisited);
+                circleNum++;
+            }
+        }
+        return circleNum;
+    }
+
+    public void dfs(int[][] isConnected, int i, boolean[] hasVisited) {
+
+        hasVisited[i] = true;
+        for (int j = 0; j < n; j++) {
+            if (isConnected[i][j] == 1 && !hasVisited[j]) {
+                dfs(isConnected, j, hasVisited);
+            }
+        }
+    }
+}
+```
+
 
 
 

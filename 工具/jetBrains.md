@@ -20,11 +20,9 @@
 
 
 
-选择下面zip文件安装，也可以直接托到ide界面，这种方式更好
+选择下面zip文件安装，**也可以直接托到ide界面，这种方式更好**
 
 ![](https://raw.githubusercontent.com/matt17du/img/main/img/20210106235214.png)
-
-
 
 
 
@@ -34,7 +32,7 @@
 
 
 
-看到以下内容重启
+看到以下内容重启ide
 
 ![](https://raw.githubusercontent.com/matt17du/img/main/img/20210106235439.png)
 
@@ -320,3 +318,14 @@ groovyScript("def result=''; def params=\"${_1}\".replaceAll('[\\\\[|\\\\]|\\\\s
 
 
 ![](https://raw.githubusercontent.com/matt17du/img/main/img/20210107004019.png)
+
+
+
+
+
+## clion
+
+由于安装了cygwin所以直接识别出来了
+
+
+

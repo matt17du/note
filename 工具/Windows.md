@@ -100,3 +100,123 @@ CODE:XPNMF-ISDYF-LCSED-BPATU
 ## 图床
 
 推荐[picgo](https://github.com/Molunerfinn/PicGo)
+
+
+
+
+
+
+
+## cygwin
+
+http://www.cygwin.com/
+
+1.点击下图链接，下载安装包，点击安装包即可
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210129225052.png)
+
+
+
+
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210129230335.png)
+
+
+
+
+
+2、三种安装模式
+①Install from Internet，这种模式直接从Internet安装，适合网速较快的情况；
+②Download Without Installing，这种模式只从网上下载Cygwin的组件包，但不安装；
+③Install from Local Directory，这种模式与上面第二种模式对应，当你的Cygwin组件包已经下载到本地，则可以使用此模式从本地安装Cygwin
+
+**我们选择第一种**
+
+
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210129230453.png)
+
+
+
+
+
+3、选择安装路径
+
+
+
+软件安装的位置
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210129230650.png)
+
+
+
+
+
+组件安装的位置
+
+
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210129230745.png)
+
+
+
+4.代理
+
+①Use System Proxy Settings 使用系统的代理设置
+②Direct Connection 一般多数用户都是这种直接连接的网络，所以都是直接使用默认设置即可
+③Use HTTP/FTP Proxy 使用HTTP或FTP类型的代理。如果有需要，自己选择此项后，设置对应的代理地址和端口，即可
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210129230909.png)
+
+
+
+
+
+5、选择下载站点
+不同的镜像存放了不同的包，为了获得最快的下载速度，我们可以添加网易开源镜像http://mirrors.163.com/cygwin/ 或者 阿里云镜像http://mirrors.aliyun.com/cygwin/
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210129231042.png)
+
+
+
+6.组件的选择
+
+此处，对于安装Cygwin来说，就是安装各种各样的模块而已。最核心的，记住一定要安装Devel这个部分的模块，其中包含了各种开发所用到的工具或模块
+
+展开devel
+
+从中选择binutils、 gcc 、mingw 、gdb进行安装，找到以下选项，点击后边的skip，使其变为版本号即可
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210129231329.png)
+
+
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210129231447.png)
+
+
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210129231532.png)
+
+
+
+
+
+下一步安装即可。

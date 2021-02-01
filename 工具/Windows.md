@@ -95,13 +95,23 @@ CODE:XPNMF-ISDYF-LCSED-BPATU
 
 
 
+## IDM
 
+idm 6.38
+
+下载解压绿化即可
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210130103333.png)
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210130103430.png)
 
 ## 图床
 
 推荐[picgo](https://github.com/Molunerfinn/PicGo)
-
-
 
 
 
@@ -219,4 +229,27 @@ http://www.cygwin.com/
 
 
 
-下一步安装即可。
+点击下一步安装即可。
+
+
+
+### 检验
+
+检查是否安装成功
+
+```c
+cygcheck -c cygwin
+```
+
+
+
+
+
+cygdrive
+
+
+
+
+
+
+

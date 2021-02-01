@@ -318,13 +318,61 @@ shutdown -r now // 立即重启
 
 
 
+#### 设置NAT
+
+##### 1.设置主机虚拟网络v8
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210131174231.png)
+
+
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210131174307.png)
+
+
+
+设置静态ip
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210131174355.png)
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210131174517.png)
+
+
+
+##### 2.设置虚拟机网络
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210131174612.png)
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210131174702.png)
+
+
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210131174736.png)
+
+
+
+子网ip，主机和虚拟机 需要在同一网段（因为在一个内网下）
+
+**关闭windows防火墙**
+
+
+
+##### 3.设置centos网络
+
 
 
 ```java
 vim /etc/sysconfig/network-scripts/ifcfg-ens33
 ```
-
-
 
 
 
@@ -381,8 +429,6 @@ systemctl restart network
 如果无法上网点击有线连接即可
 
 ![](https://raw.githubusercontent.com/matt17du/img/main/img/20201223174649.png)
-
-
 
 
 
@@ -454,12 +500,24 @@ vim /etc/ssh/sshd_config
 
 
 
+#### 退出
+
+```c
+logout 123.56.135.43 //退出ssh连接
+```
+
 
 
 ### 安装gcc gcc++
 
 ```java
 yum -y install gcc gcc-c++ kernel-devel //安装gcc、c++编译器以及内核文件
+```
+
+```
+gcc --version
+
+g++ --version
 ```
 
 
@@ -909,7 +967,9 @@ sudo ls
 
 
 
-## cygwin无法使用vim
+## cygwin
+
+### 无法使用vim
 
 E437: terminal capability "cm" required 错误；
 
@@ -917,13 +977,13 @@ E437: terminal capability "cm" required 错误；
 export TERM=xterm    
 ```
 
-**挂载**
+### **挂载**
 
 /cygdrive/
 
 
 
-
+### 使用ssh
 
 ```html
 ssh-keygen

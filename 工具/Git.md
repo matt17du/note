@@ -62,6 +62,37 @@ git checkout test // 切换test分支
 git merge test // 合并test分支
 ```
 
+
+
+### SSH登录
+
+```python
+cd ~ # 进入家目录
+
+rm -rvf .ssh # 删除.ssh 目录
+
+ssh-keygen -t rsa -C matt17@qq.com # 运行命令生成.ssh 密钥目录
+```
+
+
+
+```python
+cd .ssh
+
+cat id_rsa.pub
+```
+
+复制 id_rsa.pub 文件内容，登录 GitHub，点击用户头像→Settings→SSH and GPG keys
+
+New SSH Key
+
+输入复制的密钥信息
+
+
+
+
+
+
 ## 错误
 
 ### 由于第一次使用不是git clone 然后直接推送

@@ -502,9 +502,24 @@ vim /etc/ssh/sshd_config
 
 #### 退出
 
-```c
+```python
 logout 123.56.135.43 //退出ssh连接
+exit
 ```
+
+
+
+
+
+```
+ssh-keygen
+
+cd /home/matt/.ssh
+    
+ssh-copy-id -i id_rsa.pub root@192.168.96.128
+```
+
+
 
 
 
@@ -523,6 +538,16 @@ g++ --version
 
 
 ### 使用SSH
+
+在centos中登录root账号，使用命令`rpm -qa | grep openssh`或`yum list installed | grep openssh`检查是否安装相应软件
+
+```
+rpm -qa | grep openssh
+```
+
+
+
+
 
 ```java
 systemctl start sshd.service
@@ -543,6 +568,16 @@ ssh root@123.56.135.43
 ```JAVA
 Logout
 exit
+```
+
+
+
+
+
+```
+ ssh-keygen
+ 
+ 
 ```
 
 
@@ -986,11 +1021,7 @@ export TERM=xterm
 ### 使用ssh
 
 ```html
-ssh-keygen
 
-cd /home/matt/.ssh
-    
-ssh-copy-id -i id_rsa.pub root@192.168.96.128
 ```
 
 

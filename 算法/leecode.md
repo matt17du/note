@@ -2028,6 +2028,426 @@ class Solution {
 
 
 
+### 回溯
+
+#### [17. 电话号码的字母组合](https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/)
+
+难度中等1111
+
+给定一个仅包含数字 `2-9` 的字符串，返回所有它能表示的字母组合。答案可以按 **任意顺序** 返回。
+
+给出数字到字母的映射如下（与电话按键相同）。注意 1 不对应任何字母。
+
+![img](https://assets.leetcode-cn.com/aliyun-lc-upload/original_images/17_telephone_keypad.png)
+
+ 
+
+**示例 1：**
+
+```
+输入：digits = "23"
+输出：["ad","ae","af","bd","be","bf","cd","ce","cf"]
+```
+
+**示例 2：**
+
+```
+输入：digits = ""
+输出：[]
+```
+
+**示例 3：**
+
+```
+输入：digits = "2"
+输出：["a","b","c"]
+```
+
+ 
+
+**提示：**
+
+- `0 <= digits.length <= 4`
+- `digits[i]` 是范围 `['2', '9']` 的一个数字。
+
+
+
+```java
+class Solution {
+
+    private final String[] KEYS = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+    public List<String> letterCombinations(String digits) {
+        List<String> combinations = new ArrayList<>();
+        if (digits == null || digits.length() == 0) {
+            return combinationList;
+        }
+        doCombinations(new StringBuilder(), digits, combinations);
+        return combinationList;
+    }
+
+    public void doCombinations(StringBuilder prefix, String digits, List<String> combinations) {
+        if (prefix.length() == digits.length()) {
+            combinations.add(new String(prefix));
+            return;
+        }
+        int curDigits = digits.charAt(prefix.length()) - '0';
+        String letter = KEYS[curDigits];
+        for (char ch : letter.toCharArray()) {
+            prefix.append(ch);
+            doCombinations(prefix,digits,combinations);
+            prefix.deleteCharAt(prefix.length() - 1);
+        }
+
+    }
+
+}
+```
+
+
+
+#### [93. 复原IP地址](https://leetcode-cn.com/problems/restore-ip-addresses/)
+
+难度中等492
+
+给定一个只包含数字的字符串，复原它并返回所有可能的 IP 地址格式。
+
+**有效的 IP 地址** 正好由四个整数（每个整数位于 0 到 255 之间组成，且不能含有前导 `0`），整数之间用 `'.' `分隔。
+
+例如："0.1.2.201" 和 "192.168.1.1" 是 **有效的** IP 地址，但是 "0.011.255.245"、"192.168.1.312" 和 "192.168@1.1" 是 **无效的** IP 地址。
+
+ 
+
+**示例 1：**
+
+```
+输入：s = "25525511135"
+输出：["255.255.11.135","255.255.111.35"]
+```
+
+**示例 2：**
+
+```
+输入：s = "0000"
+输出：["0.0.0.0"]
+```
+
+**示例 3：**
+
+```
+输入：s = "1111"
+输出：["1.1.1.1"]
+```
+
+**示例 4：**
+
+```
+输入：s = "010010"
+输出：["0.10.0.10","0.100.1.0"]
+```
+
+**示例 5：**
+
+```
+输入：s = "101023"
+输出：["1.0.10.23","1.0.102.3","10.1.0.23","10.10.2.3","101.0.2.3"]
+```
+
+ 
+
+**提示：**
+
+- `0 <= s.length <= 3000`
+- `s` 仅由数字组成
+
+
+
+```java
+class Solution {
+    public List<String> restoreIpAddresses(String s) {
+
+        List<String> address = new ArrayList<>();
+        doRestore(0, new StringBuilder(), s, address);
+        return address;
+
+    }
+
+    public void doRestore(int index, StringBuilder tempAddress, String s, List<String> address) {
+
+        if (index == 4 || s.length() == 0) {
+            if (index == 4 && s.length() == 0) {
+                address.add(tempAddress.toString());
+            }
+            return;
+        }
+
+        for (int i = 0; i < s.length() && i <= 2; i++) {
+            if (i != 0 && s.charAt(0) == '0') {
+                break;
+            }
+            String part = s.substring(0, i + 1);
+            if (Integer.valueOf(part) <= 255) {
+                if (tempAddress.length() != 0) {
+                    part = "." + part;
+                }
+                tempAddress.append(part);
+                doRestore(index + 1, tempAddress, s.substring(i + 1), address);
+                tempAddress.delete(tempAddress.length() - part.length(), tempAddress.length());
+            }
+            
+        }
+
+        
+    }
+
+
+}
+```
+
+
+
+
+
+#### [79. 单词搜索](https://leetcode-cn.com/problems/word-search/)
+
+难度中等765
+
+给定一个二维网格和一个单词，找出该单词是否存在于网格中。
+
+单词必须按照字母顺序，通过相邻的单元格内的字母构成，其中“相邻”单元格是那些水平相邻或垂直相邻的单元格。同一个单元格内的字母不允许被重复使用。
+
+ 
+
+**示例:**
+
+```
+board =
+[
+  ['A','B','C','E'],
+  ['S','F','C','S'],
+  ['A','D','E','E']
+]
+
+给定 word = "ABCCED", 返回 true
+给定 word = "SEE", 返回 true
+给定 word = "ABCB", 返回 false
+```
+
+ 
+
+**提示：**
+
+- `board` 和 `word` 中只包含大写和小写英文字母。
+- `1 <= board.length <= 200`
+- `1 <= board[i].length <= 200`
+- `1 <= word.length <= 10^3`
+
+
+
+```java
+class Solution {
+
+    private int[][] direction = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+    private int m;
+    private int n;
+
+    public boolean exist(char[][] board, String word) {
+
+        if (word == null || word.length() == 0) {
+            return true;
+        }
+
+        if (board == null || board.length == 0 || board[0].length == 0) {
+            return true;
+        }
+        m = board.length;
+        n = board[0].length;
+        boolean[][] hasVisited = new boolean[m][n];
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (backtracking(0, i, j, hasVisited, board, word)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+
+    }
+
+    public boolean backtracking(int curLen, int r, int c, boolean[][] hasVisited,
+         char[][] board, String word) {
+        
+        if (curLen == word.length()) {
+            return true;
+        }
+        if (r < 0 || r >= m || c < 0 || c >= n || board[r][c] != word.charAt(curLen) || hasVisited[r][c]) {
+            return false;
+        }
+        hasVisited[r][c] = true;
+        for (int[] d : direction) {
+
+            if (backtracking(curLen + 1, r + d[0], c + d[1], hasVisited, board, word)) {
+                return true;
+            }
+        }
+        hasVisited[r][c] = false;
+        return false;
+    
+    }
+
+
+
+}
+```
+
+#### [257. 二叉树的所有路径](https://leetcode-cn.com/problems/binary-tree-paths/)
+
+难度简单438
+
+给定一个二叉树，返回所有从根节点到叶子节点的路径。
+
+**说明:** 叶子节点是指没有子节点的节点。
+
+**示例:**
+
+```
+输入:
+
+   1
+ /   \
+2     3
+ \
+  5
+
+输出: ["1->2->5", "1->3"]
+
+解释: 所有根节点到叶子节点的路径为: 1->2->5, 1->3
+```
+
+
+
+
+
+```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public List<String> binaryTreePaths(TreeNode root) {
+        List<Integer> values = new ArrayList<>();
+        List<String> paths = new ArrayList<>();
+        backtracking(root, values, paths);
+        return paths;
+    }
+
+    public void backtracking(TreeNode node, List<Integer> values, List<String> paths) {
+        if (node == null) {
+            return;
+        }
+        values.add(node.val);
+        if (node.left == null && node.right == null) {
+            paths.add(buildpath(values));
+        } else {
+            backtracking(node.left, values, paths);
+            backtracking(node.right, values, paths);
+        }
+        values.remove(values.size() - 1);
+
+    }
+
+    public String buildpath(List<Integer> values) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < values.size(); i++) {
+            stringBuilder.append(values.get(i));
+            if (i != values.size() - 1) {
+                stringBuilder.append("->");
+            }
+        }
+        return stringBuilder.toString();
+    }
+
+
+}
+```
+
+
+
+#### [46. 全排列](https://leetcode-cn.com/problems/permutations/)
+
+难度中等1107
+
+给定一个 **没有重复** 数字的序列，返回其所有可能的全排列。
+
+**示例:**
+
+```
+输入: [1,2,3]
+输出:
+[
+  [1,2,3],
+  [1,3,2],
+  [2,1,3],
+  [2,3,1],
+  [3,1,2],
+  [3,2,1]
+]
+```
+
+
+
+
+
+```java
+
+class Solution {
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> permutes = new ArrayList<>();
+        if (nums == null) {
+            return permutes;
+        }
+
+        boolean[] hasVisited = new boolean[nums.length];
+        backtracking(nums, new ArrayList<Integer>(), hasVisited, permutes);
+        return permutes;
+    }
+
+    private void backtracking(int[] nums, List<Integer> tempPermutes, boolean[] hasVisited,
+         List<List<Integer>> permutes) {
+            
+            if (tempPermutes.size() == nums.length) {
+                permutes.add(new ArrayList<>(tempPermutes));
+                return;
+            }
+
+            for (int i = 0; i < nums.length; i++) {
+                if (hasVisited[i]) {
+                    continue;
+                }
+                
+                hasVisited[i] = true;
+                tempPermutes.add(nums[i]);
+                backtracking(nums, tempPermutes, hasVisited, permutes);
+                hasVisited[i] = false;
+                tempPermutes.remove(tempPermutes.size() - 1);
+            }
+    }
+}
+```
+
+
+
 
 
 

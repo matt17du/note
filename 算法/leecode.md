@@ -2448,6 +2448,365 @@ class Solution {
 
 
 
+#### [47. 全排列 II](https://leetcode-cn.com/problems/permutations-ii/)
+
+难度中等577
+
+给定一个可包含重复数字的序列 `nums` ，**按任意顺序** 返回所有不重复的全排列。
+
+ 
+
+**示例 1：**
+
+```
+输入：nums = [1,1,2]
+输出：
+[[1,1,2],
+ [1,2,1],
+ [2,1,1]]
+```
+
+**示例 2：**
+
+```
+输入：nums = [1,2,3]
+输出：[[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
+```
+
+ 
+
+**提示：**
+
+- `1 <= nums.length <= 8`
+- `-10 <= nums[i] <= 10`
+
+
+
+
+
+
+
+```java
+
+class Solution {
+    public List<List<Integer>> permuteUnique(int[] nums) {
+
+        List<List<Integer>> permutes = new ArrayList<>();
+        if (nums == null || nums.length == 0) {
+            return permutes;
+        }
+        Arrays.sort(nums);
+        boolean[] hasVisited = new boolean[nums.length];
+        backtracking(nums, hasVisited, new ArrayList<Integer>(), permutes);
+        return permutes;
+
+    }
+
+
+    private void backtracking(int[] nums, boolean[] hasVisited, List<Integer> tempPermute, 
+        List<List<Integer>> permutes) {
+
+            if (tempPermute.size() == nums.length) {
+                permutes.add(new ArrayList<>(tempPermute));
+                return;
+            }
+
+            for (int i = 0; i < nums.length; i++) {
+                if (i != 0 && nums[i] == nums[i - 1] && !hasVisited[i - 1]) {
+                    continue;
+                }
+                if (hasVisited[i]) {
+                    continue;
+                }
+                hasVisited[i] = true;
+                tempPermute.add(nums[i]);
+                backtracking(nums, hasVisited, tempPermute, permutes);
+                hasVisited[i] = false;
+                tempPermute.remove(tempPermute.size() - 1);
+            }
+
+        }
+}
+```
+
+
+
+
+
+#### [77. 组合](https://leetcode-cn.com/problems/combinations/)
+
+难度中等480
+
+给定两个整数 *n* 和 *k*，返回 1 ... *n* 中所有可能的 *k* 个数的组合。
+
+**示例:**
+
+```
+输入: n = 4, k = 2
+输出:
+[
+  [2,4],
+  [3,4],
+  [2,3],
+  [1,2],
+  [1,3],
+  [1,4],
+]
+```
+
+
+
+
+
+```java
+class Solution {
+    public List<List<Integer>> combine(int n, int k) {
+        List<List<Integer>> combines = new ArrayList<>();
+        backtracking(1, n, k, new ArrayList<Integer>(), combines);
+        return combines;
+    }
+
+    private void backtracking(int s, int n, int k, 
+        List<Integer> tempCombine, List<List<Integer>> combines) {
+            if (k == 0) {
+                combines.add(new ArrayList(tempCombine));
+                return;
+            }
+
+            for (int i = s; i <= n - k + 1; i++) {
+                tempCombine.add(i);
+                backtracking(i + 1, n, k - 1, tempCombine, combines);
+                tempCombine.remove(tempCombine.size() - 1);
+            }
+        }
+}
+```
+
+
+
+
+
+#### [39. 组合总和](https://leetcode-cn.com/problems/combination-sum/)
+
+难度中等1150
+
+给定一个**无重复元素**的数组 `candidates` 和一个目标数 `target` ，找出 `candidates` 中所有可以使数字和为 `target` 的组合。
+
+`candidates` 中的数字可以无限制重复被选取。
+
+**说明：**
+
+- 所有数字（包括 `target`）都是正整数。
+- 解集不能包含重复的组合。 
+
+**示例 1：**
+
+```
+输入：candidates = [2,3,6,7], target = 7,
+所求解集为：
+[
+  [7],
+  [2,2,3]
+]
+```
+
+**示例 2：**
+
+```
+输入：candidates = [2,3,5], target = 8,
+所求解集为：
+[
+  [2,2,2,2],
+  [2,3,3],
+  [3,5]
+]
+```
+
+ 
+
+**提示：**
+
+- `1 <= candidates.length <= 30`
+- `1 <= candidates[i] <= 200`
+- `candidate` 中的每个元素都是独一无二的。
+- `1 <= target <= 500`
+
+
+
+
+
+```java
+class Solution {
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<List<Integer>> combinations = new ArrayList<>();
+        backtracking(combinations, new ArrayList<Integer>(), 0, target, candidates);
+        return combinations;
+    }
+
+    private void backtracking(List<List<Integer>> combinations, List<Integer> tempCombinations,
+         int start, int target, int[] candidates) {
+
+             if (target == 0) {
+                 combinations.add(new ArrayList<>(tempCombinations));
+                 return;
+             }
+
+             for (int i = start; i < candidates.length; i++) {
+                 
+                 if (candidates[i] <= target) {
+                     tempCombinations.add(candidates[i]);
+                     backtracking(combinations, tempCombinations, i, target - candidates[i], candidates);
+                     tempCombinations.remove(tempCombinations.size() - 1);
+                 }
+             }
+         }
+}
+```
+
+
+
+2 2 2 当前值可能会重复选择
+
+
+
+
+
+#### [40. 组合总和 II](https://leetcode-cn.com/problems/combination-sum-ii/)
+
+难度中等483
+
+给定一个数组 `candidates` 和一个目标数 `target` ，找出 `candidates` 中所有可以使数字和为 `target` 的组合。
+
+`candidates` 中的每个数字在每个组合中只能使用一次。
+
+**说明：**
+
+- 所有数字（包括目标数）都是正整数。
+- 解集不能包含重复的组合。 
+
+**示例 1:**
+
+```
+输入: candidates = [10,1,2,7,6,1,5], target = 8,
+所求解集为:
+[
+  [1, 7],
+  [1, 2, 5],
+  [2, 6],
+  [1, 1, 6]
+]
+```
+
+**示例 2:**
+
+```
+输入: candidates = [2,5,2,1,2], target = 5,
+所求解集为:
+[
+  [1,2,2],
+  [5]
+]
+```
+
+
+
+
+
+```java
+class Solution {
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        List<List<Integer>> combinations = new ArrayList<>();
+        if (candidates == null || candidates.length == 0) {
+            return combinations;
+        }
+        Arrays.sort(candidates);
+        boolean[] hasVisited = new boolean[candidates.length];
+        backtracking(combinations, new ArrayList<Integer>(), 0, target, hasVisited, candidates);
+        return combinations;
+        
+    }
+
+    private void backtracking(List<List<Integer>> combinations, List<Integer> tempCombination,
+        int start, int target, boolean[] hasVisited, int[] candidates) {
+            if (target == 0) {
+                combinations.add(new ArrayList<>(tempCombination));
+                return;
+            }
+
+            for (int i = start; i < candidates.length; i++) {
+                if (i != 0 && candidates[i] == candidates[i - 1] && !hasVisited[i - 1]) {
+                    continue;
+                } 
+                if (candidates[i] <= target) {
+                    hasVisited[i] = true;
+                    tempCombination.add(candidates[i]);
+                    backtracking(combinations, tempCombination, i + 1, target -  candidates[i],
+                        hasVisited, candidates);
+                    hasVisited[i] = false;
+                    tempCombination.remove(tempCombination.size() - 1);
+                }
+            }
+        }
+}
+```
+
+
+
+#### [216. 组合总和 III](https://leetcode-cn.com/problems/combination-sum-iii/)
+
+难度中等255
+
+找出所有相加之和为 ***n*** 的 ***k\*** 个数的组合***。\***组合中只允许含有 1 - 9 的正整数，并且每种组合中不存在重复的数字。
+
+**说明：**
+
+- 所有数字都是正整数。
+- 解集不能包含重复的组合。 
+
+**示例 1:**
+
+```
+输入: k = 3, n = 7
+输出: [[1,2,4]]
+```
+
+**示例 2:**
+
+```
+输入: k = 3, n = 9
+输出: [[1,2,6], [1,3,5], [2,3,4]]
+```
+
+
+
+```java
+class Solution {
+    public List<List<Integer>> combinationSum3(int k, int n) {
+        List<List<Integer>> combinations  = new ArrayList<>();
+        backtracking(combinations, new ArrayList<Integer>(), 1, k, n);
+        return combinations;
+    }
+
+    private void backtracking(List<List<Integer>> combinations, List<Integer> tempCombinations,
+        int start, int k, int n) {
+        
+        if (k == 0 && n == 0) {
+            combinations.add(new ArrayList<>(tempCombinations));
+            return;
+        }
+        if (k == 0 || n == 0) {
+            return;
+        }
+
+        for (int i = start; i <= 9; i++) {
+            tempCombinations.add(i);
+            backtracking(combinations, tempCombinations, i + 1,  k - 1, n - i);
+            tempCombinations.remove(tempCombinations.size() - 1);
+        }
+    }
+}
+```
+
 
 
 

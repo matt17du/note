@@ -2809,6 +2809,447 @@ class Solution {
 
 
 
+#### [78. 子集](https://leetcode-cn.com/problems/subsets/)
+
+难度中等978
+
+给你一个整数数组 `nums` ，数组中的元素 **互不相同** 。返回该数组所有可能的子集（幂集）。
+
+解集 **不能** 包含重复的子集。你可以按 **任意顺序** 返回解集。
+
+ 
+
+**示例 1：**
+
+```
+输入：nums = [1,2,3]
+输出：[[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]
+```
+
+**示例 2：**
+
+```
+输入：nums = [0]
+输出：[[],[0]]
+```
+
+ 
+
+**提示：**
+
+- `1 <= nums.length <= 10`
+- `-10 <= nums[i] <= 10`
+- `nums` 中的所有元素 **互不相同**
+
+
+
+```java
+class Solution {
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> subsets = new ArrayList<>();
+        
+        for (int i = 0; i <= nums.length; i++) {
+            backtracking(subsets, new ArrayList<Integer>(), 0, i, nums);
+        }
+        
+        return subsets;
+    }
+
+    private void backtracking(List<List<Integer>> subsets, List<Integer> tempSubsets,
+        int start, int size, int[] nums) {
+
+            if (tempSubsets.size() == size) {
+                subsets.add(new ArrayList<>(tempSubsets));
+                return;
+            }
+
+            for (int i = start; i < nums.length; i++) {
+                tempSubsets.add(nums[i]);
+                backtracking(subsets, tempSubsets, i + 1, size, nums);
+                tempSubsets.remove(tempSubsets.size() - 1);
+            }
+            
+        }
+}
+```
+
+
+
+
+
+#### [90. 子集 II](https://leetcode-cn.com/problems/subsets-ii/)
+
+难度中等378
+
+给定一个可能包含重复元素的整数数组 ***nums***，返回该数组所有可能的子集（幂集）。
+
+**说明：**解集不能包含重复的子集。
+
+**示例:**
+
+```
+输入: [1,2,2]
+输出:
+[
+  [2],
+  [1],
+  [1,2,2],
+  [2,2],
+  [1,2],
+  []
+]
+```
+
+
+
+需要先排序
+
+```java
+class Solution {
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        Arrays.sort(nums);
+        List<List<Integer>> subsets = new ArrayList<>();
+        if (nums == null) {
+            return subsets;
+        }
+        List<Integer> tempSubsets = new ArrayList<>();
+        boolean[] hasVisited = new boolean[nums.length];
+        for (int i = 0; i <= nums.length; i++) {
+            backtracking(subsets, tempSubsets, 0, i, hasVisited, nums);
+        }
+        return subsets;
+    }
+
+    private void backtracking(List<List<Integer>> subsets, List<Integer> tempSubsets,
+        int start, int size, boolean[] hasVisited,  int[] nums) {
+            if (tempSubsets.size() == size) {
+                subsets.add(new ArrayList<>(tempSubsets));
+                return;
+            }
+
+            for (int i = start; i < nums.length; i++) {
+                if (i != 0 && nums[i] == nums[i - 1] && !hasVisited[i - 1]) {
+                    continue;
+                }
+                hasVisited[i] = true;
+                tempSubsets.add(nums[i]);
+                backtracking(subsets, tempSubsets, i + 1, size, hasVisited, nums);
+                hasVisited[i] = false;
+                tempSubsets.remove(tempSubsets.size() - 1);
+            }
+        }
+}
+```
+
+
+
+#### [131. 分割回文串](https://leetcode-cn.com/problems/palindrome-partitioning/)
+
+难度中等475
+
+给定一个字符串 *s*，将 *s* 分割成一些子串，使每个子串都是回文串。
+
+返回 *s* 所有可能的分割方案。
+
+**示例:**
+
+```
+输入: "aab"
+输出:
+[
+  ["aa","b"],
+  ["a","a","b"]
+]
+```
+
+
+
+
+
+```java
+class Solution {
+    public List<List<String>> partition(String s) {
+        List<List<String>> partitions = new ArrayList<>();
+        backtracking(partitions, new ArrayList<String>(), s);
+        return partitions;
+    }
+
+    private void backtracking(List<List<String>> partitions, List<String> tempPartitions,
+        String s) {
+
+            if (s.length() == 0) {
+                partitions.add(new ArrayList<>(tempPartitions));
+                return;
+            }
+
+            for (int i = 0; i < s.length(); i++) {
+                if (isPalindrome(s, 0, i)) {
+                    tempPartitions.add(s.substring(0, i + 1));
+                    backtracking(partitions, tempPartitions, s.substring(i + 1));
+                    tempPartitions.remove(tempPartitions.size() - 1);
+                }
+            }
+        }
+
+    private boolean isPalindrome(String str, int l, int r) {
+        
+        while (l < r) {
+            if (str.charAt(l++) != str.charAt(r--)) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+```
+
+
+
+
+
+#### [37. 解数独](https://leetcode-cn.com/problems/sudoku-solver/)
+
+难度困难744
+
+编写一个程序，通过填充空格来解决数独问题。
+
+一个数独的解法需**遵循如下规则**：
+
+1. 数字 `1-9` 在每一行只能出现一次。
+2. 数字 `1-9` 在每一列只能出现一次。
+3. 数字 `1-9` 在每一个以粗实线分隔的 `3x3` 宫内只能出现一次。
+
+空白格用 `'.'` 表示。
+
+![img](http://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Sudoku-by-L2G-20050714.svg/250px-Sudoku-by-L2G-20050714.svg.png)
+
+一个数独。
+
+![img](http://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Sudoku-by-L2G-20050714_solution.svg/250px-Sudoku-by-L2G-20050714_solution.svg.png)
+
+答案被标成红色。
+
+**提示：**
+
+- 给定的数独序列只包含数字 `1-9` 和字符 `'.'` 。
+- 你可以假设给定的数独只有唯一解。
+- 给定数独永远是 `9x9` 形式的。
+
+
+
+
+
+```java
+class Solution {
+
+    private boolean[][] rowsUsed = new boolean[9][10];
+    private boolean[][] colsUsed = new boolean[9][10];
+    private boolean[][] cubesUsed = new boolean[9][10];
+    private char[][] board;
+    public void solveSudoku(char[][] board) {
+        this.board = board;
+
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[0].length; j++) {
+                if (board[i][j] != '.') {
+                    rowsUsed[i][board[i][j] - '0'] = true;
+                    colsUsed[j][board[i][j] - '0'] = true;
+                    cubesUsed[cubeNum(i, j)][board[i][j] - '0'] = true;
+                }
+            }
+        }
+        backtracking(0, 0);
+    }
+
+    private boolean backtracking(int row, int col) {
+        while (row < 9 && board[row][col] != '.') {
+            row = col == 8 ? row + 1 : row;
+            col = col == 8 ? 0 : col + 1;
+        }
+
+        if (row == 9) {
+            return true;
+        }
+
+
+        for (int i = 1; i <= 9; i++) {
+            if (rowsUsed[row][i] || colsUsed[col][i] || cubesUsed[cubeNum(row, col)][i]) {
+                continue;
+            }
+            rowsUsed[row][i] = true;
+            colsUsed[col][i] = true;
+            cubesUsed[cubeNum(row, col)][i] = true;
+            board[row][col] = (char)(i + '0');
+            if (backtracking(row, col)) {
+                return true;
+            }
+            rowsUsed[row][i] = false;
+            colsUsed[col][i] = false;
+            cubesUsed[cubeNum(row, col)][i] = false;
+            board[row][col] = '.';
+
+       }
+       return false;
+
+        
+    }
+
+    private int cubeNum(int i, int j) {
+        int row = i / 3;
+        int col = j / 3;
+        return row * 3 + col;
+    }
+}
+```
+
+
+
+
+
+### 贪心算法
+
+#### [455. 分发饼干](https://leetcode-cn.com/problems/assign-cookies/)
+
+难度简单299
+
+假设你是一位很棒的家长，想要给你的孩子们一些小饼干。但是，每个孩子最多只能给一块饼干。
+
+对每个孩子 `i`，都有一个胃口值 `g[i]`，这是能让孩子们满足胃口的饼干的最小尺寸；并且每块饼干 `j`，都有一个尺寸 `s[j]` 。如果 `s[j] >= g[i]`，我们可以将这个饼干 `j` 分配给孩子 `i` ，这个孩子会得到满足。你的目标是尽可能满足越多数量的孩子，并输出这个最大数值。
+
+**示例 1:**
+
+```
+输入: g = [1,2,3], s = [1,1]
+输出: 1
+解释: 
+你有三个孩子和两块小饼干，3个孩子的胃口值分别是：1,2,3。
+虽然你有两块小饼干，由于他们的尺寸都是1，你只能让胃口值是1的孩子满足。
+所以你应该输出1。
+```
+
+**示例 2:**
+
+```
+输入: g = [1,2], s = [1,2,3]
+输出: 2
+解释: 
+你有两个孩子和三块小饼干，2个孩子的胃口值分别是1,2。
+你拥有的饼干数量和尺寸都足以让所有孩子满足。
+所以你应该输出2.
+```
+
+ 
+
+**提示：**
+
+- `1 <= g.length <= 3 * 104`
+- `0 <= s.length <= 3 * 104`
+- `1 <= g[i], s[j] <= 231 - 1`
+
+
+
+```java
+class Solution {
+    public int findContentChildren(int[] g, int[] s) {
+
+        if (g == null || s == null) {
+            return 0;
+        }
+        Arrays.sort(g);
+        Arrays.sort(s);
+        int gi = 0;
+        int si = 0;
+        while (gi < g.length && si < s.length) {
+            if (g[gi] <= s[si]) {
+                gi++;
+            }
+            si++;
+        }
+        return gi;
+
+    }
+}
+```
+
+
+
+
+
+#### [435. 无重叠区间](https://leetcode-cn.com/problems/non-overlapping-intervals/)
+
+难度中等346
+
+给定一个区间的集合，找到需要移除区间的最小数量，使剩余区间互不重叠。
+
+**注意:**
+
+1. 可以认为区间的终点总是大于它的起点。
+2. 区间 [1,2] 和 [2,3] 的边界相互“接触”，但没有相互重叠。
+
+**示例 1:**
+
+```
+输入: [ [1,2], [2,3], [3,4], [1,3] ]
+
+输出: 1
+
+解释: 移除 [1,3] 后，剩下的区间没有重叠。
+```
+
+**示例 2:**
+
+```
+输入: [ [1,2], [1,2], [1,2] ]
+
+输出: 2
+
+解释: 你需要移除两个 [1,2] 来使剩下的区间没有重叠。
+```
+
+**示例 3:**
+
+```
+输入: [ [1,2], [2,3] ]
+
+输出: 0
+
+解释: 你不需要移除任何区间，因为它们已经是无重叠的了。
+```
+
+
+
+```
+o1 - o2 :可能会产生数组越界
+```
+
+
+
+
+
+```java
+class Solution {
+    public int eraseOverlapIntervals(int[][] intervals) {
+        if (intervals == null || intervals.length == 0) {
+            return 0;
+        }
+        Arrays.sort(intervals, (o1, o2) -> {
+            return o1[1] < o2[1] ? -1 : (o1[1] == o2[1] ? 0 : 1); 
+        });
+
+        int cnt = 1;
+        int end = intervals[0][1];
+        for (int i = 1; i < intervals.length; i++) {
+            if (intervals[i][0] < end) {
+                continue;
+            }
+            cnt++;
+            end = intervals[i][1];
+        }
+        return intervals.length - cnt;
+    }
+}
+```
+
 
 
 ### end

@@ -3252,4 +3252,439 @@ class Solution {
 
 
 
+
+
+
+
+### DP
+
+
+
+#### [70. 爬楼梯](https://leetcode-cn.com/problems/climbing-stairs/)
+
+难度简单1457
+
+假设你正在爬楼梯。需要 *n* 阶你才能到达楼顶。
+
+每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？
+
+**注意：**给定 *n* 是一个正整数。
+
+**示例 1：**
+
+```
+输入： 2
+输出： 2
+解释： 有两种方法可以爬到楼顶。
+1.  1 阶 + 1 阶
+2.  2 阶
+```
+
+**示例 2：**
+
+```
+输入： 3
+输出： 3
+解释： 有三种方法可以爬到楼顶。
+1.  1 阶 + 1 阶 + 1 阶
+2.  1 阶 + 2 阶
+3.  2 阶 + 1 阶
+```
+
+
+
+
+
+```java
+class Solution {
+    public int climbStairs(int n) {
+
+        if (n <= 1) {
+            return 1;
+        }
+        int[] dp = new int[n];
+        dp[0] = 1;
+        dp[1] = 2;
+        for (int i = 2; i < n; i++) {
+            dp[i] = dp[i - 1] + dp[i - 2];
+        }
+        return dp[n - 1];
+
+    }
+}
+```
+
+
+
+
+
+```java
+class Solution {
+    public int climbStairs(int n) {
+
+        if (n <= 1) {
+            return 1;
+        }
+        int pre2 = 1;
+        int pre1 = 2;
+        for (int i = 2; i < n; i++) {
+            int cur = pre2 + pre1;
+            pre2 = pre1;
+            pre1 = cur;
+        }
+        return pre1;
+
+    }
+}
+```
+
+
+
+#### [198. 打家劫舍](https://leetcode-cn.com/problems/house-robber/)
+
+难度中等1270
+
+你是一个专业的小偷，计划偷窃沿街的房屋。每间房内都藏有一定的现金，影响你偷窃的唯一制约因素就是相邻的房屋装有相互连通的防盗系统，**如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警**。
+
+给定一个代表每个房屋存放金额的非负整数数组，计算你 **不触动警报装置的情况下** ，一夜之内能够偷窃到的最高金额。
+
+ 
+
+**示例 1：**
+
+```
+输入：[1,2,3,1]
+输出：4
+解释：偷窃 1 号房屋 (金额 = 1) ，然后偷窃 3 号房屋 (金额 = 3)。
+     偷窃到的最高金额 = 1 + 3 = 4 。
+```
+
+**示例 2：**
+
+```
+输入：[2,7,9,3,1]
+输出：12
+解释：偷窃 1 号房屋 (金额 = 2), 偷窃 3 号房屋 (金额 = 9)，接着偷窃 5 号房屋 (金额 = 1)。
+     偷窃到的最高金额 = 2 + 9 + 1 = 12 。
+```
+
+ 
+
+**提示：**
+
+- `0 <= nums.length <= 100`
+- `0 <= nums[i] <= 400`
+
+
+
+```java
+class Solution {
+    public int rob(int[] nums) {
+
+        int pre2 = 0;
+        int pre1 = 0;
+        for (int i = 0; i < nums.length; i++) {
+            int cur = Math.max(pre2 + nums[i], pre1);
+            pre2 = pre1;
+            pre1 = cur;
+        }
+        return pre1;
+    }
+}
+```
+
+
+
+
+
+#### [213. 打家劫舍 II](https://leetcode-cn.com/problems/house-robber-ii/)
+
+难度中等461
+
+你是一个专业的小偷，计划偷窃沿街的房屋，每间房内都藏有一定的现金。这个地方所有的房屋都 **围成一圈** ，这意味着第一个房屋和最后一个房屋是紧挨着的。同时，相邻的房屋装有相互连通的防盗系统，**如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警** 。
+
+给定一个代表每个房屋存放金额的非负整数数组，计算你 **在不触动警报装置的情况下** ，能够偷窃到的最高金额。
+
+ 
+
+**示例 1：**
+
+```
+输入：nums = [2,3,2]
+输出：3
+解释：你不能先偷窃 1 号房屋（金额 = 2），然后偷窃 3 号房屋（金额 = 2）, 因为他们是相邻的。
+```
+
+**示例 2：**
+
+```
+输入：nums = [1,2,3,1]
+输出：4
+解释：你可以先偷窃 1 号房屋（金额 = 1），然后偷窃 3 号房屋（金额 = 3）。
+     偷窃到的最高金额 = 1 + 3 = 4 。
+```
+
+**示例 3：**
+
+```
+输入：nums = [0]
+输出：0
+```
+
+ 
+
+**提示：**
+
+- `1 <= nums.length <= 100`
+- `0 <= nums[i] <= 1000`
+
+
+
+```java
+class Solution {
+    public int rob(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+
+        if (nums.length == 1) {
+            return nums[0];
+        }
+
+        return Math.max(rob(nums, 0, nums.length - 2), rob(nums, 1, nums.length - 1));
+
+
+    }
+
+    public int rob(int[] nums, int f, int l) {
+
+        int pre2 = 0;
+        int pre1 = 0;
+        for (int i = f; i <= l; i++) {
+            int cur = Math.max(pre2 + nums[i], pre1);
+            pre2 = pre1;
+            pre1 = cur;
+        }
+        return pre1;
+    }
+}
+```
+
+
+
+#### 4.信件错排
+
+题目描述：有n个信和信封，求他有多少种错误的方式
+
+定义一个数组 dp 存储错误方式数量，dp[i] 表示前 i 个信和信封的错误方式数量。假设第 i 个信装到第 j 个信封里面，而第 j 个信装到第 k 个信封里面。根据 i 和 k 是否相等，有两种情况：
+
+- i==k，此时i的选择i-1种，(i - 1) * dp[i - 2],因为i 和 j已经忽略，所以剩下i-2
+- i != k，(i-1) * dp[i-1]
+
+
+
+```java
+public class Message {
+
+    public static int getMessageSum(int n) {
+
+        if (n <= 1) {
+            return 0;
+        }
+        int pre2 = 0;
+        int pre1 = 1;
+
+        for (int i = 3; i <= n; i++) {
+            int cur = (i - 1) * pre2 + (i - 1) * pre1;
+            pre2 = pre1;
+            pre1 = cur;
+
+        }
+        return pre1;
+    }
+
+    public static void main(String[] args) {
+
+        System.out.println(getMessageSum(5));
+
+    }
+
+}
+
+```
+
+#### 母牛生产
+
+题目描述：假设农场中成熟的母牛每年都会生 1 头小母牛，并且永远不会死。第一年有 1 只小母牛，从第二年开始，母牛开始生小母牛。每只小母牛 3 年之后成熟又可以生小母牛。给定整数 N，求 N 年后牛的数量。
+
+
+
+```java
+// dp[i - 1] :上一年牛的数量  dp[i - 3]成熟母牛的数量
+dp[i] = dp[i - 1] + dp[i - 3]; 
+```
+
+
+
+#### **>>矩阵路径>>**
+
+
+
+#### [64. 最小路径和](https://leetcode-cn.com/problems/minimum-path-sum/)
+
+难度中等781
+
+给定一个包含非负整数的 `*m* x *n*` 网格 `grid` ，请找出一条从左上角到右下角的路径，使得路径上的数字总和为最小。
+
+**说明：**每次只能向下或者向右移动一步。
+
+ 
+
+**示例 1：**
+
+![img](https://assets.leetcode.com/uploads/2020/11/05/minpath.jpg)
+
+```
+输入：grid = [[1,3,1],[1,5,1],[4,2,1]]
+输出：7
+解释：因为路径 1→3→1→1→1 的总和最小。
+```
+
+**示例 2：**
+
+```
+输入：grid = [[1,2,3],[4,5,6]]
+输出：12
+```
+
+ 
+
+**提示：**
+
+- `m == grid.length`
+- `n == grid[i].length`
+- `1 <= m, n <= 200`
+- `0 <= grid[i][j] <= 100`
+
+
+
+
+
+**不会改变该列值3->3 和4没关系**
+
+和最小
+
+
+
+```java
+class Solution {
+    public int minPathSum(int[][] grid) {
+        
+        if(grid == null || grid.length == 0 || grid[0].length == 0) {
+            return 0;
+        }
+        int m = grid.length;
+        int n = grid[0].length;
+        int[] dp = new int[n];
+        
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (j == 0) {
+                    dp[j] = dp[j];
+                } else if (i == 0) {
+                    dp[j] = dp[j - 1];
+                } else {
+                    dp[j] = Math.min(dp[j], dp[j - 1]);
+                }
+                dp[j] += grid[i][j];
+            }
+        }
+        return dp[n - 1];
+    }
+}
+```
+
+
+
+
+
+#### [62. 不同路径](https://leetcode-cn.com/problems/unique-paths/)
+
+难度中等876
+
+一个机器人位于一个 `m x n` 网格的左上角 （起始点在下图中标记为 “Start” ）。
+
+机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为 “Finish” ）。
+
+问总共有多少条不同的路径？
+
+ 
+
+**示例 1：**
+
+![img](https://assets.leetcode.com/uploads/2018/10/22/robot_maze.png)
+
+```
+输入：m = 3, n = 7
+输出：28
+```
+
+**示例 2：**
+
+```
+输入：m = 3, n = 2
+输出：3
+解释：
+从左上角开始，总共有 3 条路径可以到达右下角。
+1. 向右 -> 向下 -> 向下
+2. 向下 -> 向下 -> 向右
+3. 向下 -> 向右 -> 向下
+```
+
+**示例 3：**
+
+```
+输入：m = 7, n = 3
+输出：28
+```
+
+**示例 4：**
+
+```
+输入：m = 3, n = 3
+输出：6
+```
+
+ 
+
+**提示：**
+
+- `1 <= m, n <= 100`
+- 题目数据保证答案小于等于 `2 * 109`
+
+
+
+```java
+class Solution {
+    public int uniquePaths(int m, int n) {
+        int[] dp = new int[n];
+        Arrays.fill(dp, 1);
+        for (int i = 1; i < m; i++) {
+            for (int j = 1; j < n; j++) {
+                dp[j] = dp[j] + dp[j - 1];
+            }
+        }
+        return dp[n - 1];
+    }
+}
+```
+
+
+
+
+
+
+
+
+
 ### end

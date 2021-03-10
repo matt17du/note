@@ -1,4 +1,4 @@
-## 错误
+## **错误**
 
 在编写配置文件，错误将brokerId写成brokerld,导致从节点不能启动，从节点需要满足brokerId不是0。
 
@@ -132,7 +132,7 @@ brokerClusterName=rocketmq-cluster
 #broker名字，注意：此处不同的配置文件填写的不一样
 brokerName=broker-a
 # 0 表示 master主节点 ，不是0则代表从节点slave
-brokerld=0
+brokerId=0
 #nameServer地址，分号分隔，
 #注意：nameSeve的地址就是部署mq服务器的地址，可以在/etc/hosts中修改服务器ip指定一个名字
 #我的服务器ip对应的名字是阿里云默认的名字aliyun
@@ -214,6 +214,7 @@ cd /usr/local/rocketmq/bin/
 
 
 ```bash
+cd /usr/local/rocketmq/bin/
 nohup sh mqnamesrv &
 ```
 
@@ -232,6 +233,22 @@ sh mqshutdown broker
 // 关闭namesrv
 sh mqshutdown namesrv
 ```
+
+
+
+
+
+
+
+## 使用
+
+
+
+[控制台地址](https://github.com/apache/rocketmq-externals)
+
+
+
+
 
 
 
@@ -577,3 +594,16 @@ offset：1.存储在map中
 
 
 
+
+
+```java
+ mvn -Prelease-all -DskipTests clean install -U
+```
+
+
+
+
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210309215050.png)

@@ -196,3 +196,33 @@ undolog
 left join匹配左表的所有记录，以及右表中和左表匹配的记录
 
 join:inner join 缩写，左表和右表匹配的记录。
+
+
+
+
+
+limit
+
+
+
+```mysql
+SELECT * 
+FROM student
+LIMIT 0, 2   # 0：表示索引 2:表示几条数据而不是右边界， 从0开始
+
+
+#
+LIMIT n # 表示0开始到n-1不包括n
+```
+
+日期函数
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210310105753.png)
+
+
+
+
+
+count(1)
+
+count(*)

@@ -89,8 +89,6 @@ bootstrap.memory_lock: false
 bootstrap.system_call_filter: false
 network.host: 0.0.0.0
 cluster.initial_master_nodes: ["node-1"]
-    
-
 ```
 
 ### 启动

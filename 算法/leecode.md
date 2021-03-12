@@ -3683,6 +3683,462 @@ class Solution {
 
 
 
+### 链表
+
+
+
+#### [160. 相交链表](https://leetcode-cn.com/problems/intersection-of-two-linked-lists/)
+
+难度简单1023
+
+编写一个程序，找到两个单链表相交的起始节点。
+
+如下面的两个链表**：**
+
+[![img](https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/14/160_statement.png)](https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/14/160_statement.png)
+
+在节点 c1 开始相交。
+
+ 
+
+**示例 1：**
+
+[![img](https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/14/160_example_1.png)](https://assets.leetcode.com/uploads/2018/12/13/160_example_1.png)
+
+```
+输入：intersectVal = 8, listA = [4,1,8,4,5], listB = [5,0,1,8,4,5], skipA = 2, skipB = 3
+输出：Reference of the node with value = 8
+输入解释：相交节点的值为 8 （注意，如果两个链表相交则不能为 0）。从各自的表头开始算起，链表 A 为 [4,1,8,4,5]，链表 B 为 [5,0,1,8,4,5]。在 A 中，相交节点前有 2 个节点；在 B 中，相交节点前有 3 个节点。
+```
+
+
+
+
+
+```java
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+public class Solution {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        ListNode l1 = headA;
+        ListNode l2 = headB;
+
+    while(l1 != l2) {
+            l1 = (l1 == null) ? headB : l1.next;
+            l2 = (l2 == null) ? headA : l2.next;
+        }
+        return l1;
+    }
+}
+```
+
+#### [206. 反转链表](https://leetcode-cn.com/problems/reverse-linked-list/)
+
+难度简单1566
+
+反转一个单链表。
+
+**示例:**
+
+```
+输入: 1->2->3->4->5->NULL
+输出: 5->4->3->2->1->NULL
+```
+
+反转
+
+```java
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        ListNode curr = head;
+        ListNode pre = null;
+        while (curr != null) {
+            ListNode next = curr.next;
+            curr.next = pre;
+            pre = curr;
+            curr = next;
+        }
+        return pre;
+       
+    }
+}
+```
+
+
+
+递归
+
+```java
+ public ListNode reverseList(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode res = reverseList(head.next);
+        head.next.next = head;
+        head.next = null;
+        return res;
+    }
+```
+
+#### [21. 合并两个有序链表](https://leetcode-cn.com/problems/merge-two-sorted-lists/)
+
+难度简单1589
+
+将两个升序链表合并为一个新的 **升序** 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。 
+
+ 
+
+**示例 1：**
+
+![img](https://assets.leetcode.com/uploads/2020/10/03/merge_ex1.jpg)
+
+```
+输入：l1 = [1,2,4], l2 = [1,3,4]
+输出：[1,1,2,3,4,4]
+```
+
+
+
+
+
+```java
+class Solution {
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        if (l1 == null) {
+            return l2;
+        }
+        if (l2 == null) {
+            return l1;
+        }
+        if (l1.val < l2.val) {
+            l1.next = mergeTwoLists(l1.next, l2);
+            return l1;
+        } else {
+            l2.next = mergeTwoLists(l1, l2.next);
+            return l2;
+        }
+    }
+}
+```
+
+
+
+
+
+#### [83. 删除排序链表中的重复元素](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list/)
+
+难度简单488
+
+给定一个排序链表，删除所有重复的元素，使得每个元素只出现一次。
+
+**示例 1:**
+
+```
+输入: 1->1->2
+输出: 1->2
+```
+
+**示例 2:**
+
+```
+输入: 1->1->2->3->3
+输出: 1->2->3
+```
+
+
+
+递归
+
+```java
+class Solution {
+    public ListNode deleteDuplicates(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        head.next = deleteDuplicates(head.next);
+        return head.val == head.next.val ? head.next : head;
+    }
+}
+```
+
+
+
+
+
+```java
+
+class Solution {
+    public ListNode deleteDuplicates(ListNode head) {
+        Set<Integer> set = new HashSet<>();
+        ListNode pre = null;
+        ListNode curr = head;
+        while (curr != null) {
+            ListNode next = curr.next;
+            if (!set.add(curr.val)) {
+                pre.next = next;
+                
+            } else {
+                pre = curr;
+            }            
+            curr = next;
+        }
+         return head;
+    }
+}
+```
+
+
+
+我自己的版本
+
+
+
+```java
+class Solution {
+    public ListNode deleteDuplicates(ListNode head) {
+        Set<Integer> set = new HashSet<>();
+        ListNode cur = head;
+        ListNode pre = null;
+        while (cur != null) {
+            if (set.contains(cur.val)) {
+                pre.next = cur.next;
+                cur = pre.next;
+            } else {
+                set.add(cur.val);
+                pre = cur;
+                cur = cur.next;
+                
+            }
+        }
+        return head;
+    }
+}
+```
+
+
+
+
+
+#### [19. 删除链表的倒数第 N 个结点](https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/)
+
+难度中等1264
+
+给你一个链表，删除链表的倒数第 `n` 个结点，并且返回链表的头结点。
+
+**进阶：**你能尝试使用一趟扫描实现吗？
+
+ 
+
+**示例 1：**
+
+![img](https://assets.leetcode.com/uploads/2020/10/03/remove_ex1.jpg)
+
+```
+输入：head = [1,2,3,4,5], n = 2
+输出：[1,2,3,5]
+```
+
+**示例 2：**
+
+```
+输入：head = [1], n = 1
+输出：[]
+```
+
+**示例 3：**
+
+```
+输入：head = [1,2], n = 1
+输出：[1]
+```
+
+
+
+
+
+```java
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        
+        ListNode fast = head;
+        while (n-- > 0) {
+            if (fast == null) {
+                return head;
+            }
+            fast = fast.next;
+            
+        }
+        if (fast == null) {
+            return head.next;
+        }
+        ListNode slow = head;
+        while (fast.next != null) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+        slow.next = slow.next.next;
+        return head;
+    }
+}
+```
+
+#### [24. 两两交换链表中的节点](https://leetcode-cn.com/problems/swap-nodes-in-pairs/)
+
+难度中等848
+
+给定一个链表，两两交换其中相邻的节点，并返回交换后的链表。
+
+**你不能只是单纯的改变节点内部的值**，而是需要实际的进行节点交换。
+
+ 
+
+**示例 1：**
+
+![img](https://assets.leetcode.com/uploads/2020/10/03/swap_ex1.jpg)
+
+```
+输入：head = [1,2,3,4]
+输出：[2,1,4,3]
+```
+
+
+
+```java
+class Solution {
+    public ListNode swapPairs(ListNode head) {
+        ListNode node = new ListNode(-1);
+        node.next = head;
+        ListNode pre = node;
+        while (pre.next != null && pre.next.next != null) {
+            ListNode l1 = pre.next;
+            ListNode l2 = pre.next.next;
+            ListNode next = l2.next;
+            l1.next = next;
+            l2.next = l1;
+            pre.next = l2;
+
+            pre = l1;
+        }
+        return node.next;
+    }
+}
+```
+
+#### [445. 两数相加 II](https://leetcode-cn.com/problems/add-two-numbers-ii/)
+
+难度中等350
+
+给你两个 **非空** 链表来代表两个非负整数。数字最高位位于链表开始位置。它们的每个节点只存储一位数字。将这两数相加会返回一个新的链表。
+
+你可以假设除了数字 0 之外，这两个数字都不会以零开头。
+
+ 
+
+**进阶：**
+
+如果输入链表不能修改该如何处理？换句话说，你不能对列表中的节点进行翻转。
+
+ 
+
+**示例：**
+
+```
+输入：(7 -> 2 -> 4 -> 3) + (5 -> 6 -> 4)
+输出：7 -> 8 -> 0 -> 7
+```
+
+
+
+```java
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        Stack<Integer> stack1 = buildStack(l1);
+        Stack<Integer> stack2 = buildStack(l2);
+        int carry = 0;
+        ListNode head = new ListNode(-1);
+        while (!stack1.isEmpty() || !stack2.isEmpty() || carry != 0) {
+            int num1 = stack1.isEmpty() ? 0 : stack1.pop();
+            int num2 = stack2.isEmpty() ? 0 : stack2.pop();
+            int sum = num1 + num2 + carry;
+            ListNode node = new ListNode(sum % 10);
+            node.next = head.next;
+            head.next = node;
+            carry = sum / 10;
+        }
+        return head.next;
+    }
+
+
+    public Stack<Integer> buildStack(ListNode node) {
+        Stack<Integer> stack = new Stack<>();
+        while (node != null) {
+            stack.push(node.val);
+            node = node.next;
+        }
+        return stack;
+    }
+}
+```
+
+```java
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        l1 = reverseList(l1);
+        l2 = reverseList(l2);
+        ListNode head = new ListNode(-1);
+        int carry = 0;
+        int num1 = 0;
+        int num2 = 0;
+        while (l1 != null || l2 != null || carry != 0) {
+           
+            if (l1 != null) {
+                num1 = l1.val;
+                l1 = l1.next;
+            } else {
+                num1 = 0;
+            }
+            if (l2 != null) {
+                num2 = l2.val;
+                l2 = l2.next;
+            } else {
+                num2 = 0;
+            }
+            int sum = num1 + num2 + carry;
+            ListNode node = new ListNode(sum % 10);
+            node.next = head.next;
+            head.next = node;
+            carry = sum / 10;
+        }
+        return head.next;
+    }
+
+    public ListNode reverseList(ListNode node) {
+        ListNode curr = node;
+        ListNode pre = null;
+        while (curr != null) {
+            ListNode next = curr.next;
+            curr.next = pre; // 因为会被破坏所以
+            pre = curr;
+            curr = next;
+        }
+        return pre;
+    }
+}
+```
+
+
+
+
+
 
 
 

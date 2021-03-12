@@ -250,7 +250,19 @@ sh mqshutdown namesrv
 
 
 
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210310200407.png)
 
+
+
+
+
+
+
+Consumer
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210310212835.png)
 
 
 

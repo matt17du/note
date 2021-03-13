@@ -940,7 +940,6 @@ test(1, 2, 3,name = 'age', age = 17)
 函数中使用类型
 
 ```python
-
 # python不会对参数类型进行验证
 def test(i:int, j:str = 'hello word'):
     print(i)

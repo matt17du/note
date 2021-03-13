@@ -4137,7 +4137,248 @@ class Solution {
 
 
 
+#### [234. 回文链表](https://leetcode-cn.com/problems/palindrome-linked-list/)
 
+难度简单891
+
+请判断一个链表是否为回文链表。
+
+**示例 1:**
+
+```
+输入: 1->2
+输出: false
+```
+
+
+
+
+
+```java
+class Solution {
+    public boolean isPalindrome(ListNode head) {
+        if (head == null || head.next == null) {
+            return true;
+        }
+        ListNode slow = head;
+        ListNode fast = head.next;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        if (fast != null) {
+            slow = slow.next;
+        }
+        cut(head, slow);
+        return isEqual(head, reverse(slow));
+    }
+
+    public void cut(ListNode node1, ListNode node2) {
+        while (node1.next != node2) { // node1.next != node2
+            node1 = node1.next;
+        }
+        node1.next = null;
+    }
+
+    public ListNode reverse(ListNode head) {
+        
+        ListNode pre = null;
+        while (head != null) {
+            ListNode next = head.next;
+            head.next = pre;
+            pre = head;
+            head = next;
+        }
+        return pre;
+    }
+
+    public boolean isEqual(ListNode node1, ListNode node2) {
+        
+        while (node1 != null && node2 != null) {
+            if (node1.val != node2.val) {
+                return false;
+            }
+            node1 = node1.next;
+            node2 = node2.next;
+        }
+        return true;
+    }
+
+
+}
+```
+
+
+
+递归
+
+```java
+class Solution {
+    ListNode frontPointer = null;
+    public boolean isPalindrome(ListNode head) {
+        frontPointer = head;
+        return recursivelyCheck(head);
+    }
+
+    private boolean recursivelyCheck(ListNode node) {
+        if (node != null) {
+            if(!recursivelyCheck(node.next)) {
+                return false;
+            }
+            if (node.val == frontPointer.val) {
+                frontPointer = frontPointer.next;
+                return true;
+            }
+            return false;
+        }
+        return true;
+    }
+}
+```
+
+
+
+
+
+#### [725. 分隔链表](https://leetcode-cn.com/problems/split-linked-list-in-parts/)
+
+难度中等124
+
+给定一个头结点为 `root` 的链表, 编写一个函数以将链表分隔为 `k` 个连续的部分。
+
+每部分的长度应该尽可能的相等: 任意两部分的长度差距不能超过 1，也就是说可能有些部分为 null。
+
+这k个部分应该按照在链表中出现的顺序进行输出，并且排在前面的部分的长度应该大于或等于后面的长度。
+
+返回一个符合上述规则的链表的列表。
+
+举例： 1->2->3->4, k = 5 // 5 结果 [ [1], [2], [3], [4], null ]
+
+**示例 1：**
+
+```
+输入: 
+root = [1, 2, 3], k = 5
+输出: [[1],[2],[3],[],[]]
+解释:
+输入输出各部分都应该是链表，而不是数组。
+例如, 输入的结点 root 的 val= 1, root.next.val = 2, \root.next.next.val = 3, 且 root.next.next.next = null。
+第一个输出 output[0] 是 output[0].val = 1, output[0].next = null。
+最后一个元素 output[4] 为 null, 它代表了最后一个部分为空链表。
+```
+
+**示例 2：**
+
+```
+输入: 
+root = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], k = 3
+输出: [[1, 2, 3, 4], [5, 6, 7], [8, 9, 10]]
+解释:
+输入被分成了几个连续的部分，并且每部分的长度相差不超过1.前面部分的长度大于等于后面部分的长度。
+```
+
+ 
+
+**提示:**
+
+- `root` 的长度范围： `[0, 1000]`.
+- 输入的每个节点的大小范围：`[0, 999]`.
+- `k` 的取值范围： `[1, 50]`.
+
+ 
+
+
+
+```java
+class Solution {
+    public ListNode[] splitListToParts(ListNode root, int k) {
+        ListNode[] res = new ListNode[k];
+        ListNode cur = root;
+        int N = 0;
+        while (cur != null) { // 刚开始这里写成root导致
+            N++;
+            cur = cur.next;
+        }
+        int mod = N % k;
+        int size = N / k;
+        cur = root;
+        for (int i = 0; i < k && cur != null; i++) {
+            res[i] = cur;
+            int curSize = size + (mod-- > 0 ? 1 : 0);
+            for (int j = 0; j < curSize - 1; j++) {
+                cur = cur.next;
+            }
+            ListNode next = cur.next;
+            cur.next = null;
+            cur = next;
+        }
+        return res;
+    }
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+#### [328. 奇偶链表](https://leetcode-cn.com/problems/odd-even-linked-list/)
+
+难度中等394
+
+给定一个单链表，把所有的奇数节点和偶数节点分别排在一起。请注意，这里的奇数节点和偶数节点指的是节点编号的奇偶性，而不是节点的值的奇偶性。
+
+请尝试使用原地算法完成。你的算法的空间复杂度应为 O(1)，时间复杂度应为 O(nodes)，nodes 为节点总数。
+
+**示例 1:**
+
+```
+输入: 1->2->3->4->5->NULL
+输出: 1->3->5->2->4->NULL
+```
+
+**示例 2:**
+
+```
+输入: 2->1->3->5->6->4->7->NULL 
+输出: 2->3->6->7->1->5->4->NULL
+```
+
+**说明:**
+
+- 应当保持奇数节点和偶数节点的相对顺序。
+- 链表的第一个节点视为奇数节点，第二个节点视为偶数节点，以此类推。
+
+
+
+
+
+```java
+class Solution {
+    public ListNode oddEvenList(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode odd = head;
+        ListNode even = head.next;
+        ListNode evenHead = even;
+        while (even != null && even.next != null) {
+            odd.next = odd.next.next;
+            odd = odd.next;
+            even.next = even.next.next;
+            even = even.next;
+        }
+        odd.next = evenHead;
+        return head;
+    }
+}
+```
 
 
 

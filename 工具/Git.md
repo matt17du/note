@@ -32,7 +32,7 @@ git remote add origin https://github.com/matt17du/note.git
 // 拉取
 git pull origin
     
-
+// git add --all
 git add --all
     
 git commit -m "xxxm"

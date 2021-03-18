@@ -196,3 +196,58 @@ target
 
 
 
+
+
+
+
+
+
+```c
+git config --global http.https://github.com.proxy https://127.0.0.1:XXXX
+git config --global https.https://github.com.proxy https://127.0.0.1:XXXX
+
+git config --global --unset http.proxy
+git config --global --unset https.proxy
+
+    
+git config --global --unset http.https://github.com.proxy
+git config --global --unset https.https://github.com.proxy
+
+
+git config --global -l
+
+
+```
+
+
+
+
+
+git设置代理
+
+```python
+git config --global http.proxy 'http://127.0.0.1:10809/' 
+git config --global https.proxy 'http://127.0.0.1:10809/'
+```
+
+打开设置-》网络设置-》找代理-》端口号
+
+
+
+```python
+git config --global --unset http.proxy
+```
+
+
+
+
+
+```python
+# github设置代理
+git config --global http.https://github.com.proxy 'http://127.0.0.1:10809/'
+
+# 取消代理
+git config --global --unset http.https://github.com.proxy 'http://127.0.0.1:10809/'
+
+```
+

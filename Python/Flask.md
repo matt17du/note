@@ -339,3 +339,35 @@ def forbidden(err):
 
 
 
+
+
+```python
+from app import db
+db.create_all()
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```python
+pip install flask
+pip install flask_sqlalchemy # 数据库
+pip install Flask-WTF # 表单
+
+
+pip install --upgrade 'SQLAlchemy<1.4'
+```
+
+
+

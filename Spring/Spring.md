@@ -585,3 +585,31 @@ public class Springhello03Application {
 
 
 当然也不是所有配置类都加载到容器中，每一个配置类都会有@Conditional注解，只有满足某个条件才会加载到容器中。
+
+
+
+
+
+
+
+
+
+## Spring
+
+
+
+
+
+
+
+
+
+## 面试
+
+
+
+### @Component和@Bean区别
+
+@Component通常作用与类，而@Bean作用于方法，@Bean一般需要和@Configuration搭配使用。
+
+@Bean自定义更强，比如第三方的类库的某个类使用@Component是无法实现的。

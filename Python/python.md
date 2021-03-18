@@ -223,7 +223,7 @@ average = float(1.1)
 
 ##### 字符串
 
-```
+```python
 str1 = 'hello word' 
 str2 = "hello word"
 str3 = str('hello word')
@@ -238,7 +238,7 @@ str3 = str('hello word')
 'word'）
 ```
 
-```
+```python
 '''
 this is good
 hello hey
@@ -491,7 +491,7 @@ print(str3.strip('h')) # hellhoh -> ellho
 
 replace():字符串替换
 
-```
+```python
 str4 = 'hello'
 print(str4.replace('e', 'a', 3)) # old,new,次数：默认是全部替换
 ```
@@ -803,7 +803,7 @@ print(dict)
 
 keys 和 values
 
-keys:获取字典中所有的key
+keys:获取字典中所有的key                
 
 values:获取字典中所有的值
 
@@ -1616,7 +1616,7 @@ base64：可解密，需要自己导入base64模块
 
 
 ```python
- coding:utf-8
+# coding:utf-8
 import hashlib
 import base64
 

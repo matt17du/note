@@ -3683,6 +3683,413 @@ class Solution {
 
 
 
+
+
+
+
+#### [416. 分割等和子集](https://leetcode-cn.com/problems/partition-equal-subset-sum/)
+
+难度中等695
+
+给定一个**只包含正整数**的**非空**数组。是否可以将这个数组分割成两个子集，使得两个子集的元素和相等。
+
+**注意:**
+
+1. 每个数组中的元素不会超过 100
+2. 数组的大小不会超过 200
+
+**示例 1:**
+
+```
+输入: [1, 5, 11, 5]
+
+输出: true
+
+解释: 数组可以分割成 [1, 5, 5] 和 [11].
+```
+
+ 
+
+**示例 2:**
+
+```
+输入: [1, 2, 3, 5]
+
+输出: false
+
+解释: 数组不能分割成两个元素和相等的子集.
+```
+
+
+
+
+
+```java
+class Solution {
+    public boolean canPartition(int[] nums) {
+        int sum = computeArraySum(nums);
+        if (sum % 2 == 1) {
+            return false;
+        }
+        int W = sum / 2;
+        boolean[] dp = new boolean[W + 1];
+        dp[0] = true;
+        for (int num : nums) {
+            for (int j = W; j >= num; j--){
+                dp[j] = dp[j] || dp[j - num];
+            }
+        }
+        return dp[W];
+
+    }
+
+    private int computeArraySum(int[] nums) {
+        int sum = 0;
+        for (int num: nums) {
+            sum += num;
+        }
+        return sum;
+    }
+    
+}
+```
+
+
+
+
+
+#### [494. 目标和](https://leetcode-cn.com/problems/target-sum/)
+
+难度中等586
+
+给定一个非负整数数组，a1, a2, ..., an, 和一个目标数，S。现在你有两个符号 `+` 和 `-`。对于数组中的任意一个整数，你都可以从 `+` 或 `-`中选择一个符号添加在前面。
+
+返回可以使最终数组和为目标数 S 的所有添加符号的方法数。
+
+ 
+
+**示例：**
+
+```
+输入：nums: [1, 1, 1, 1, 1], S: 3
+输出：5
+解释：
+
+-1+1+1+1+1 = 3
++1-1+1+1+1 = 3
++1+1-1+1+1 = 3
++1+1+1-1+1 = 3
++1+1+1+1-1 = 3
+
+一共有5种方法让最终目标和为3。
+```
+
+ 
+
+**提示：**
+
+- 数组非空，且长度不会超过 20 。
+- 初始的数组的和不会超过 1000 。
+- 保证返回的最终结果能被 32 位整数存下。
+
+
+
+和小于目标值
+
+```java
+class Solution {
+    public int findTargetSumWays(int[] nums, int S) {
+        int sum = computeArraySum(nums);
+        if (sum < S || (sum + S) % 2 == 1) {
+            return 0;
+        }
+        int W = (sum + S) / 2;
+        int[] dp = new int[W + 1];
+        dp[0] = 1;
+        for (int num : nums) {
+            for (int i = W; i >= num; i--) {
+                dp[i] = dp[i] + dp[i - num];
+            }
+        }
+        return dp[W];
+    }
+
+    private int computeArraySum(int[] nums) {
+        int sum = 0;
+        for (int num : nums) {
+            sum += num;
+        }
+        return sum;
+    }
+}
+```
+
+
+
+#### [474. 一和零](https://leetcode-cn.com/problems/ones-and-zeroes/)
+
+难度中等356
+
+给你一个二进制字符串数组 `strs` 和两个整数 `m` 和 `n` 。
+
+请你找出并返回 `strs` 的最大子集的大小，该子集中 **最多** 有 `m` 个 `0` 和 `n` 个 `1` 。
+
+如果 `x` 的所有元素也是 `y` 的元素，集合 `x` 是集合 `y` 的 **子集** 。
+
+ 
+
+**示例 1：**
+
+```
+输入：strs = ["10", "0001", "111001", "1", "0"], m = 5, n = 3
+输出：4
+解释：最多有 5 个 0 和 3 个 1 的最大子集是 {"10","0001","1","0"} ，因此答案是 4 。
+其他满足题意但较小的子集包括 {"0001","1"} 和 {"10","1","0"} 。{"111001"} 不满足题意，因为它含 4 个 1 ，大于 n 的值 3 。
+```
+
+**示例 2：**
+
+```
+输入：strs = ["10", "0", "1"], m = 1, n = 1
+输出：2
+解释：最大的子集是 {"0", "1"} ，所以答案是 2 。
+```
+
+ 
+
+**提示：**
+
+- `1 <= strs.length <= 600`
+- `1 <= strs[i].length <= 100`
+- `strs[i]` 仅由 `'0'` 和 `'1'` 组成
+- `1 <= m, n <= 100`
+
+
+
+
+
+```java
+class Solution {
+    public int findMaxForm(String[] strs, int m, int n) {
+        if (strs == null || strs.length == 0) {
+            return 0;
+        }
+        int[][] dp = new int[m + 1][n + 1];
+        for (String str : strs) {
+            int zeros = 0;
+            int ones = 0;
+            for (char ch : str.toCharArray()) {
+                if (ch == '0') {
+                    zeros++;
+                } else {
+                    ones++;
+                }
+            }
+
+            for (int i = m; i >= zeros; i--) {
+                for (int j = n; j >= ones; j--) {
+                    dp[i][j] = Math.max(dp[i][j], dp[i - zeros][j - ones] + 1);
+                }
+            }
+        }
+        return dp[m][n];
+    }
+}
+```
+
+
+
+#### [322. 零钱兑换](https://leetcode-cn.com/problems/coin-change/)
+
+难度中等1122
+
+给定不同面额的硬币 `coins` 和一个总金额 `amount`。编写一个函数来计算可以凑成总金额所需的最少的硬币个数。如果没有任何一种硬币组合能组成总金额，返回 `-1`。
+
+你可以认为每种硬币的数量是无限的。
+
+ 
+
+**示例 1：**
+
+```
+输入：coins = [1, 2, 5], amount = 11
+输出：3 
+解释：11 = 5 + 5 + 1
+```
+
+**示例 2：**
+
+```
+输入：coins = [2], amount = 3
+输出：-1
+```
+
+
+
+
+
+```java
+class Solution {
+    public int coinChange(int[] coins, int amount) {
+        if (coins == null || amount == 0) {
+            return 0;
+        }
+        int[] dp = new int[amount + 1];
+        
+        for(int coin : coins) {
+            
+            for (int i = coin; i <= amount; i++) {
+                if (i == coin) {
+                    dp[i] = 1;
+                } else if (dp[i] == 0 && dp[i - coin] != 0) {
+                    dp[i] = dp[i - coin] + 1;
+                } else if (dp[i - coin] != 0) {
+                    dp[i] = Math.min(dp[i], dp[i - coin] + 1);
+                }
+            }
+        }
+        return dp[amount] == 0 ? -1 : dp[amount];
+    }
+}
+```
+
+
+
+#### [518. 零钱兑换 II](https://leetcode-cn.com/problems/coin-change-2/)
+
+难度中等335
+
+给定不同面额的硬币和一个总金额。写出函数来计算可以凑成总金额的硬币组合数。假设每一种面额的硬币有无限个。 
+
+ 
+
+
+
+**示例 1:**
+
+```
+输入: amount = 5, coins = [1, 2, 5]
+输出: 4
+解释: 有四种方式可以凑成总金额:
+5=5
+5=2+2+1
+5=2+1+1+1
+5=1+1+1+1+1
+```
+
+**示例 2:**
+
+```
+输入: amount = 3, coins = [2]
+输出: 0
+解释: 只用面额2的硬币不能凑成总金额3。
+```
+
+**示例 3:**
+
+```
+输入: amount = 10, coins = [10] 
+输出: 1
+```
+
+ 
+
+**注意****:**
+
+你可以假设：
+
+- 0 <= amount (总金额) <= 5000
+- 1 <= coin (硬币面额) <= 5000
+- 硬币种类不超过 500 种
+- 结果符合 32 位符号整数
+
+
+
+```java
+class Solution {
+    public int change(int amount, int[] coins) {
+        if (amount == 0) {
+            return 1;
+        }
+        int[] dp = new int[amount + 1];
+        dp[0] = 1;
+        for (int coin : coins) {
+            for (int i = coin; i <= amount; i++) {
+                dp[i] = dp[i] + dp[i - coin];
+            }
+        }
+        return dp[amount]; 
+    }
+}
+```
+
+
+
+#### [139. 单词拆分](https://leetcode-cn.com/problems/word-break/)
+
+难度中等875
+
+给定一个**非空**字符串 *s* 和一个包含**非空**单词的列表 *wordDict*，判定 *s* 是否可以被空格拆分为一个或多个在字典中出现的单词。
+
+**说明：**
+
+- 拆分时可以重复使用字典中的单词。
+- 你可以假设字典中没有重复的单词。
+
+**示例 1：**
+
+```
+输入: s = "leetcode", wordDict = ["leet", "code"]
+输出: true
+解释: 返回 true 因为 "leetcode" 可以被拆分成 "leet code"。
+```
+
+**示例 2：**
+
+```
+输入: s = "applepenapple", wordDict = ["apple", "pen"]
+输出: true
+解释: 返回 true 因为 "applepenapple" 可以被拆分成 "apple pen apple"。
+     注意你可以重复使用字典中的单词。
+```
+
+**示例 3：**
+
+```
+输入: s = "catsandog", wordDict = ["cats", "dog", "sand", "and", "cat"]
+输出: false
+```
+
+
+
+```java
+class Solution {
+    public boolean wordBreak(String s, List<String> wordDict) {
+        int len = s.length();
+        boolean[] dp = new boolean[len + 1];
+        dp[0] = true;
+        for (int i = 1; i <= len; i++) {
+            for (String word : wordDict) {
+                int wordLen = word.length();
+                if (i >= wordLen && word.equals(s.substring(i - wordLen, i))) {
+                    dp[i] = dp[i] || dp[i - wordLen];
+                }
+            }
+        }
+        return dp[len];
+
+  }
+}
+```
+
+
+
+
+
+
+
+
+
 ### 链表
 
 
@@ -4317,6 +4724,14 @@ class Solution {
     }
 }
 ```
+
+
+
+
+
+
+
+
 
 
 

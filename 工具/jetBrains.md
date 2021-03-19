@@ -52,6 +52,16 @@ BISACXYELK-eyJsaWNlbnNlSWQiOiJCSVNBQ1hZRUxLIiwibGljZW5zZWVOYW1lIjoiQ2hpbmFOQiIsI
 
 
 
+
+
+### 插件
+
+```html
+CodeGlance:代码缩略图
+```
+
+
+
 ## IDEA配置
 
 ### 常规配置
@@ -288,6 +298,14 @@ groovyScript("def result=''; def params=\"${_1}\".replaceAll('[\\\\[|\\\\]|\\\\s
 ![](https://raw.githubusercontent.com/matt17du/img/main/img/20210107001646.png)
 
 
+
+
+
+## 常规使用
+
+### 如何重启
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210319231913.png)
 
 
 

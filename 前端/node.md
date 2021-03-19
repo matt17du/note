@@ -173,3 +173,20 @@ npm 常用的命令
 npm view css-loader version //3.5.2
 npm view css-loader versions //查看所有的版本信息
 ```
+
+
+
+
+
+安装webpack
+
+```js
+npm install webpack -g
+```
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210319233446.png)
+
+
+

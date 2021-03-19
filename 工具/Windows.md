@@ -233,6 +233,8 @@ http://www.cygwin.com/
 
 
 
+
+
 ### 检验
 
 检查是否安装成功
@@ -242,6 +244,52 @@ cygcheck -c cygwin
 ```
 
 
+
+
+
+### 添加右键
+
+**Step 2 准备启动脚本**
+
+- 以我的安装目录(d:\cygwin)为例
+- 在d:\cygwin\bin\下准备一个启动脚本，命名为cygwin.bat
+- 内容为：
+
+```
+@echo off
+set _WindowsDIR=%*
+D:\cygwin\bin\mintty.exe -i /Cygwin-Terminal.ico -
+
+```
+
+*如果出现最后出现闪退的情况，把最后一行改为"D:\cygwin\bin\mintty.exe" -i /Cygwin-Terminal.ico -*
+
+Step 3 添加右键菜单
+
+打开注册表编辑器，在计算机\HKEY_CLASSES_ROOT\Directory\Background\shell下新建项CygWin，将其默认字符串值改为CygWin Here(右键菜单显示的内容)
+然后新建一个字符串值，名称改为Icon，字符串值改为D:\ProgramFiles\cygwin64\Cygwin.ico
+之后为CygWin添加子项command，将默认字符串值改为D:\ProgramFiles\cygwin64\bin\cygwin.bat %V 如图
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210320000521.png)
+
+
+
+- **Step 4 Cygwin获取环境变量**
+- 编辑bash_profile：vim ~/.bash_profile
+- 在最后添加内容:
+
+```
+if [[ $_WindowsDIR != "" ]]
+then
+	TMPDIR=${_WindowsDIR//\\//}
+	unset _WindowsDIR
+	cd "$TMPDIR"
+fi
+
+
+```
 
 
 

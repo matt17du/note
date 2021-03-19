@@ -354,6 +354,171 @@ db.create_all()
 
 
 
+## 数据库
+
+
+
+```python
+pip install flask
+pip install -U Flask-SQLAlchemy
+pip install mysqlclient 
+```
+
+
+
+
+
+基本使用
+
+```python
+from flask import Flask, render_template
+from flask_sqlalchemy import SQLAlchemy
+
+app = Flask(__name__)
+# 配置数据库的连接参数
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root@127.0.0.1/test_flask'
+# 绑定到flask对象
+db = SQLAlchemy(app)
+
+class User(db.Model):
+    '''表名'''
+    __tablename__ = 'weibo_user'
+    '''列名'''
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(64), nullable=False)
+    password = db.Column(db.String(256), nullable=False)
+    age = db.Column(db.Integer, default=0)
+
+    def __init__(self, username, password, age):
+        self.username = username
+        self.password = password
+        self.age = age
+
+
+class UserAddress(db.Model):
+    """ 用户的地址 """
+    __tablename__ = 'weibo_user_addr'
+    id = db.Column(db.Integer, primary_key=True)
+    addr = db.Column(db.String(256), nullable=False)
+    
+    user_id = db.Column(db.Integer, db.ForeignKey('weibo_user.id'), nullable=False)
+    user = db.relationship('User', backref=db.backref('address', lazy=True))
+
+    def __init__(self, addr, user_id):
+        self.addr = addr
+        self.user_id = user_id
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+```
+
+
+
+创建基本表
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210319201839.png)
+
+```python
+class User(db.Model):
+    '''表名'''
+    __tablename__ = 'weibo_user'
+    '''列名'''
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(64), nullable=False)
+    password = db.Column(db.String(256), nullable=False)
+    age = db.Column(db.Integer, default=0)
+
+    def __init__(self, username, password, age):
+        self.username = username
+        self.password = password
+        self.age = age
+```
+
+
+
+设置外键
+
+
+
+```python
+user_id = db.Column(db.Integer, db.ForeignKey('weibo_user.id'), nullable=False)
+    user = db.relationship('User', backref=db.backref('address', lazy=True))
+
+```
+
+user中会有address属性
+
+address中会有user属性
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210319202418.png)
+
+```python
+from app import db
+```
+
+
+
+创建表
+
+```python
+db.create_all()
+```
+
+删除表
+
+```python
+db.drop_all()
+```
+
+
+
+### crud
+
+添加、更新
+
+```python
+addr = UserAddress('11', 1)
+db.session.add(addr)
+db.session.commit()
+```
+
+
+
+删除
+
+```python
+addr = UserAddress.query.filter_by(addr='上海').first()
+db.session.delete(addr)
+db.session.commit()
+```
+
+查找
+
+
+
+查找所有数据
+
+```python
+user = User.query.all()
+```
+
+添加过滤条件
+
+```python
+User.query.filter_by(username='zhangsan').all()
+```
+
+统计个数
+
+```python
+User.query.filter_by(username='zhangsan').count()
+```
+
+
+
 
 
 

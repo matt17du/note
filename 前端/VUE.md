@@ -599,18 +599,6 @@ show:隐藏
 
 
 
-声明式
-
-
-
-编程式：自己管理，jquery那种、
-
-
-
-
-
-
-
 ```
 v-if:移除
 v-show:隐藏
@@ -620,11 +608,23 @@ v-show:隐藏
 
 
 
-列表渲染
+输入vue
 
-数组
-
-```html
-mysql
+```js
+npm install -g vue-cli
 ```
+
+
+
+
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210319233446.png)
+
+
+
+不使用测试
+
+不使用vue-router
 

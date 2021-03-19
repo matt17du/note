@@ -245,9 +245,15 @@ cygcheck -c cygwin
 
 
 
-cygdrive
 
 
+
+
+
+
+## 窗口最大化
+
+应用属性中选择
 
 
 

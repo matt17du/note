@@ -287,3 +287,233 @@ class Solution {
 }
 ```
 
+
+
+超过一半的数字
+
+
+
+count += (num == x ? 1 : 0); 
+
+写成 count += (num == x ? 1 : -1); 
+
+```java
+
+class Solution {
+    public int majorityElement(int[] nums) {
+        int vote = 0;
+        int x = 0;
+        for(int num : nums) {
+            if (vote == 0) {
+                vote = 1;
+                x = num;
+            } else {
+                vote += (x == num ? 1 : -1);
+            }
+        }
+        int count = 0;
+        for (int num : nums) {
+            count += (num == x ? 1 : 0); 
+        }
+        return count > nums.length / 2 ? x : -1;
+    }
+}
+```
+
+== 写成=
+
+int area  写成 area
+
+
+
+```java
+
+class Solution {
+    int m;
+    int n;
+    int[][] direction = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+    public int maxAreaOfIsland(int[][] grid) {
+        if (grid == null || grid.length == 0 || grid[0].length == 0) {
+            return 0;
+        }
+
+        int maxArea = 0;
+        m = grid.length;
+        n = grid[0].length;
+
+        for(int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                maxArea = Math.max(maxArea, dfs(grid, i, j));
+            }
+        }
+        return maxArea;
+    }
+
+    private int dfs(int[][] grid, int i, int j) {
+        if (i < 0 || i >= m || j < 0 || j >= n || grid[i][j] == 0) {
+            return 0;
+        }
+
+        grid[i][j] = 0;
+        int area = 1;
+        for (int[] d : direction) {
+            area += dfs(grid, i + d[0], j + d[1]);
+        }
+        return area;
+    }
+}
+```
+
+
+
+
+
+回文链表：前面的较短
+
+
+
+```java
+class Solution {
+    public boolean isPalindrome(ListNode head) {
+
+        if (head == null || head.next == null) {
+            return true;
+        }
+        
+        ListNode slow = head;
+        ListNode fast = head.next;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        if (fast != null) {
+            slow = slow.next;
+        }
+        cut(head, slow);
+        slow = reverse(slow);
+        return isEqual(head, slow);
+
+
+    }
+
+    private void cut(ListNode node1, ListNode node2) {
+        while (node1.next != node2) {
+            node1 = node1.next;
+        }
+        node1.next = null;
+    }
+
+    private ListNode reverse(ListNode node) {
+        ListNode pre = null;
+        while (node != null) {
+            ListNode next = node.next;
+            node.next = pre;
+            pre = node;
+            node = next;
+        }
+        return pre;
+    }
+
+    public boolean isEqual(ListNode node1, ListNode node2) {
+        while (node1 != null && node2 != null) {
+            if (node1.val != node2.val) {
+                return false;
+            }
+            node1 = node1.next;
+            node2 = node2.next;
+        }
+        return true;
+    }
+
+}
+```
+
+
+
+
+
+
+
+随机指针
+
+移动指针
+
+指针可能破坏，所以有先后顺序
+
+
+
+```java
+ Node newNode = tempNode.next;
+            
+            tempNode.next = tempNode.next.next;
+            tempNode = tempNode.next;
+            newNode.next = newNode.next != null ? newNode.next.next : null;
+```
+
+
+
+
+
+```java
+class Solution {
+    public Node copyRandomList(Node head) {
+        Node tempNode = head;
+        while (tempNode != null) {
+            Node newNode = new Node(tempNode.val);
+            newNode.next = tempNode.next;
+            tempNode.next = newNode;
+            tempNode = newNode.next;
+        }
+
+        tempNode = head;
+        while (tempNode != null) {
+            Node newNode = tempNode.next;
+            newNode.random = tempNode.random != null ? tempNode.random.next : null;
+            tempNode = newNode.next;
+        }
+
+        tempNode = head;
+        Node resNode = head.next;
+
+        while (tempNode != null) {
+            Node newNode = tempNode.next;
+            
+            tempNode.next = tempNode.next.next;
+            tempNode = tempNode.next;
+            newNode.next = newNode.next != null ? newNode.next.next : null;
+            
+            
+        }
+        return resNode;
+    }
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+### 运算符优先级
+
+
+
+String 方法
+
+list常用方法
+
+System.arrayCopy
+
+
+
+输入输出
+
+
+

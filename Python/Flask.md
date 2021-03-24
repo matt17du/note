@@ -1,4 +1,4 @@
-
+## 基础使用
 
 ### 介绍
 
@@ -18,7 +18,7 @@ pip install flask
 验证
 >>> import flask
 >>> flask.__version__
-' 1.1.2'
+'1.1.2'
 ```
 
 ### 使用
@@ -55,7 +55,7 @@ def test_matt():
 启动服务器
  1.步骤1：设置环境变量
 
- Windows set FLASK_APP=app.py
+ Windows set **FLASK_APP=app.py**
  Linux export FLASK_APP=app.py、
 
  2.步骤2flask run web：启动内置服务器
@@ -63,7 +63,7 @@ def test_matt():
 指定IP及端口：
 flask run host=0.0.0.0 port=8001
 或：
-flask run -h 0.0.0.0 -p 8001
+flask run -h 127.0.0.1 -p 8001
 
 
 
@@ -77,7 +77,7 @@ flask run -h 0.0.0.0 -p 8001
 
 ​	
 
-### MVT模型
+### **MVT模型：待补充**
 
 ![](https://raw.githubusercontent.com/matt17du/img/main/img/20210312234128.png)
 
@@ -86,6 +86,8 @@ flask run -h 0.0.0.0 -p 8001
 视图：py中的函数
 
 模型：mysql查询出来的
+
+模板：页面
 
 
 
@@ -97,22 +99,32 @@ flask run -h 0.0.0.0 -p 8001
 
 ### 路由
 
-使用装饰器
+#### 基本使用
 
+使用装饰器:推荐使用
+
+```python
 @app.route(url_name, methods)
 
-urlURL: 匹配的地址
-methods: ['GET', 'POST']所支持的请求方式（）
+# urlURL: 匹配的地址
+# methods: ['GET', 'POST']所支持的请求方式（）
+```
 
 实例：
 
+
+
+```python
 @app.route('/login', methods=['GET', 'POST'])
+```
+
+
 
 
 
 使用API
 
-app.add_url_rule(url_name view_name)
+app.add_url_rule(url,url_name view_name)
 
 url : 匹配的URL地址
 url_nameURL: 给的命名
@@ -126,6 +138,17 @@ view_name: 视图函数
 @app.route('/hello')
   传递参数
 @app.route('/user/<username>')
+
+username需要在函数中写
+
+```python
+@app.route('/matt/<username>', methods=['GET', 'POST'])
+def test_route_1(username):
+    return 'matt' + username
+```
+
+
+
   指定参数类型
 @app.route('/post/<int:post_id>')
 
@@ -150,47 +173,18 @@ url_for('static', filename='style.css')
 URL中的值
 @app.route('/page/<page>')
  def list_user(page):
+
+
+
 URL中的值为可选
+*暂时不是特别理解*
+
+```python
 @app.route('/page/<page>')
- def list_user(page=None):
+def list_user(page=None):
+```
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-模板是html
-
-
-
-视图是py中的一个函数
-
-
-
-
-
-匹配整个文字
-@app.route('/hello')
-  传递参数
-@app.route('/user/<username>')
-  指定参数类型
-@app.route('/post/<int:post_id>')
-
-URL中的值
-@app.route('/page/<page>')
- def list_user(page):
-  URL中的值为可选
-@app.route('/page/<page>')
- def list_user(page=None):
 
 
 
@@ -200,7 +194,7 @@ URL中的值
 
 
 
-食堂是应用上下文
+
 
 
 
@@ -263,8 +257,6 @@ def pre_request():
 
 
 
-
-
 ### 响应
 
 1.可以是字符串
@@ -290,6 +282,23 @@ def test_response():
 
     return resp
 ```
+
+
+
+
+
+```python
+@app.route('/resp')
+def test_resp():
+    resp = make_response('hello resp', 200, {'name': 'matt'})
+    return resp
+```
+
+
+
+
+
+
 
 
 
@@ -324,7 +333,26 @@ def helloword():
     return 'hello'
 ```
 
+**方法需要有返回语句**
+
+```python
+@app.route('/from')
+def test_from():
+    redirect('/to')
+    return 'from'
+
+@app.route('/to')
+def test_to():
+    return 'i am to'
+```
+
+
+
+
+
 ### 错误
+
+需要指定 err
 
 ```python
 @app.route('/test/abort')
@@ -345,12 +373,6 @@ def forbidden(err):
 from app import db
 db.create_all()
 ```
-
-
-
-
-
-
 
 
 

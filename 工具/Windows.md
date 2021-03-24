@@ -293,6 +293,10 @@ fi
 
 
 
+### jetBrains使用cygwin
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210320213501.png)
+
 
 
 

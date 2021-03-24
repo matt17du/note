@@ -32,3 +32,15 @@ java
 
 序列化机制 Serilizalbe
 
+
+
+
+
+html缓存机制
+
+
+
+
+
+
+

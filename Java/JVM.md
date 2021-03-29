@@ -44,3 +44,5 @@ young gc:
 old gc
 
 full gc : 整个堆和方法区的垃圾收集
+
+oom

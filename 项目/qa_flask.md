@@ -47,7 +47,6 @@ MySQLdb只支持Python2.*，还不支持3.*可以用PyMySQL代替
 
 
 ```python
-
 pip install PyMySQL
 ```
 
@@ -65,7 +64,14 @@ pymysql.install_as_MySQLdb()
 
 
 
+```python
+from app import db, app
+db.create_all(app=app)
+```
 
+
+
+flask-cors
 
 
 

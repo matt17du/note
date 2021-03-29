@@ -255,6 +255,30 @@ groovyScript("def result=''; def params=\"${_1}\".replaceAll('[\\\\[|\\\\]|\\\\s
 
 
 
+
+
+### junit无法从控制台输入
+
+```
+help ->Edit Custom VM Options
+
+-Deditable.java.test.console=true
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## pycharm配置
 
 

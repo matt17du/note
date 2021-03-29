@@ -1,6 +1,6 @@
 ### 双指针
 
-#### [167. 两数之和 II - 输入有序数组](https://leetcode-cn.com/problems/two-sum-ii-input-array-is-sorted/)
+#### [1. 两数之和 II - 输入有序数组](https://leetcode-cn.com/problems/two-sum-ii-input-array-is-sorted/)
 
 给定一个已按照***升序排列\*** 的有序数组，找到两个数使得它们相加之和等于目标数。
 
@@ -62,7 +62,7 @@ public int[] twoSum(int[] numbers, int target) {
 }
 ```
 
-#### [633. 平方数之和](https://leetcode-cn.com/problems/sum-of-square-numbers/)
+#### [2. 平方数之和](https://leetcode-cn.com/problems/sum-of-square-numbers/)
 
 难度中等161
 
@@ -89,20 +89,6 @@ public int[] twoSum(int[] numbers, int target) {
 
 ```
 输入：c = 4
-输出：true
-```
-
-**示例 4：**
-
-```
-输入：c = 2
-输出：true
-```
-
-**示例 5：**
-
-```
-输入：c = 1
 输出：true
 ```
 
@@ -136,13 +122,13 @@ class Solution {
 }
 ```
 
-不使用平方根会超出int的范围
+**不使用平方根会超出int的范围**
+
+l r -> 小于目标值移动左指针，大于目标值则移动右指针，和上一题是类似的
 
 
 
-
-
-#### [345. 反转字符串中的元音字母](https://leetcode-cn.com/problems/reverse-vowels-of-a-string/)
+#### [3. 反转字符串中的元音字母](https://leetcode-cn.com/problems/reverse-vowels-of-a-string/)
 
 难度简单137
 
@@ -169,6 +155,64 @@ class Solution {
 **提示：**
 
 - 元音字母不包含字母 "y" 。
+
+
+
+```java
+class Solution {
+    public String reverseVowels(String s) {
+        
+        Set<Character> set = new HashSet<>();
+        set.add('a');
+        set.add('o');
+        set.add('e');
+        set.add('i');
+        set.add('u');
+        set.add('A');
+        set.add('O');
+        set.add('E');
+        set.add('I');
+        set.add('U');
+        if (s == null || s.length() == 0) {
+            return s;
+        }
+        int l = 0;
+        int r = s.length() - 1;
+        char[] arr = s.toCharArray();
+        while (l < r) {
+            while (l< r && !set.contains(arr[l])){
+                l++;
+            }
+            while (l< r && !set.contains(arr[r])){
+                r--;
+            }
+            if (l >= r) {
+                break;
+            }
+            swap(arr, l, r);
+            l++;
+            r--;
+
+        }
+        return new String(arr);
+
+
+    }
+
+    public void swap(char[] arr, int l, int r) {
+        if (l == r) {
+            return;
+        }
+        char t = arr[r];
+        arr[r] = arr[l];
+        arr[l] = t;
+    }
+}
+```
+
+
+
+
 
 ```java
 class Solution {
@@ -205,9 +249,13 @@ class Solution {
 
 
 
-#### [680. 验证回文字符串 Ⅱ](https://leetcode-cn.com/problems/valid-palindrome-ii/)
 
-难度简单310
+
+
+
+#### [4. 验证回文字符串 Ⅱ](https://leetcode-cn.com/problems/valid-palindrome-ii/)
+
+
 
 给定一个非空字符串 `s`，**最多**删除一个字符。判断是否能成为回文字符串。
 
@@ -256,6 +304,10 @@ class Solution {
     }
 }
 ```
+
+
+
+注意:使用i++,之后若使用i,需要注意
 
 
 
@@ -371,9 +423,9 @@ public class Solution {
 
 
 
-#### [524. 通过删除字母匹配到字典里最长单词](https://leetcode-cn.com/problems/longest-word-in-dictionary-through-deleting/)
+#### [7. 通过删除字母匹配到字典里最长单词](https://leetcode-cn.com/problems/longest-word-in-dictionary-through-deleting/)
 
-难度中等123
+
 
 给定一个字符串和一个字符串字典，找到字典里面最长的字符串，该字符串可以通过删除给定字符串的某些字符来得到。如果答案不止一个，返回长度最长且字典顺序最小的字符串。如果答案不存在，则返回空字符串。
 
@@ -1310,6 +1362,28 @@ class Solution {
 
 ### BFS
 
+#### 理论
+
+一层一层遍历，每一层遍历上一层遍历的结果作为起点，每次遍历的节点是距离为1，且没有访问过。
+
+
+
+*i节点先访问*
+
+*di <= dj*
+
+
+
+**使用队列存储结果**
+
+**使用boolean数组标记已经被访问过的节点**
+
+
+
+当层节点加入队列，判断当前队列的size,依次取出上层队列的节点， 遍历每个节点的时候以及将该节点可以访问距离为1的的所有节点且没有访问过加入队列。
+
+
+
 #### [1. 二进制矩阵中的最短路径](https://leetcode-cn.com/problems/shortest-path-in-binary-matrix/)
 
 难度中等
@@ -1336,6 +1410,23 @@ class Solution {
 ```
 
 ![](https://raw.githubusercontent.com/matt17du/img/main/img/20210127114924.png)
+
+
+
+
+
+先判断在输出
+
+
+
+```java
+if (grid[cr][cc] == 1) {
+                    continue;
+}
+if (cr == m - 1 && cc == n - 1) {
+    return pathLength;
+}
+```
 
 
 
@@ -1509,6 +1600,22 @@ class Solution {
 - `beginWord`、`endWord` 和 `wordList[i]` 由小写英文字母组成
 - `beginWord != endWord`
 - `wordList` 中的所有字符串 **互不相同**
+
+
+
+##### 解决
+
+判断list中是否有该元素
+
+ ```java
+if (end == N) {
+      return 0;
+}
+ ```
+
+list中每一个找到和它差一个元素的字符串，最后生成List<Integer>[],就会构成图，只需要bfs遍历该图即可
+
+
 
 
 
@@ -1801,6 +1908,10 @@ class Solution {
 - `isConnected[i][i] == 1`
 - `isConnected[i][j] == isConnected[j][i]`
 
+##### 解法
+
+0 和 1都要计算，当前位置一直向后扩展
+
 
 
 ```java
@@ -1959,6 +2070,12 @@ class Solution {
 
 [[0, 4], [1, 3], [1, 4], [2, 2], [3, 0], [3, 1], [4, 0]] (上图中带括号的单元).
 ```
+
+##### 解法
+
+*当前位置已经设置就不怕其余元素破坏因为没有 false->true的设置*
+
+
 
 
 

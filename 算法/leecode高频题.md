@@ -2926,7 +2926,7 @@ class Solution {
 
 
 
-#### [78. 子集](https://leetcode-cn.com/problems/subsets/)
+#### [#78. 子集](https://leetcode-cn.com/problems/subsets/)
 
 难度中等978
 
@@ -2994,7 +2994,7 @@ class Solution {
 
 
 
-#### [90. 子集 II](https://leetcode-cn.com/problems/subsets-ii/)
+#### [#90. 子集 II](https://leetcode-cn.com/problems/subsets-ii/)
 
 难度中等378
 
@@ -3017,9 +3017,19 @@ class Solution {
 ]
 ```
 
+##### Solution
+
+需要先排序->
+
+```java
+if (i != 0 && nums[i] == nums[i - 1] && !hasVisited[i - 1]) {
+                    continue;
+                }
 
 
-需要先排序
+```
+
+本次递归不选
 
 ```java
 class Solution {

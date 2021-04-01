@@ -322,3 +322,39 @@ fi
 数据库建模工具
 
 [pdman](http://www.pdman.cn/#/)
+
+
+
+
+
+
+
+## utools
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210331110807.png)
+
+
+
+
+
+## powertoys
+
+
+
+
+
+
+
+
+
+
+
+
+
+## **pdf相关**
+
+### xodo
+
+pdf阅读

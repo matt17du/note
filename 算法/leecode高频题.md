@@ -2501,7 +2501,7 @@ class Solution {
 
 
 
-#### [46. 全排列](https://leetcode-cn.com/problems/permutations/)
+#### [#46. 全排列](https://leetcode-cn.com/problems/permutations/)
 
 难度中等1107
 
@@ -2522,7 +2522,9 @@ class Solution {
 ]
 ```
 
+##### Solution
 
+使用boolean数组标记已经访问过，每次都是从0开始
 
 
 

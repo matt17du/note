@@ -791,6 +791,30 @@ Arrays.sort(arr, (o1, o2) -> {
 
 
 
+
+
+```java
+ @Override
+    public <T extends Product> T createProduct(Class<T> c) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+        T t = (T)Class.forName(c.getName()).newInstance();
+        return t;
+    }
+```
+
+extends 不是extend
+
+
+
+
+
+抽象类；类的抽象
+
+接口：行为的规范
+
+
+
+
+
 jvm：常量池
 
 final, finally, finalize 的区别
@@ -800,3 +824,22 @@ nio bio aio
 线程进程
 
 内存泄漏
+
+
+
+
+
+
+
+常见的包
+
+```
+java.lang.* //核心包
+java.util.* // 工具包
+java.io.*
+java.text.*; // 格式化
+java.net.*
+java.sql.*
+
+```
+

@@ -178,49 +178,137 @@ swap分区设置，文件系统为“swap”
 
 ### 常用的命令
 
-帮助命令
+#### 帮助命令
 
 ```
 man cd
 cd --help
 ```
 
-文件目录命令
+#### 文件目录命令
 
 ```
 touch hello.txt
 vim hello.txt
-mkdir aa
+mkdir -p ./a/b
 
-// 文件全部显示出来
-cat hello.txt
-// 一页
-more hello.txt
-less hello.txt
+rmdir ./a
+rm -rvf ./a
 
-// 显示更多的信息
-ls -l
-//隐藏的文件也会显示出来
-ls -a 
-ls 
+cd ./a
+
+pwd
+
+ls ./
+ls -l ./
+
+
+// 查看文件最后20行
+tail -n 20 a.txt
+// 监视文件的内容 -n 10
+tail -f a.txt
+
 
 cp hello.txt copy.txt
 mv hello.txt a.txt
 mv hello.txt ../
 
-// 删除文件
-rm -rvf a.txt 
 
-cd /mnt
-pwd
-
-
-
-// 统计字数
-wc a.txt
-
-chmod 777 hello.txt
 ```
+
+
+
+#### 其他
+
+```
+ln -s a.txt a
+history
+echo 
+grep
+```
+
+
+
+#### **压缩**
+
+**tar -zcvf xx.tar.gz xx.txt**
+
+```
+tar -zcvf  xxx.tar.gz  xxxx 压缩文件
+tar -zxvf xxx.tar.gz  解压缩文件
+tar -zxvf aa.tar.gz -C ./a
+
+zip a.zip a.txt
+zip -r a.zip ./
+unzip xxx.zip
+```
+
+#### 用户
+
+```
+groupadd g1
+groupdel g1
+useradd -g g1 u1
+passwd u1
+userdel -r u1
+
+id u1
+whoami
+su - u1
+```
+
+
+
+#### 文件
+
+文件类型-所有者-同一个组-其他用户
+
+r：读4
+
+w：写2
+
+x：执行1
+
+```]
+chmod 777 aa.txt
+
+chown u1 aa.txt
+chown u1:g1 aa.txt
+chgrp g1 aa.txt
+```
+
+
+
+
+
+
+
+#### yum rpm
+
+```
+yum list
+yum install tomcat
+yum remove tomcat
+```
+
+
+
+```
+xxx:包名
+rpm -ivh xxx
+rpm -e xxx
+rpm -qa
+```
+
+
+
+
+
+
+
+
+
+
 
 ipcs -m
 
@@ -313,8 +401,6 @@ shutdown -r now // 立即重启
 
 
 ### 网络
-
-
 
 
 

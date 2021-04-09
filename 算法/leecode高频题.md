@@ -1,4 +1,4 @@
-### 双指针
+## 双指针
 
 #### [1. 两数之和 II - 输入有序数组](https://leetcode-cn.com/problems/two-sum-ii-input-array-is-sorted/)
 
@@ -492,7 +492,7 @@ class Solution {
 
 
 
-### 排序
+## 排序
 
 #### [215. 数组中的第K个最大元素](https://leetcode-cn.com/problems/kth-largest-element-in-an-array/)
 
@@ -812,7 +812,7 @@ class Solution {
 }
 ```
 
-### 二分查找
+## 二分查找
 
 #### [1. x 的平方根](https://leetcode-cn.com/problems/sqrtx/)
 
@@ -1196,7 +1196,7 @@ class Solution {
 
 
 
-### 分治
+## 分治
 
 #### [241. 为运算表达式设计优先级](https://leetcode-cn.com/problems/different-ways-to-add-parentheses/)
 
@@ -1360,29 +1360,31 @@ class Solution {
 
 
 
-### BFS
+## BFS
 
 #### 理论
 
-一层一层遍历，每一层遍历上一层遍历的结果作为起点，每次遍历的节点是距离为1，且没有访问过。
+一层一层遍历，每一层遍历以上一层遍历的结果作为起点，每次遍历的节点是距离为1，且没有访问过。
 
 
 
 *i节点先访问*
 
-*di <= dj*
+*di <= dj*， 最短路径
 
 
 
-**使用队列存储结果**
+存储：**使用队列存储节点**
 
-**使用boolean数组标记已经被访问过的节点**
+标记：**使用boolean数组标记已经被访问过的节点**
 
 
 
 当层节点加入队列，判断当前队列的size,依次取出上层队列的节点， 遍历每个节点的时候以及将该节点可以访问距离为1的的所有节点且没有访问过加入队列。
 
+结果是否满足条件
 
+满足条件才会添加队列
 
 #### [1. 二进制矩阵中的最短路径](https://leetcode-cn.com/problems/shortest-path-in-binary-matrix/)
 
@@ -1421,7 +1423,7 @@ class Solution {
 
 ```java
 if (grid[cr][cc] == 1) {
-                    continue;
+     continue;
 }
 if (cr == m - 1 && cc == n - 1) {
     return pathLength;
@@ -1609,7 +1611,7 @@ class Solution {
 
  ```java
 if (end == N) {
-      return 0;
+  return 0;
 }
  ```
 
@@ -1696,7 +1698,23 @@ class Solution {
 
 
 
-### DFS
+## DFS
+
+#### 理论
+
+遍历得到一个节点立即对该节点进行遍历，不能遍历则返回
+
+
+
+能够遍历的节点：说明初始节点可以到达该节点，解决可达性问题
+
+栈：保存当前节点信息
+
+标记：需要对遍历过的节点进行标记
+
+
+
+dfs=边界条件+有哪些入口
 
 #### [695. 岛屿的最大面积](https://leetcode-cn.com/problems/max-area-of-island/)
 
@@ -2071,7 +2089,7 @@ class Solution {
 [[0, 4], [1, 3], [1, 4], [2, 2], [3, 0], [3, 1], [4, 0]] (上图中带括号的单元).
 ```
 
-##### 解法
+##### Solution
 
 *当前位置已经设置就不怕其余元素破坏因为没有 false->true的设置*
 
@@ -2145,9 +2163,21 @@ class Solution {
 
 
 
-### 回溯
+## 回溯
 
-#### [17. 电话号码的字母组合](https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/)
+和DFS是类似的，不过在返回时需要把已经访问过的元素标记为未访问。保证其他递归链可以访问到该元素。
+
+
+
+**选择当前也可以不选择**
+
+
+
+站队
+
+
+
+#### [#17. 电话号码的字母组合](https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/)
 
 难度中等1111
 
@@ -2187,6 +2217,26 @@ class Solution {
 - `0 <= digits.length <= 4`
 - `digits[i]` 是范围 `['2', '9']` 的一个数字。
 
+##### Solution
+
+"" [""]应该是[]
+
+```java
+if (digits == null || digits.length() == 0) {
+            return combinationList;
+}
+```
+
+**s.toCharArray()**
+
+```java
+for (char ch : s.toCharArray())
+```
+
+
+
+
+
 
 
 ```java
@@ -2222,7 +2272,7 @@ class Solution {
 
 
 
-#### [93. 复原IP地址](https://leetcode-cn.com/problems/restore-ip-addresses/)
+#### [#93. 复原IP地址](https://leetcode-cn.com/problems/restore-ip-addresses/)
 
 难度中等492
 
@@ -2324,7 +2374,7 @@ class Solution {
 
 
 
-#### [79. 单词搜索](https://leetcode-cn.com/problems/word-search/)
+#### [#79. 单词搜索](https://leetcode-cn.com/problems/word-search/)
 
 难度中等765
 
@@ -2409,7 +2459,6 @@ class Solution {
         }
         hasVisited[r][c] = false;
         return false;
-    
     }
 
 
@@ -2417,7 +2466,7 @@ class Solution {
 }
 ```
 
-#### [257. 二叉树的所有路径](https://leetcode-cn.com/problems/binary-tree-paths/)
+#### [#257. 二叉树的所有路径](https://leetcode-cn.com/problems/binary-tree-paths/)
 
 难度简单438
 
@@ -2442,6 +2491,12 @@ class Solution {
 ```
 
 
+
+
+
+##### Solution
+
+根 -》 先选择左，左递归执行完，需要把左节点删除，以便执行右节点
 
 
 
@@ -2567,7 +2622,7 @@ class Solution {
 
 
 
-#### [47. 全排列 II](https://leetcode-cn.com/problems/permutations-ii/)
+#### [#47. 全排列 II](https://leetcode-cn.com/problems/permutations-ii/)
 
 难度中等577
 
@@ -2652,7 +2707,7 @@ class Solution {
 
 
 
-#### [77. 组合](https://leetcode-cn.com/problems/combinations/)
+#### [#77. 组合](https://leetcode-cn.com/problems/combinations/)
 
 难度中等480
 
@@ -2672,6 +2727,21 @@ class Solution {
   [1,4],
 ]
 ```
+
+##### Solution
+
+```java
+if (k == 0) {
+     combines.add(new ArrayList(tempCombine));
+     return;
+}
+```
+
+k=0时需要返回否则还会进入下面的循环
+
+0 -1 -2：只会越来越小
+
+
 
 
 
@@ -2705,7 +2775,7 @@ class Solution {
 
 
 
-#### [39. 组合总和](https://leetcode-cn.com/problems/combination-sum/)
+#### [#39. 组合总和](https://leetcode-cn.com/problems/combination-sum/)
 
 难度中等1150
 
@@ -2752,7 +2822,15 @@ class Solution {
 
 
 
+##### Solution
 
+**2, 3, 5**
+
+**2 2 2 2**
+
+**2 2 2 3**
+
+**2 2 2 5**
 
 ```java
 class Solution {
@@ -2790,7 +2868,7 @@ class Solution {
 
 
 
-#### [40. 组合总和 II](https://leetcode-cn.com/problems/combination-sum-ii/)
+#### [#40. 组合总和 II](https://leetcode-cn.com/problems/combination-sum-ii/)
 
 难度中等483
 
@@ -2875,7 +2953,7 @@ class Solution {
 
 难度中等255
 
-找出所有相加之和为 ***n*** 的 ***k\*** 个数的组合***。\***组合中只允许含有 1 - 9 的正整数，并且每种组合中不存在重复的数字。
+找出所有相加之和为 ***n*** 的 ***k\*** 个数的组合。组合中只允许含有 1 - 9 的正整数，并且每种组合中不存在重复的数字。
 
 **说明：**
 
@@ -2895,6 +2973,10 @@ class Solution {
 输入: k = 3, n = 9
 输出: [[1,2,6], [1,3,5], [2,3,4]]
 ```
+
+##### Solution
+
+从1开始
 
 
 
@@ -3072,7 +3154,7 @@ class Solution {
 
 
 
-#### [131. 分割回文串](https://leetcode-cn.com/problems/palindrome-partitioning/)
+#### [#131. 分割回文串](https://leetcode-cn.com/problems/palindrome-partitioning/)
 
 难度中等475
 
@@ -3136,7 +3218,7 @@ class Solution {
 
 
 
-#### [37. 解数独](https://leetcode-cn.com/problems/sudoku-solver/)
+#### [#37. 解数独](https://leetcode-cn.com/problems/sudoku-solver/)
 
 难度困难744
 
@@ -3163,6 +3245,41 @@ class Solution {
 - 给定的数独序列只包含数字 `1-9` 和字符 `'.'` 。
 - 你可以假设给定的数独只有唯一解。
 - 给定数独永远是 `9x9` 形式的。
+
+
+
+
+
+##### Solution
+
+
+
+```java
+ while (row < 9 && board[row][col] != '.') {
+            row = col == 8 ? row + 1 : row;
+            col = col == 8 ? 0 : col + 1;
+        }
+```
+
+数组越界
+
+
+
+```java
+private int cubeNum(int i, int j) {
+        int row = i / 3;
+        int col = j / 3;
+        return row * 3 + col;
+}
+```
+
+**当前位置是否放入该数**
+
+
+
+
+
+
 
 
 
@@ -3235,7 +3352,7 @@ class Solution {
 
 
 
-### 贪心算法
+## 贪心算法
 
 *每次操作都是最优的，并且保证最后的结果时最优的*
 
@@ -3794,9 +3911,9 @@ class Solution {
 
 
 
-### DP
+## DP
 
-
+### 斐波那契数列
 
 #### [70. 爬楼梯](https://leetcode-cn.com/problems/climbing-stairs/)
 
@@ -3912,6 +4029,12 @@ class Solution {
 
 - `0 <= nums.length <= 100`
 - `0 <= nums[i] <= 400`
+
+
+
+##### **Solution**
+
+有了per2 ，pre1就不要判断数组是否为0
 
 
 
@@ -4064,7 +4187,7 @@ dp[i] = dp[i - 1] + dp[i - 3];
 
 
 
-#### **>>矩阵路径>>**
+### **>>矩阵路径>>**
 
 
 
@@ -4111,6 +4234,12 @@ dp[i] = dp[i - 1] + dp[i - 3];
 **不会改变该列值3->3 和4没关系**
 
 和最小
+
+
+
+##### Solution
+
+**j==0,让可以取到，如果i==0,则会抛出异常**
 
 
 
@@ -4200,6 +4329,8 @@ class Solution {
 - `1 <= m, n <= 100`
 - 题目数据保证答案小于等于 `2 * 109`
 
+##### Solution
+
 
 
 ```java
@@ -4219,11 +4350,333 @@ class Solution {
 
 
 
+### 子序列
+
+#### [300. 最长递增子序列](https://leetcode-cn.com/problems/longest-increasing-subsequence/)
+
+难度中等1510
+
+给你一个整数数组 `nums` ，找到其中最长严格递增子序列的长度。
+
+子序列是由数组派生而来的序列，删除（或不删除）数组中的元素而不改变其余元素的顺序。例如，`[3,6,2,7]` 是数组 `[0,3,1,6,2,2,7]` 的子序列。
+
+**示例 1：**
+
+```
+输入：nums = [10,9,2,5,3,7,101,18]
+输出：4
+解释：最长递增子序列是 [2,3,7,101]，因此长度为 4 。
+```
+
+**示例 2：**
+
+```
+输入：nums = [0,1,0,3,2,3]
+输出：4
+```
+
+**示例 3：**
+
+```
+输入：nums = [7,7,7,7,7,7,7]
+输出：1
+```
+
+ 
+
+**提示：**
+
+- `1 <= nums.length <= 2500`
+- `-104 <= nums[i] <= 104`
+
+##### Solution
+
+第一个大于当前值
+
+== 不取
 
 
 
 
 
+```java
+class Solution {
+    public int lengthOfLIS(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        int n = nums.length;
+        int[] dp = new int[n];
+        Arrays.fill(dp, 1);
+        int len = 1;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < i; j++) {
+                if (nums[j] < nums[i]) {
+                    dp[i] = Math.max(dp[i], dp[j] + 1);
+                }
+            }
+            len = Math.max(len, dp[i]);
+        }
+        return len;
+        
+    }
+}
+```
+
+
+
+
+
+
+
+```java
+class Solution {
+    public int lengthOfLIS(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        int n = nums.length;
+        int[] dp = new int[n];
+       
+        int len = 0;
+        for (int i = 0; i < n; i++) {
+            int index = binarySearch(dp, nums[i], len);
+            dp[index] = nums[i];
+            if (index == len) {
+                len++;
+            }
+        }
+        return len;
+    }
+
+    public int binarySearch(int[] dp, int num, int len) {
+        int l = 0;
+        int r = len;
+        while(l < r) {
+            int mid = l + (r - l) / 2;
+            if (num == dp[mid]) {
+                return mid;
+            } else if (num < dp[mid]) {
+                r = mid;
+            } else {
+                l = mid + 1;
+            }
+        }
+        return l;
+    }
+}
+```
+
+
+
+#### [646. 最长数对链](https://leetcode-cn.com/problems/maximum-length-of-pair-chain/)
+
+难度中等156
+
+给出 `n` 个数对。 在每一个数对中，第一个数字总是比第二个数字小。
+
+现在，我们定义一种跟随关系，当且仅当 `b < c` 时，数对`(c, d)` 才可以跟在 `(a, b)` 后面。我们用这种形式来构造一个数对链。
+
+给定一个数对集合，找出能够形成的最长数对链的长度。你不需要用到所有的数对，你可以以任何顺序选择其中的一些数对来构造。
+
+ 
+
+**示例：**
+
+```
+输入：[[1,2], [2,3], [3,4]]
+输出：2
+解释：最长的数对链是 [1,2] -> [3,4]
+```
+
+ 
+
+**提示：**
+
+- 给出数对的个数在 `[1, 1000]` 范围内。
+
+
+
+```java
+class Solution {
+    public int findLongestChain(int[][] pairs) {
+        if (pairs == null || pairs.length == 0) {
+            return 0;
+        }
+
+        int n = pairs.length;
+        int[] dp = new int[n];
+       
+        Arrays.sort(pairs, Comparator.comparingInt(o->o[0]));
+        int len = 1;
+        Arrays.fill(dp, 1);
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < i; j++) {
+                if(pairs[j][1] < pairs[i][0]) {
+                    dp[i] = Math.max(dp[i], dp[j] + 1);
+                }
+            }
+            len = Math.max(len, dp[i]);
+        }
+        return len;
+    }
+}
+```
+
+
+
+
+
+#### [376. 摆动序列](https://leetcode-cn.com/problems/wiggle-subsequence/)
+
+难度中等421
+
+如果连续数字之间的差严格地在正数和负数之间交替，则数字序列称为**摆动序列。**第一个差（如果存在的话）可能是正数或负数。少于两个元素的序列也是摆动序列。
+
+例如， `[1,7,4,9,2,5]` 是一个摆动序列，因为差值 `(6,-3,5,-7,3)` 是正负交替出现的。相反, `[1,4,7,2,5]` 和 `[1,7,4,5,5]` 不是摆动序列，第一个序列是因为它的前两个差值都是正数，第二个序列是因为它的最后一个差值为零。
+
+给定一个整数序列，返回作为摆动序列的最长子序列的长度。 通过从原始序列中删除一些（也可以不删除）元素来获得子序列，剩下的元素保持其原始顺序。
+
+**示例 1:**
+
+```
+输入: [1,7,4,9,2,5]
+输出: 6 
+解释: 整个序列均为摆动序列。
+```
+
+**示例 2:**
+
+```
+输入: [1,17,5,10,13,15,10,5,16,8]
+输出: 7
+解释: 这个序列包含几个长度为 7 摆动序列，其中一个可为[1,17,10,13,10,16,8]。
+```
+
+**示例 3:**
+
+```
+输入: [1,2,3,4,5,6,7,8,9]
+输出: 2
+```
+
+
+
+```java
+class Solution {
+    public int wiggleMaxLength(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+
+        int up = 1;
+        int down = 1;
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] > nums[i - 1]) {
+                up = down + 1;
+            } else if (nums[i] < nums[i - 1]) {
+                down = up + 1;
+            }
+        }
+        return Math.max(up, down);
+    }
+} 
+```
+
+
+
+#### [1143. 最长公共子序列](https://leetcode-cn.com/problems/longest-common-subsequence/)
+
+难度中等507
+
+给定两个字符串 `text1` 和 `text2`，返回这两个字符串的最长 **公共子序列** 的长度。如果不存在 **公共子序列** ，返回 `0` 。
+
+一个字符串的 **子序列** 是指这样一个新的字符串：它是由原字符串在不改变字符的相对顺序的情况下删除某些字符（也可以不删除任何字符）后组成的新字符串。
+
+- 例如，`"ace"` 是 `"abcde"` 的子序列，但 `"aec"` 不是 `"abcde"` 的子序列。
+
+两个字符串的 **公共子序列** 是这两个字符串所共同拥有的子序列。
+
+ 
+
+**示例 1：**
+
+```
+输入：text1 = "abcde", text2 = "ace" 
+输出：3  
+解释：最长公共子序列是 "ace" ，它的长度为 3 。
+```
+
+**示例 2：**
+
+```
+输入：text1 = "abc", text2 = "abc"
+输出：3
+解释：最长公共子序列是 "abc" ，它的长度为 3 。
+```
+
+**示例 3：**
+
+```
+输入：text1 = "abc", text2 = "def"
+输出：0
+解释：两个字符串没有公共子序列，返回 0 。
+```
+
+ 
+
+**提示：**
+
+- `1 <= text1.length, text2.length <= 1000`
+- `text1` 和 `text2` 仅由小写英文字符组成。
+
+
+
+
+
+```java
+class Solution {
+    public int longestCommonSubsequence(String text1, String text2) {
+        if (text1 == null || text2 == null) {
+            return 0;
+        }
+
+        int n1 = text1.length();
+        int n2 = text2.length();
+        int[][] dp = new int[n1 + 1][n2 + 1];
+
+        for (int i = 0; i < n1; i++) {
+            for (int j = 0; j < n2; j++) {
+                if (text1.charAt(i) == text2.charAt(j)) {
+                    dp[i + 1][j + 1] = dp[i][j] + 1;
+                } else {
+                    dp[i + 1][j + 1] = Math.max(dp[i][j + 1], dp[i + 1][j]);
+                }
+            }
+        }
+        return dp[n1][n2];
+
+    }
+}
+```
+
+
+
+### 0 1背包
+
+**前i件物品体积j最大价值，选和不选当前物品**
+
+```java
+dp[i][j] = Math.max(dp[i - 1][j], dp[i - 1][j - w[i]] + v);
+```
+
+
+
+```java
+dp[i] = Math.max(dp[i], dp[i - w[i]] + v)
+```
+
+前一个行 + 前一个行
 
 #### [416. 分割等和子集](https://leetcode-cn.com/problems/partition-equal-subset-sum/)
 
@@ -4260,7 +4713,7 @@ class Solution {
 
 
 
-
+不是选不选 ，有这几个值可以变成true
 
 ```java
 class Solution {
@@ -4329,6 +4782,14 @@ class Solution {
 - 数组非空，且长度不会超过 20 。
 - 初始的数组的和不会超过 1000 。
 - 保证返回的最终结果能被 32 位整数存下。
+
+##### Solution
+
+**在没选该物品有多少种条件**
+
+```java
+dp[i] += dp[i - num]
+```
 
 
 
@@ -4402,7 +4863,9 @@ class Solution {
 - `strs[i]` 仅由 `'0'` 和 `'1'` 组成
 - `1 <= m, n <= 100`
 
+##### Solution
 
+多维背包
 
 
 
@@ -4462,7 +4925,9 @@ class Solution {
 输出：-1
 ```
 
+##### Soluiton
 
+**完全背包问题，正向就可以不用担心被破坏**
 
 
 
@@ -4598,7 +5063,11 @@ class Solution {
 输出: false
 ```
 
+##### Solution
 
+**顺序背包问题**：让物品按照一定顺序添加包。
+
+背包外面-
 
 ```java
 class Solution {
@@ -4622,13 +5091,72 @@ class Solution {
 
 
 
+#### [377. 组合总和 Ⅳ](https://leetcode-cn.com/problems/combination-sum-iv/)
+
+难度中等306
+
+给你一个由 **不同** 整数组成的数组 `nums` ，和一个目标整数 `target` 。请你从 `nums` 中找出并返回总和为 `target` 的元素组合的个数。
+
+题目数据保证答案符合 32 位整数范围。
+
+ 
+
+**示例 1：**
+
+```
+输入：nums = [1,2,3], target = 4
+输出：7
+解释：
+所有可能的组合为：
+(1, 1, 1, 1)
+(1, 1, 2)
+(1, 2, 1)
+(1, 3)
+(2, 1, 1)
+(2, 2)
+(3, 1)
+请注意，顺序不同的序列被视作不同的组合。
+```
+
+**示例 2：**
+
+```
+输入：nums = [9], target = 3
+输出：0
+```
+
+ 
+
+##### Solution
+
+
+
+```java
+class Solution {
+    public int combinationSum4(int[] nums, int target) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        int[] dp = new int[target + 1];
+        dp[0] = 1;
+        Arrays.sort(nums);
+        for (int i = 1; i <= target; i++) {
+            for (int j = 0; j < nums.length && nums[j] <= i; j++) {
+                dp[i] += dp[i - nums[j]];
+            }
+        }
+        return dp[target];
+    }
+}
+```
 
 
 
 
 
 
-### 链表
+
+## 链表
 
 
 

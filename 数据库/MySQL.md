@@ -231,6 +231,29 @@ count(*)
 
 
 
+```mysql
+create table student(
+	id int,
+    name varchar(255)
+);
+```
+
+
+
+
+
+```mysql
+INSERT INTO student(id, name)
+VALUES (1, 'matt'),
+(2, 'jack');
+```
+
+
+
+
+
+
+
 ## 面试
 
 
@@ -244,3 +267,10 @@ count(*)
 
 
 mysql默认隔离级别：可重复读
+
+
+
+
+
+
+

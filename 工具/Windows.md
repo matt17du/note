@@ -89,7 +89,7 @@ CODE:XPNMF-ISDYF-LCSED-BPATU
 
 [官网](https://www.faststone.org/FSCaptureDetail.htm)
 
-
+[中文官网](https://www.faststonecapture.cn/download)
 
 ## 7-zip
 

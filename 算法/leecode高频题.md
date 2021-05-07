@@ -5865,4 +5865,196 @@ class Solution {
 
 
 
+## 字符串
+
+#### 字符串循环移位包含
+
+  
+
+```java
+abc->bca->cab->abc
+```
+
+str1, str2判断str2是否在str1移动的子串中
+
+str2 在 str1+str2即可
+
+
+
+```java
+@Test
+    public void test() {
+        System.out.println(move("abc", "cb"));
+    }
+
+    public boolean move(String str1, String str2) {
+
+        if (str1 == null || str2 == null || str1.length() == 0 || str2.length() == 0) {
+            return false;
+        }
+        int p1 = 0;
+        int str1Len = str1.length();
+        int str2Len = str2.length();
+        for (; p1 < 2 * str1Len; p1++) {
+            char ch = str1.charAt(p1 % str1Len);
+
+            if (str2.charAt(0) == ch) {
+                for (int j = 0; j <= str2Len; j++) {
+                    if (j == str2Len) {
+                        return true;
+                    } else if (str1.charAt((p1 + j) % str1Len) != str2.charAt(j)) {
+                        break;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+```
+
+
+
+
+
+#### 字符串向后移动k位
+
+这样做刚好向后移动k位
+
+```
+0->n-1-k
+n-k->n-1
+0->n-1
+```
+
+
+
+
+
+```java
+public void reverse(char[] arr, int f, int l) {
+        for (; f < l; f++,l--) {
+            char temp = arr[f];
+            arr[f] = arr[l];
+            arr[l] = temp;
+        }
+    }
+
+    public String shift(String str, int k) {
+
+        char[] strArr = str.toCharArray();
+        int n = str.length();
+        reverse(strArr, 0, n - 1 - k);
+        reverse(strArr, n - k, n - 1);
+        reverse(strArr, 0, n - 1);
+
+        return String.valueOf(strArr);
+    }
+
+    @Test
+    public void testMoveN() {
+        System.out.println(shift("abcd123", 3));
+    }
+```
+
+
+
+
+
+#### 字符串单词反转
+
+
+
+```
+hello matt
+matt hello
+```
+
+
+
+
+
+
+
+
+
+```java
+ public String reverse(String str) {
+        //
+        StringBuilder stringBuilder = new StringBuilder();
+
+
+        str = str.trim();
+        int l1 = str.length() - 1;
+        int l2 = str.length() - 1;
+        while (l1 >= 0) {
+            while (l1 >= 0 && str.charAt(l1) != ' ') {
+                l1--;
+            }
+            stringBuilder.append(str.substring(l1 + 1, l2 + 1));
+            stringBuilder.append(" ");
+            while (l1 >= 0 && str.charAt(l1) == ' ') {
+                l1--;
+            }
+            l2 = l1;
+        }
+        return stringBuilder.toString().trim();
+    }
+```
+
+
+
+
+
+
+
+#### [242. 有效的字母异位词](https://leetcode-cn.com/problems/valid-anagram/)
+
+难度简单370
+
+给定两个字符串 *s* 和 *t* ，编写一个函数来判断 *t* 是否是 *s* 的字母异位词。
+
+**示例 1:**
+
+```
+输入: s = "anagram", t = "nagaram"
+输出: true
+```
+
+**示例 2:**
+
+```
+输入: s = "rat", t = "car"
+输出: false
+```
+
+
+
+
+
+
+
+```java
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        int[] arr = new int[26];
+        for (char ch : s.toCharArray()) {
+            arr[ch - 'a']++;
+        }
+        for (char ch : t.toCharArray()) {
+            arr[ch - 'a']--;
+        }
+        for (int i : arr) {
+            if (i != 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+```
+
+
+
+
+
 ### end

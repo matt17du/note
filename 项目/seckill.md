@@ -293,9 +293,7 @@ public LocalTransactionState checkLocalTransaction(MessageExt messageExt)
 
 
 
-
-
-
+活动校验、异步更新销量、记录商品的流水状态
 
 
 

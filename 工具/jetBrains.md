@@ -267,9 +267,13 @@ help ->Edit Custom VM Options
 
 
 
+### **properties文件乱码**
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210501112734.png)
 
 
 
+如果还是不起作用删除文件重新创建即可
 
 
 
@@ -386,3 +390,39 @@ help ->Edit Custom VM Options
 
 
 ![](https://raw.githubusercontent.com/matt17du/img/main/img/20210320210538.png)
+
+
+
+
+
+
+
+
+
+**压缩包引入到IDEA，help->reset**
+
+**auto -> reset**
+
+
+
+
+
+## goland
+
+
+
+
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210420155953.png)
+
+
+
+go的安装目录
+
+
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210420160034.png)

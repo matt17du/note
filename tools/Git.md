@@ -23,7 +23,7 @@ git pull origin master
 
 ### 基本
 
-```java
+```bash
 // 第一下克隆下来
 git clone https://github.com/matt17du/note.git
 git remote -v
@@ -38,6 +38,7 @@ git add --all
 git commit -m "xxxm"
     
 // 推送
+//git push <远程主机名> <本地分支名>:<远程分支名>
 git push origin master:master
     
 

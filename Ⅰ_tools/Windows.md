@@ -358,3 +358,25 @@ fi
 ### xodo
 
 pdf阅读  
+
+
+
+
+
+
+
+
+
+
+
+
+
+## chrome
+
+
+
+[剪切板](chrome://flags/#clipboard-filenames)
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210510104647.png)

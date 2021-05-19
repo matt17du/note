@@ -2891,3 +2891,129 @@ CP(Zookeeper/Consul)
 
 
 ![](https://raw.githubusercontent.com/matt17du/img/main/img/20210511155907.png)
+
+
+
+
+
+
+
+
+
+@SpringbootApplication 有@Compantscan
+
+
+
+
+
+```java
+public class RoundRobinRule extends AbstractLoadBalancerRule {
+    private AtomicInteger nextServerCyclicCounter;
+    private static final boolean AVAILABLE_ONLY_SERVERS = true;
+    private static final boolean ALL_SERVERS = false;
+    private static Logger log = LoggerFactory.getLogger(RoundRobinRule.class);
+
+    public RoundRobinRule() {
+        this.nextServerCyclicCounter = new AtomicInteger(0);
+    }
+
+    public RoundRobinRule(ILoadBalancer lb) {
+        this();
+        this.setLoadBalancer(lb);
+    }
+
+    public Server choose(ILoadBalancer lb, Object key) {
+        if (lb == null) {
+            log.warn("no load balancer");
+            return null;
+        } else {
+            Server server = null;
+            int count = 0;
+
+            while(true) {
+                if (server == null && count++ < 10) {
+                    List<Server> reachableServers = lb.getReachableServers();
+                    List<Server> allServers = lb.getAllServers();
+                    int upCount = reachableServers.size();
+                    int serverCount = allServers.size();
+                    if (upCount != 0 && serverCount != 0) {
+                        int nextServerIndex = this.incrementAndGetModulo(serverCount);
+                        server = (Server)allServers.get(nextServerIndex);
+                        if (server == null) {
+                            Thread.yield();
+                        } else {
+                            if (server.isAlive() && server.isReadyToServe()) {
+                                return server;
+                            }
+
+                            server = null;
+                        }
+                        continue;
+                    }
+
+                    log.warn("No up servers available from load balancer: " + lb);
+                    return null;
+                }
+
+                if (count >= 10) {
+                    log.warn("No available alive servers after 10 tries from load balancer: " + lb);
+                }
+
+                return server;
+            }
+        }
+    }
+
+    private int incrementAndGetModulo(int modulo) {
+        int current;
+        int next;
+        do {
+            current = this.nextServerCyclicCounter.get();
+            next = (current + 1) % modulo;
+        } while(!this.nextServerCyclicCounter.compareAndSet(current, next));
+
+        return next;
+    }
+
+```
+
+
+
+
+
+
+
+@Feign:服务接口绑定器
+
+
+
+
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210512111930.png)
+
+
+
+
+
+@RestController
+
+
+
+
+
+豪猪哥
+
+
+
+服务降级：对方系统不可用，不要让客户端一直等待，而是返回一个兜底的方法。
+
+
+
+fallback
+
+
+
+flowlimit
+

@@ -2,6 +2,20 @@ font-family: JetBrains Mono;
 
 
 
+
+
+
+
+## Typora
+
+
+
+Mo Dark
+
+
+
+
+
 ## iqbit
 
 一直next安装即可(自定义安装可以修改安装位置)，之后把破解文件添加到安装目录下点击patch即可,不需要退出程序
@@ -48,17 +62,15 @@ chinese :中文
 
 
 
-![image-20201023000557995](D:\matt\workspace\git\app\img\image-20201023000557995.png)
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210519134409.png)
 
 
 
-
-
-![image-20201023000707096](D:\matt\workspace\git\app\img\image-20201023000707096.png)
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210519134507.png)
 
 
 
-![image-20201023000350172](D:\matt\workspace\git\app\img\image-20201023000350172.png)
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210519134436.png)
 
 
 
@@ -380,3 +392,25 @@ pdf阅读
 
 
 ![](https://raw.githubusercontent.com/matt17du/img/main/img/20210510104647.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+**删除Word分页符**
+
+如果空白页存在分页符，点击文中「小双箭头」，文档底部就会出现「分页符」，选中它按「Delete」键即可删除。
+
+
+
+
+
+![](https://pic3.zhimg.com/v2-86fa42baaf8eaeea15f09b29f6534366_b.webp)

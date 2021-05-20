@@ -167,7 +167,7 @@ public LocalTransactionState checkLocalTransaction(MessageExt messageExt)
 
 ### 生成活动token
 
-用户商品活动校验之后生成token，保存在redis中
+用户商品活动校验之后生成token，保存在redis中 
 
 
 

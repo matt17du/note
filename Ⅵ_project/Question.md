@@ -6,7 +6,7 @@
 
 用户名密码数据验证以及是否匹配，如果成功则生成登录凭证，并返回给前端
 
-login_ticket
+login_ticket 
 
 user
 

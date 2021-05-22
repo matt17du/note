@@ -351,12 +351,54 @@ help ->Edit Custom VM Options
 
 
 
-![](https://raw.githubusercontent.com/matt17du/img/main/img/20210420155953.png)
+### 配置
 
 
 
-go的安装目录
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210521103340.png)
 
 
 
-![](https://raw.githubusercontent.com/matt17du/img/main/img/20210420160034.png)
+
+
+
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210521103319.png)
+
+
+
+
+
+### 使用goland创建项目
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210521103117.png)
+
+
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210521103217.png)
+
+
+
+
+
+
+
+
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210521103908.png)
+
+
+
+
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210521103926.png)

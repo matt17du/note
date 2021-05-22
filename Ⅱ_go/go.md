@@ -1,6 +1,6 @@
-## 使用
+## 第一章  使用
 
-### 安装
+### 1.1安装
 
 [下载地址](https://golang.org/dl/)
 
@@ -20,7 +20,7 @@ win10/64-》选择x86-64
 
 
 
-### 配置
+### 1.2配置
 
 
 
@@ -80,7 +80,7 @@ go env -w GOSUMDB=off
 
 
 
-### 验证
+### 1.3验证
 
 验证go环境是否安装成功
 
@@ -96,17 +96,15 @@ gofmt -w main.go
 
 
 
-### 资料
+### 1.4资料
 
 [中文API](https://studygolang.com/pkgdoc)
 
 [官网](https://golang.org/)
 
+## 第二章  Hello Word
 
-
-## Hello Word
-
-### 程序
+### 2.1程序
 
 新建项目
 
@@ -122,7 +120,7 @@ func main() {
 }
 ```
 
-### 编译运行
+### 2.2编译运行
 
 #### 1.编译运行分开
 
@@ -154,7 +152,7 @@ go run hello.go
 
 
 
-### 注意事项
+### 2.3注意事项
 
 go源文件以 go 为扩展名
 
@@ -170,7 +168,7 @@ go语句是一行一行编译，所以一行不可以写多条语句
 
 
 
-### 注释
+### 2.4注释
 
 
 
@@ -191,9 +189,9 @@ func main() {
 
 ```
 
-## 变量
+## 第三章  变量
 
-### 转义字符
+### 3.1转义字符
 
 
 
@@ -210,7 +208,7 @@ func main() {
 	fmt.Println("aaa\r bb");
 ```
 
-### 变量声明
+### 3.2变量声明
 
 指定变量类型，
 
@@ -270,9 +268,9 @@ var (
 
 
 
-## 数据类型
+## 第四章  数据类型
 
-### 基本数据类型
+### 4.1基本数据类型
 
 
 
@@ -429,7 +427,7 @@ var address = "hello" +
 	"word"
 ```
 
-### 基本数据类型转换
+### 4.2基本数据类型转换
 
 
 
@@ -512,6 +510,145 @@ func main() {
 
 
 
+### 4.3指针类型
+
+
+
+#### 4.3.1基础
+
+
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	var num int = 10
+	var p *int = &num
+	fmt.Println(p)
+	*p = 20
+	fmt.Println(num)
+}
+```
+
+&num:获取num地址
+
+*int:int类型的指针
+
+*p:获取p指针指向变量的地址
+
+#### 4.3.2值类型和引用类型
+
+(1) 值类型，都有对应的指针类型， 形式为 *数据类型，比如 int 的对应的指针就是 *int, float32
+对应的指针类型就是 *float32, 依次类推。 
+
+(2) 值类型包括：基本数据类型 int 系列, float 系列, bool, string 、数组和结构体 struct
+
+
+
+(1) 值类型：基本数据类型 int 系列, float 系列, bool, string 、数组和结构体 struct
+(2) 引用类型：指针、slice 切片、map、管道 chan、interface 等都是引用类型
+
+
+
+
+
+**值类型：变量直接存储值，内存通常在栈中分配**
+
+**引用类型：变量存储的是一个地址，这个地址对应的空间才真正存储数据(值)，内存通常在堆**
+**上分配，当没有任何变量引用这个地址时，该地址对应的数据空间就成为一个垃圾，由GC 来回收**
+
+
+
+### 4.4标识符
+
+#### 4.4.1基础
+
+Golang 对各种变量、方法、函数等命名时使用的字符序列称为标识符
+
+凡是自己可以起名字的地方都叫标识符
+
+
+
+#### 4.4.2命名规则
+
+
+
+(1) 由 26 个英文字母大小写，0-9 ，_ 组成
+
+(2) 数字不可以开头。var num int //ok var 3num int //error
+
+(3) Golang 中严格区分大小写
+
+(4) 识符不能包含空格。
+
+(5) 下划线"_"本身在Go 中是一个特殊的标识符，称为空标识符。可以代表任何其它的标识符，但 是它对应的值会被忽略(比如：忽略某个返回值)。所以仅能被作为占位符使用，不能作为标识符使用
+
+(6) 能以系统保留关键字作为标识符（一共有 25 个），比如 break，if 等等...
+
+
+
+#### 4.4.3注意事项
+
+
+
+(1) 包名：保持 package 的名字和目录保持一致，尽量采取有意义的包名，简短，有意义，不要和
+标准库不要冲突 fmt
+
+(2)变量名、函数名、常量名：采用驼峰法
+
+(3)如果变量名、函数名、常量名首字母大写，则可以被其他的包访问；如果首字母小写，则只能在本包中使用 ( 注：可以简单的理解成，首字母大写是公开的，首字母小写是私有的 ) ,在 golang没有 public , private 等关键字。
+
+### 4.4系统保留关键字
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210522201843.png)
+
+
+
+### 4.5系统的预定义标识符
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210522201953.png)
+
+
+
+## 第五章  运算符
+
+### 5.1算术运算符
+
+
+
+#### 基础
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210522170845.png)
+
+
+
+#### 注意事项
+
+##### 1.取模%
+
+**a % b = a - a / b * b**
+
+##### 2.除法
+
+```go
+10/3   = 3
+```
+
+##### 3.++ --
+
+go 语言只支持 i++, i-- 这样的，没有 --i , ++i 同时 j = i++这样也是错误的
+
+### 5.2关系运算符
+
+#### 1.基础
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210522171257.png)
 
 
 
@@ -519,4 +656,444 @@ func main() {
 
 
 
+### 5.3逻辑运算符
+
+
+
+#### 5.3.1基础
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210522171414.png)
+
+
+
+#### 5.3.2注意事项
+
+##### 1.短路
+
+(1) &&也叫短路与：如果第一个条件为 false，则第二个条件不会判断，最终结果为 false 
+
+(2) ||也叫短路或：如果第一个条件为 true，则第二个条件不会判断，最终结果为 true
+
+
+
+### 5.4赋值运算符
+
+
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210522172532.png)
+
+
+
+
+
+### **5.5进制基础**
+
+#### 5.5.1认知
+
+几进制就是满几进1
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210522193107.png)
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210522193143.png)
+
+
+
+#### 5.5.2进制转换
+
+
+
+##### 任意进制转十进制
+
+二进制
+
+```
+01->0*2^1+0*2^0
+```
+
+八进制
+
+```
+71->7*8^1+1*8^0
+```
+
+十六进制
+
+```
+A1->10*16^1+1*16^0
+```
+
+##### 十进制转其他进制
+
+
+
+十进制转二进制，除2取余的逆，直到商为0 (其他进制类似)
+
+
+
+|      | 商   | 余数 |
+| ---- | ---- | ---- |
+| 14   | 7    | 0    |
+| 7    | 3    | 1    |
+| 3    | 1    | 1    |
+| 1    | 0    | 1    |
+
+1110
+
+##### 二进制转八进制、十六进制
+
+**二进制转八进制**
+
+从末尾开始将二进制三位数转为对应八进制数
+
+```
+1110011 -> 1 110 011 ->163
+```
+
+转十六进制则为四位
+
+
+
+十六进制转二进制、八进制转二进制
+
+一位转四位、一位转三位
+
+
+
+
+
+### **5.6原码反码补码**
+
+正数和0：原码反码补码相同
+
+负数的反码：符号位不变，其他位取反
+
+负数的补码：反码+1
+
+
+
+**计算机都是以补码进行运算**
+
+
+
+
+
+### 5.7位运算符
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210522172931.png)
+
+
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210522172551.png)
+
+
+
+### 5、7指针运算符
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210522173004.png)
+
+### 5.8运算符优先级
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210522172800.png)
+
+
+
+
+
+
+
+1：括号，++, --
+
+2: 单目运算 
+
+3：算术运算符 
+
+4：移位运算 
+
+5：关系运算符 
+
+6：位运算符 
+
+7：逻辑运算符 
+
+8：赋值运算符 
+
+9：逗号
+
+
+
+### 5.9go没有三木运算符
+
+
+
+## 第六章 流程控制
+
+
+
+### 6.1IF ELSE
+
+
+
+```GO
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	var age int
+	fmt.Scanln(&age)
+	if age < 0 {
+		fmt.Println("错误的数据")
+	} else if age < -1 {
+		fmt.Println("未成年")
+	} else {
+		fmt.Println("成年人")
+	}
+}
+```
+
+**注意：即使if语句中只有以及仍然要加{}**
+
+
+
+### 6.2switch
+
+
+
+```go
+
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	var ch byte
+	// 不要使用 Scanln
+
+	fmt.Scanf("%c", &ch)
+	// switch 'a'
+	// switch test('a')
+	switch ch {
+		case 'a', 'b':
+			fmt.Println("星期一或者星期二")
+		case 'c':
+			fmt.Println("星期三")
+		default:
+			fmt.Println("其他")
+	}
+
+	
+
+	
+}
+```
+
+switch：不需要写break，go已经帮我们添加了
+
+golang 的 case 后的表达式可以有多个，使用 逗号 间隔,表示或的意思
+
+case 后的各个表达式的值的数据类型，必须和 switch 的表达式数据类型一致
+
+case/switch 后是一个表达式( 即：常量值、变量、一个有返回值的函数等都可以)
+
+```go
+// switch 'a'
+// switch test('a')
+```
+
+default:不是必须的
+
+case 后面的表达式如果是常量值(字面量)，则要求不能重复
+
+
+
+switch:可以声明一个变量，不推荐
+
+```go
+switch age := 12; {
+	
+	case age == 18:
+		fmt.Println("18")
+		// 穿透
+		fallthrough
+	case age < 18:
+		fmt.Println("未成年")
+		fallthrough
+	default:
+		fmt.Println("成年")
+}
+```
+
+switch：模拟ifel
+
+```go
+switch {
+case 1 == 1 && 2 == 3:
+	fmt.Println("error")
+default:
+	fmt.Println("true")
+}
+```
+
+
+
+switch 穿透-fallthrough ，如果在 case 语句块后增加 fallthrough ,则会继续执行下一个 case，也 叫 switch 穿透,但是只可以穿透一次
+
+
+
+### 6.3for//**go没有while**
+
+
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+
+	
+	for i := 0; i < 10; i++{
+		fmt.Println("matt", i)
+	}
+	
+}
+
+```
+
+
+
+```go
+i := 0
+for i < 10{
+	fmt.Println("matt", i)
+    i++
+}
+```
+
+遍历字符串
+
+根据字符遍历的
+
+```go
+var str = "hello wordz中文"
+// 如果使用传统的字符串遍历就会出错，因为3个字节
+for index, val := range str {
+	//fmt.Println(index, val)
+	fmt.Printf("%d %c\n", index, val)
+}
+```
+
+### 6.4break
+
+break:跳出for循环
+
+
+
+### 6.5continue
+
+continue:跳出当前循环
+
+
+
+### 6.6label
+
+label:使用break跳出指定的for循环
+
+同样continue也可以使用
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+
+	label1:
+		for i := 0; i < 10; i++ {
+			for j := 0; j < 10; j++ {
+				if j == 3 {
+					break label1
+				}
+				fmt.Println(j)
+			}
+			fmt.Println(i)
+		}
+}
+
+```
+
+### 6.7goto
+
+goto:跳转到指定的行，不推荐使用
+
+
+
+```go
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+
+	goto label1
+	fmt.Print("不执行")
+	label1:
+		fmt.Print("执行")
+}
+```
+
+```
+输出：执行
+```
+
+
+
+
+
+
+
+
+
+
+
+## 常用包
+
+
+
+### 从键盘输入
+
+
+
+```go
+package main
+
+import (
+	"fmt"
+)
+func main()  {
+	var name string
+	var address string
+	//fmt.Scanln(&name)
+	fmt.Scanf("%s %s", &name, &address)
+	fmt.Println(name, address)
+}
+```
 

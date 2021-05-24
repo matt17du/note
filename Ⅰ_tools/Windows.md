@@ -2,7 +2,19 @@ font-family: JetBrains Mono;
 
 
 
+# word
 
+## word
+
+**删除Word分页符**
+
+如果空白页存在分页符，点击文中「小双箭头」，文档底部就会出现「分页符」，选中它按「Delete」键即可删除。
+
+
+
+
+
+![](https://pic3.zhimg.com/v2-86fa42baaf8eaeea15f09b29f6534366_b.webp)
 
 
 
@@ -13,20 +25,6 @@ font-family: JetBrains Mono;
 Mo Dark
 
 
-
-
-
-## iqbit
-
-一直next安装即可(自定义安装可以修改安装位置)，之后把破解文件添加到安装目录下点击patch即可,不需要退出程序
-
-![](https://raw.githubusercontent.com/matt17du/img/main/img/20210108162544.png)
-
-
-
-## switchhost
-
-[官网](https://github.com/oldj/SwitchHosts/releases)
 
 
 
@@ -80,9 +78,21 @@ chinese :中文
 
 
 
+
+
+
+
+
+
+
+
+# img
+
+
+
 ## fscapture
 
-```
+```bash
 FastStone Capture(FSCapture) 注册码
 2018年07月18日 15:19:08 殇莫忆 阅读数：12509
 企业版序列号： 
@@ -97,15 +107,145 @@ USER NAME:TEAM_BRAiGHTLiNG_2007
 CODE:XPNMF-ISDYF-LCSED-BPATU 
 ```
 
+
+
+
+
 推荐选择第一个
 
 [官网](https://www.faststone.org/FSCaptureDetail.htm)
 
-[中文官网](https://www.faststonecapture.cn/download)
+[中文官网](
 
-## 7-zip
+## 图床
+
+推荐[picgo](https://github.com/Molunerfinn/PicGo)
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# 视频
+
+## OBS-STUDIO
+
+### 安装
+
+[官网](https://obsproject.com/zh-tw)
+
+从官网下载， next 安装即可
+
+
+
+### 配置
+
+#### 显示键盘鼠标
+
+[插件官网](https://obsproject.com/forum/resources/categories/obs-studio-plugins.6/)
+
+[插件仓库](https://github.com/univrsal/input-overlay/releases/tag/v4.8)
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210524190116.png)
+
+
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210524190344.png)
+
+
+
+
+
+选择如图所示下载即可
+
+
+
+下载解压，解压得到如下文件，将plugin下的俩个文件夹放到obs的安装目录下即可，**不是pulugin文件夹。**
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210524190535.png)
+
+
+
+
+
+
+
+在obs中如下操作
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210524190720.png)
+
+
+
+
+
+配置， presets文件夹中，选择图标、选择配置
+
+
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210524190802.png)
+
+
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210524192358.png)
+
+
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210524192441.png)
+
+#### 关闭麦克风
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210524193130.png)
+
+
+
+### 使用
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210524193011.png)
+
+
+
+
+
+# file
 
 ## IDM
 
@@ -119,17 +259,67 @@ idm 6.38
 
 
 
+
+
 ![](https://raw.githubusercontent.com/matt17du/img/main/img/20210130103430.png)
 
-## 图床
-
-推荐[picgo](https://github.com/Molunerfinn/PicGo)
 
 
 
 
+## iqbit
+
+一直next安装即可(自定义安装可以修改安装位置)，之后把破解文件添加到安装目录下点击patch即可,不需要退出程序
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210108162544.png)
+
+
+
+
+
+## 7zip
+
+### 解压压缩
+
+## **pdf相关**
+
+### xodo
+
+pdf阅读  
+
+
+
+
+
+## else
+
+## utools
+
+内网穿透
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210331110807.png)
+
+
+
+
+
+
+
+# net
+
+## switchhost
+
+[官网](https://github.com/oldj/SwitchHosts/releases)
+
+
+
+# bash
 
 ## cygwin
+
+### 安装
 
 http://www.cygwin.com/
 
@@ -315,7 +505,7 @@ fi
 
 
 
-## 窗口最大化
+### 窗口最大化
 
 应用属性中选择
 
@@ -327,6 +517,8 @@ fi
 
 
 
+# 数据库
+
 
 
 ## pdman
@@ -335,82 +527,3 @@ fi
 
 [pdman](http://www.pdman.cn/#/)
 
-
-
-
-
-
-
-## utools
-
-
-
-![](https://raw.githubusercontent.com/matt17du/img/main/img/20210331110807.png)
-
-
-
-
-
-## powertoys
-
-
-
-
-
-
-
-
-
-
-
-
-
-## **pdf相关**
-
-### xodo
-
-pdf阅读  
-
-
-
-
-
-
-
-
-
-
-
-
-
-## chrome
-
-
-
-[剪切板](chrome://flags/#clipboard-filenames)
-
-
-
-![](https://raw.githubusercontent.com/matt17du/img/main/img/20210510104647.png)
-
-
-
-
-
-
-
-
-
-
-
-
-
-**删除Word分页符**
-
-如果空白页存在分页符，点击文中「小双箭头」，文档底部就会出现「分页符」，选中它按「Delete」键即可删除。
-
-
-
-
-
-![](https://pic3.zhimg.com/v2-86fa42baaf8eaeea15f09b29f6534366_b.webp)

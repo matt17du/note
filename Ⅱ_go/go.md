@@ -540,8 +540,7 @@ func main() {
 
 #### 4.3.2值类型和引用类型
 
-(1) 值类型，都有对应的指针类型， 形式为 *数据类型，比如 int 的对应的指针就是 *int, float32
-对应的指针类型就是 *float32, 依次类推。 
+(1) 值类型，都有对应的指针类型， 形式为 *数据类型，比如 int 的对应的指针就是 *int, float32对应的指针类型就是 *float32, 依次类推。 
 
 (2) 值类型包括：基本数据类型 int 系列, float 系列, bool, string 、数组和结构体 struct
 
@@ -1129,7 +1128,7 @@ func main()  {
 
 
 ```bash
-O111MODULE=off
+GO111MODULE=off
 ```
 
 
@@ -1620,6 +1619,80 @@ fmt.Println(strings.HasSuffix("aabbcc", "aa"))
 
 
 
+### 日期函数
+
+
+
+time.Time:类型
+
+time.now()
+
+```go
+now := time.Now()
+// fmt.Println(now)
+fmt.Printf("%v\n%T", now, now)
+```
+
+获取年、月、日、时、分、秒
+
+
+
+```go
+fmt.Printf("Year-----%v\n", now.Year())
+fmt.Printf("Month-----%v\n", int(now.Month()))
+fmt.Printf("Day-----%v\n", now.Day())
+fmt.Printf("Hour-----%v\n", now.Hour())
+fmt.Printf("Minute-----%v\n", now.Minute())
+fmt.Printf("Second-----%v\n", now.Second())
+```
+
+
+
+格式化
+
+```go
+fmt.Println("-------格式化------")
+// 时间是固定的 2006/01/02 15:04:05
+fmt.Println(now.Format("2006年01月02日 15时:04分:05秒"))
+```
+
+也可以使用Sprintf
+
+
+
+
+
+获取单位时间 (NanoSecond,MicroSecond,MilliSecond,Second,Minute,Hour)
+
+
+
+```go
+fmt.Println(time.Millisecond)
+fmt.Printf("%T", time.Second)
+fmt.Println(time.Second)
+```
+
+Sleep()
+
+
+
+```go
+time.Sleep(time.Second * 5)
+```
+
+ 获取时间戳
+
+```go
+fmt.Println(now.Unix())
+fmt.Println(now.UnixNano())
+```
+
+
+
+
+
+
+
 ## 常用包
 
 
@@ -1645,7 +1718,388 @@ func main()  {
 
 
 
+## 数组
 
+### 介绍
+
+存放多个同一类型的数据
+
+
+
+### 使用
+
+#### 声明
+
+```go
+var arr1 [3]int
+```
+
+四种初始化方法
+
+```go
+var arr1 [3]int = [3]int{1, 2, 3}
+fmt.Println(arr1)
+
+var arr2 = [5]int{1, 2, 3, 4, 5}
+fmt.Println(arr2)
+
+arr3 := [...]float64{1, 2, 3}
+fmt.Println(arr3)
+
+var arr4 = [...]string{1: "aa", 0: "bb"}
+fmt.Println(arr4)
+```
+
+
+
+遍历
+
+```go
+for index, val := range arr4 {
+	fmt.Println(index, val)
+}
+```
+
+
+
+```go
+for i := 0; i < len(arr4); i++ {
+	fmt.Println(arr4[i])
+}
+```
+
+### 注意
+
+1.数组一旦声明，其长度不能发生改变
+
+2.数组创建后，没有赋值，会有默认值
+
+3.go 语言中数组是值类型，而不是引用类型
+
+
+
+4.传递参数需要指定数组长度
+
+```go
+// [3]int [4]int 认为是不同数据类型
+func valueTest(arr [3]int) {
+	arr[0] = 1
+}
+```
+
+
+
+### 切片
+
+
+
+```go
+var arr = [5]int{1, 2, 3, 45, 5}
+slice := arr[2:4]
+arr[2] = -1
+fmt.Println(slice)
+// 元素数量
+fmt.Println(len(slice))
+// 容量
+fmt.Println(cap(slice))
+```
+
+
+
+```go
+var slice1 []int = make([]int, 2, 10)
+slice1[0] = 0
+slice1[1] = 1
+fmt.Println(slice1)
+```
+
+
+
+```go
+fmt.Println("方式三")
+var slice2 []float64 = []float64{1, 2, 3}
+fmt.Println(cap(slice2))
+```
+
+
+
+直接引用数组，对数组是可见的，使用 make 方式，引用的数组是不可见的
+
+使用make可以指定切片的大小和容量
+
+没有赋值会有默认值
+
+
+
+
+
+```go
+type slice struct { 
+    ptr *[2]int 
+    len int 
+    cap int
+}
+```
+
+引用一个数组
+
+数量
+
+容量
+
+
+
+
+
+#### 遍历
+
+
+
+```go
+for index, value := range slice2 {
+	fmt.Printf("---%v:%v ", index, value)
+}
+```
+
+#### 注意
+
+
+
+```go
+var slieceDemo = arr[startIndex: endIndex]
+```
+
+包含左边，不包含右边
+
+var slice = arr[0:end] 可以简写 var slice = arr[:end] 
+
+var slice = arr[start:len(arr)] 可以简写： var slice = arr[start:] 
+
+var slice = arr[0:len(arr)] 可以简写: var slice = arr[:]
+
+
+
+cap 是一个内置函数，用于统计切片的容量，即最大可以存放多少个元素。
+
+```go
+// 元素数量
+fmt.Println(len(slice))
+// 容量
+fmt.Println(cap(slice))
+```
+
+切片定义完后，还不能使用，因为本身是一个空的，需要让其引用到一个数组，或者make 一
+个空间供切片来使用
+
+
+
+切片仍然可以切片
+
+
+
+用 append 内置函数，可以对切片进行动态追加
+
+
+
+```go
+var arr = [5]int{1, 2, 3, 4, 5}
+var slice []int = arr[:]
+fmt.Println(slice)
+
+// 返回
+slice = append(slice, 10)
+fmt.Println(slice)
+```
+
+切片的拷贝
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	var slice1 []int = make([]int, 5)
+	var slice2 []int = make([]int, 10)
+
+	slice1[0] = 1
+	copy(slice2, slice1)
+	fmt.Println(slice2)
+}
+```
+
+切片是引用传递
+
+
+
+string底层也是数组，可以使用切片
+
+
+
+### 二维数组
+
+
+
+```go
+func main() {
+	var arr = [2][2]int{{1, 2}, {3, 4}}
+	fmt.Println(arr)
+
+	// 只有第一个可以为...
+	var arr1 = [...][3]int{{1, 2}, {3, 4}}
+	fmt.Println(arr1)
+}
+```
+
+
+
+
+
+## Map使用
+
+### 介绍
+
+key-value 的数据结构，类似于 java 中的 map
+
+
+
+key 的类型：bool, 数字，string, 指针, channel , 还可以是只包含前面几个类型的 接口, 结构体, 数组，通常 key 为 int 、string 注意: slice， map 还有 function 不可以，因为这几个没法用 == 来判断
+valuetype 的类型和 key 基本一样，通常为: 数字(整数,浮点数),string,map,struct
+
+
+
+### 使用
+
+#### 声明
+
+
+
+```go
+var map1 map[int]int
+```
+
+1) map 在使用前一定要make(需要分配内存)
+
+2) map 的 key 是不能重复，如果重复了，则以最后这个 key-value 为准 
+
+3) map 的 value 是可以相同的. 
+
+4) map 的 key-value 是无序
+
+
+
+#### 三种使用方式
+
+
+
+```go
+var map1 map[int]int
+map1 = make(map[int]int, 10)
+fmt.Println(map1)
+```
+
+
+
+```go
+map2 := make(map[int]int, 10)
+fmt.Println(map2)
+```
+
+
+
+```go
+map3 := map[int]int {
+	1: 1,
+	2: 2,
+}
+fmt.Println(map3)
+```
+
+
+
+### map中的方法
+
+添加和更新
+
+
+
+```go
+var a = make(map[int]string)
+a[0] = "matt"
+a[1] = "pony"
+a[0] = "jack"
+a[100] = "aa"
+```
+
+删除
+
+
+
+```go
+// 删除不存在的 key 也不会出错
+delete(a, 1)
+```
+
+
+
+查找
+
+```go
+// val:值 ok:是否找到
+val, ok := a[3]
+fmt.Println(ok, val)
+```
+
+遍历
+
+
+
+```go
+a1 := make(map[string]string)
+a1["1"] = "a"
+a1["2"] = "b"
+a1["3"] = "c"
+a1["4"] = "d"
+for k, v := range a1 {
+	fmt.Println(k, v)
+}
+```
+
+
+
+长度
+
+```go
+fmt.Println(len(a1), "map的长度")
+```
+
+### *map切片*
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	var students = make([]map[string]string, 2, 2)
+	students[0] = map[string]string{
+		"name": "matt",
+		"age": "11",
+	}
+	fmt.Println(students)
+}
+
+```
+
+
+
+### 注意
+
+map是引用类型
+
+map会自动扩容
+
+map的 value 经常是struct
 
 
 
@@ -1689,5 +2143,553 @@ pkg:库文件
 ```go
 string()
 len()
+```
+
+
+
+## 面向对象
+
+### 概述
+
+go 语言并没有类，而采用结构体，仍然有面向对象中封装继承多态等特性。
+
+
+
+### 结构体
+
+
+
+#### 声明结构体
+
+
+
+```go
+type 结构体名 struct {
+    字段名 类型
+}
+```
+
+
+
+
+
+```go
+type Person struct {
+	Name string
+	Age  int
+	p *int
+	slice []int
+	map1 map[string]string
+}
+```
+
+
+
+结构体是值类型
+
+创建一个结构体变量后，如果没有给字段赋值，都会有零值，如果是引用类型，在没有进行分配内存则它的值为 nil 。
+
+
+
+#### 创建结构体变量
+
+
+
+```go
+func main() {
+	// 1
+	var person Person
+	person.Age = 11
+	person.Name = "matt"
+	fmt.Println(person)
+	//2
+	var p1 = Person{}
+	fmt.Println(p1)
+
+	// 3
+	var p3 *Person = new(Person)
+	(*p3).Name = "33"
+	p3.Name = "44优化等价于上面的"
+	fmt.Println(*p3)
+
+	// 4
+	var p4 *Person = &Person{}
+	p4.Age = 111
+	fmt.Println(*p4)
+}
+```
+
+
+
+创建结构体变量也可以指定字段值
+
+```go
+func main() {
+	var c Computer = Computer{
+		Age: 1,
+		Name: "matt",
+	}
+	fmt.Println(c)
+}
+```
+
+这样指定字段可以不按结构体中的顺序，否则就要按结构体中的顺序。
+
+
+
+#### 结构体使用注意
+
+
+
+结构体所有字段在内存中连续的
+
+
+
+俩个结构体进行转换的时候，要求这俩个结构体需要有相同的字段
+
+
+
+```go
+a = B(b)
+```
+
+
+
+对结构体进行重新定义， golang 认为是不同的数据类型
+
+
+
+```go
+type P Person
+```
+
+struct 的每个字段上，可以写上一个 tag, 该 tag 可以通过反射机制获取，常见的使用场景就是序列化和反序列化。
+
+
+
+```go
+import "fmt"
+import "encoding/json"
+
+type A struct {
+	age int
+	num int
+}
+
+type B struct {
+	age int
+	num int
+}
+
+type C struct {
+	Name string `json:"name"`
+}
+func main() {
+	var a A
+	var b B
+	a.age = 1
+	// 要求字段一致
+	b = B(a)
+	var c C
+	c.Name = "hello ma"
+	str1, _ := json.Marshal(c)
+	fmt.Println(string(str1))
+	fmt.Println(b)
+}
+
+```
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210701154924.png)
+
+
+
+### 方法
+
+
+
+#### 使用
+
+
+
+```go
+import "fmt"
+
+type Person struct {
+	Age int
+}
+
+func (p Person) getAge() int {
+	return p.Age
+}
+
+func main() {
+	var p Person
+	p.Age = 18
+	fmt.Println(p.getAge())
+
+}
+```
+
+该方法和 Person 结构体进行绑定
+
+方法进行调用会把调用该方法的变量赋值给该方法
+
+
+
+#### 方法使用注意
+
+
+
+结构体类型是值类型，在方法调用中，遵守值类型的传递机制，是值拷贝传递方式
+
+
+
+方法也可以接收结构体指针
+
+
+
+```go
+func (circle *Circle) test()  {
+	// (*circle).R
+    // 进行了优化
+	fmt.Println(circle.R)
+}
+```
+
+
+
+方法不仅可以作用于结构体，还可以作用于 int,string等
+
+
+
+```go
+import "fmt"
+
+func (i integer) testInt() {
+	fmt.Println(i)
+}
+
+type integer int
+
+func main() {
+	var j integer = 10
+	j.testInt()
+}
+```
+
+方法的访问范围控制的规则，和函数一样。方法名首字母小写，只能在本包访问，方法首字母
+大写，可以在本包和其它包访问。
+
+
+
+如果一个类型实现了 String()这个方法，那么 fmt.Println 默认会调用这个变量的 String()进行输出，类似于 java 中的 toString() 方法
+
+
+
+```go
+func (c Computer) String() string {
+	str := fmt.Sprintf("Name=%s Age=%d", c.Name, c.Age)
+	return str
+}
+```
+
+
+
+### 面向对象特性
+
+#### 封装
+
+##### 概念
+
+将对象属性隐藏起来，属性的操作只可以通过被授权的方法。
+
+
+
+##### 使用
+
+结构体属性、方法首字母小写，其他包就不可以访问，当前包仍然可以访问。
+
+
+
+为结构体提供一个创建的函数，相当于java中的构造函数。
+
+
+
+编写set,get 方法。
+
+
+
+```go
+package main
+
+type Person struct {
+	name string
+	age  int
+}
+
+func NewPerson() Person {
+	var person = Person{}
+	return person
+}
+
+func (p *Person) SetName(name string) {
+	p.name = name
+}
+
+func (p *Person) GetName() string {
+	return p.name
+}
+
+```
+
+#### 继承
+
+
+
+##### 概述
+
+子类具有父类的属性和方法
+
+
+
+##### 使用
+
+
+
+```go
+type S struct {
+	Name string
+	Age int
+}
+
+type X struct {
+	S
+}
+
+func (s S) showInfo() {
+	fmt.Println(s.Name)
+}
+
+func (x *X) showInfo() {
+	fmt.Printf("x---name=%v age=%v\n",x.Name, x.Age)
+}
+
+func main() {
+	var x  = &X{}
+	x.S.Name = "matt"
+	x.S.Name = "aa"
+	x.Name = "ma"
+
+	x.S.showInfo()
+
+	x1 := X{
+		S{
+			Name: "aa",
+			Age: 11,
+		},
+	}
+	fmt.Println(x1)
+
+
+}
+```
+
+
+
+##### 继承使用注意
+
+结构体可以使用嵌套匿名结构体所有的字段和方法(首字母大小写都可以获得)
+
+
+
+结构体访问可以简化
+
+
+
+```go
+func main() {
+	var x  = &X{}
+	x.S.Name = "matt"
+	// 对上面进行简化
+	x.Name = "ma"
+	x.S.showInfo()
+
+}
+```
+
+上述Name字段，编译器首先会从 X 中查找该属性，找不到在从不S中找，最后找不到则报错。
+
+
+
+
+
+当结构体和匿名结构体有相同的字段或者方法时，编译器采用就近访问原则访问，如希望访问
+匿名结构体的字段和方法，可以通过匿名结构体名（x.S.Name）来区分
+
+
+
+结构体嵌入两个(或多个)匿名结构体，如两个匿名结构体有相同的字段和方法(同时结构体本身 没有同名的字段和方法)，在访问时，就必须明确指定匿名结构体名字，否则编译报错。
+
+
+
+如果一个 struct 嵌套了一个有名结构体，这种模式就是组合，如果是组合关系，那么在访问组合 的结构体的字段或方法时，必须带上结构体的名字
+
+
+
+```go
+type A struct {
+	Name string
+}
+
+type B struct {
+	a A
+}
+
+func main() {
+	var b B = B{}
+	b.a.Name = "matt"
+	fmt.Println(b)
+}
+```
+
+可以在创建结构体变量时指定匿名结构体值
+
+
+
+```go
+var a A = B{
+    B{
+        Name: "matt sir"
+    }
+}
+```
+
+
+
+##### 多重继承
+
+嵌套多个匿名结构体
+
+
+
+如果嵌套的多个匿名结构体具有相同的属性和方法，那么需要指定具体哪一个结构体。
+
+避免使用多重继承。
+
+
+
+
+
+#### 接口
+
+
+
+##### 使用
+
+```go
+type I interface {
+	start()
+}
+
+type A struct {
+}
+
+func (a *A) start() {
+	fmt.Println("A 开始...")
+}
+```
+
+结构体 A 实现接口 I
+
+##### 使用接口注意
+
+1.接口本身不能创建实例,但是可以指向一个实现了该接口的自定义类型的变量(实例)
+
+
+
+```go
+// I是接口 s 是S的实例，S实现I
+var s I
+```
+
+接口中不可以有变量
+
+接口中所有的方法都没有实现
+
+
+
+一个自定义类型实现了一个接口的所有方法，那么就说实现了该接口。
+
+自定义类型可以实现多个接口
+
+
+
+一个接口可以继承多个接口，比如A接口继承B，C, 如果实现A接口，那么就要把A,B,C中所有方法实现。
+
+只要是自定义数据类型，就可以实现接口，不仅仅是结构体类型
+
+
+
+interface 类型默认是一个指针(引用类型)，如果没有对 interface 初始化就使用，那么会输出 nil
+
+空接口是没有方法，即任何变量实现了空接口，任何一个变量可以使用空接口类型。
+
+
+
+##### 实现和继承
+
+
+
+继承的价值主要在于：解决代码的复用性和可维护性。 
+
+接口的价值主要在于：设计，设计好各种规范(方法)，让其它自定义类型去实现这些方法
+
+
+
+
+
+#### 多态
+
+
+
+多态参数：
+
+一个方法中的一个参数是I类型，那么就可以接收实现I类型的所有类
+
+
+
+多态数组
+
+一个数组中的I类型，那么就可以接收实现I类型的所有类
+
+
+
+
+
+### 类型断言
+
+
+
+#### 概述
+
+一个变量知道他是某一个接口类型，但是不知道它是哪一个具体类型，所以使用断言。
+
+
+
+
+
+#### 使用
+
+
+
+```go
+func main() {
+	var a interface{}
+	var b B = B{}
+	a = b
+	c, ok := a.(B)
+	fmt.Println(ok)
+	fmt.Println(c)
+}
 ```
 

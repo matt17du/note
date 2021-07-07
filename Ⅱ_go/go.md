@@ -794,6 +794,8 @@ A1->10*16^1+1*16^0
 
 
 
+因此所说的 有符号、无符号 看的就是二进制的符号位， 无符号:3就不管符号位，右移只填充0；有符号，就是符号位是啥，我就填充啥，Java中也是同理。
+
 ### 5、7指针运算符
 
 
@@ -979,7 +981,7 @@ func main() {
 
 ```go
 i := 0
-for i < 10{
+for i < 10 {
 	fmt.Println("matt", i)
     i++
 }
@@ -1188,7 +1190,7 @@ import tDb "db"
 
 ##### 6.同一个包下不能有相同的函数名或者变量名
 
-##### 7.如果想把一个.go文件编译成可执行文件，则把该文件包名设置为 main
+##### **7**.如果想把一个.go文件编译成可执行文件，则把该文件包名设置为 main
 
 
 
@@ -1289,9 +1291,6 @@ func main() {
 	fmt.Println(t)*/
 	a := test1
 	test2(1, 2, a)
-
-
-
 
 }
 
@@ -2693,3 +2692,47 @@ func main() {
 }
 ```
 
+
+
+
+
+
+
+
+
+
+
+```go
+const (
+    O_RDONLY int = syscall.O_RDONLY // 只读模式打开文件
+    O_WRONLY int = syscall.O_WRONLY // 只写模式打开文件
+    O_RDWR   int = syscall.O_RDWR   // 读写模式打开文件
+    O_APPEND int = syscall.O_APPEND // 写操作时将数据附加到文件尾部
+    O_CREATE int = syscall.O_CREAT  // 如果不存在将创建一个新文件
+    O_EXCL   int = syscall.O_EXCL   // 和O_CREATE配合使用，文件必须不存在
+    O_SYNC   int = syscall.O_SYNC   // 打开文件用于同步I/O
+    O_TRUNC  int = syscall.O_TRUNC  // 如果可能，打开时清空文件
+)
+```
+
+
+
+
+
+
+
+反序列化map不需要make
+
+
+
+
+
+
+
+gopath
+
+
+
+
+
+![](https://raw.githubusercontent.com/matt17du/img/main/img/20210707150305.png)
